@@ -48,7 +48,7 @@
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
-/* =========================================
+    /* =========================================
        ФОН (ФИНАЛЬНАЯ ВЕРСИЯ АНИМАЦИИ)
        ========================================= */
     #bg {
@@ -407,9 +407,12 @@
     .rs.on>*:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s }
     .rs.on>*:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s }
     .rs:not(.on)>* { opacity: 0; transform: translateY(36px); transition: opacity .28s ease, transform .28s ease; }
-    /* TICKER */
+
+    /* =========================================
+       TICKER (БЕГУЩАЯ СТРОКА С ЛОГОТИПАМИ)
+       ========================================= */
     .tick-wrap {
-      padding: 26px 0;
+      padding: 30px 0;
       overflow: hidden;
       border-top: 1px solid var(--bor);
       border-bottom: 1px solid var(--bor);
@@ -419,9 +422,10 @@
     }
     .tick-track {
       display: flex;
-      gap: 56px;
+      align-items: center;
+      gap: 35px; /* ИЗМЕНЕНО: было 70px, теперь 35px, чтобы совпадало с отступом ниже */
       width: max-content;
-      animation: tk 26s linear infinite
+      animation: tk 35s linear infinite;
     }
     @keyframes tk {
       from { transform: translateX(0) }
@@ -430,17 +434,29 @@
     .tick-item {
       display: flex;
       align-items: center;
-      gap: 9px;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, .22);
-      white-space: nowrap;
-      transition: color .3s
+      gap: 35px; /* Этот отступ от лого до точки теперь равен отступу до следующего лого */
     }
-    .tick-item:hover { color: rgba(255, 255, 255, .65) }
-    .tdot { width: 4px; height: 4px; border-radius: 50%; background: var(--y); opacity: .55 }
+    .tdot { 
+      width: 5px; 
+      height: 5px; 
+      border-radius: 50%; 
+      background: var(--y); 
+      opacity: 0.6; 
+      box-shadow: 0 0 8px var(--y); 
+    }
+    .tick-logo {
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1) opacity(0.35);
+      transition: filter 0.4s ease, transform 0.4s ease;
+      cursor: pointer;
+    }
+    .tick-logo:hover {
+      filter: brightness(0) invert(1) opacity(1);
+      transform: scale(1.08);
+    }
+
     /* SECTIONS */
     #main-content { position: relative; z-index: 10 }
     section { position: relative; z-index: 10 }
@@ -1294,7 +1310,18 @@ padding: 0px 0 30px; }
   </div>
 
   <script>
-    const COMP = ['probazis', 'FSCR', 'Remstart', 'Шкафы Нарния', 'fullflat', 'Region Online', 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', 'Nutreasy'];
+    // НОВЫЙ МАССИВ С ЛОГОТИПАМИ КЛИЕНТОВ (ВМЕСТО СТАРОГО ТЕКСТА)
+    const LOGOS = [
+      { src: 'assets/logos/africa.png', alt: 'Африка', size: 90 }, 
+      { src: 'assets/logos/fullflat.png', alt: 'fullflat', size: 85 },
+      { src: 'assets/logos/probazis.png', alt: 'Probazis', size: 200 },
+      { src: 'assets/logos/fscr.png', alt: 'FSCR', size: 80 },
+      { src: 'assets/logos/remsart.png', alt: 'Remstart', size: 120 }, 
+      { src: 'assets/logos/narnia.png', alt: 'Шкафы Нарния', size: 140 },
+      { src: 'assets/logos/region.png', alt: 'Region Online', size: 150 },
+      { src: 'assets/logos/nutreasy.png', alt: 'Nutreasy', size: 150 }
+    ];
+
     const VW = [{ l: 'Reels · Probazis', t: 'SMM' }, { l: 'Shorts · FSCR', t: 'Спорт' }, { l: 'Reels · Remstart', t: 'Бизнес' }, { l: 'Reels · fullflat', t: 'Недвижимость' }, { l: 'Shorts · Nutreasy', t: 'Продукт' }, { l: 'Reels · Region Online', t: 'Медиа' }];
     const HW = [{ l: 'YouTube · Probazis', t: 'Обзор' }, { l: 'YouTube · ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', t: 'Travel' }, { l: 'Highlight · Шкафы Нарния', t: 'Реклама' }, { l: 'Corporate · Remstart', t: 'Корпоратив' }];
     
@@ -1313,9 +1340,21 @@ padding: 0px 0 30px; }
       { q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
     ];
     let lang = 'ru';
-    function buildTicker() { document.getElementById('tt').innerHTML = [...COMP, ...COMP].map(c => '<div class="tick-item"><span class="tdot"></span>' + c + '</div>').join('') }
+
+    // НОВАЯ ФУНКЦИЯ ДЛЯ ОТРИСОВКИ ЛОГОТИПОВ
+    function buildTicker() { 
+      const track = [...LOGOS, ...LOGOS];
+      const baseHeight = 28; 
+      document.getElementById('tt').innerHTML = track.map(logo => {
+        const newHeight = (baseHeight * (logo.size || 100)) / 100;
+        return `
+        <div class="tick-item">
+          <img src="${logo.src}" alt="${logo.alt}" class="tick-logo" loading="lazy" decoding="async" style="height: ${newHeight}px;">
+          <span class="tdot"></span>
+        </div>`;
+      }).join(''); 
+    }
     
-    // ИЗМЕНЕНИЕ 4: Добавлено событие onclick="openModal()"
     function wCard(w, cls) { 
       const txt = lang === 'ru' ? '📂 Добавьте видео' : '📂 Add video';
       return '<div class="' + cls + ' wcard" onclick="openModal()"><div class="wi"><div class="wph">' + txt + '</div><div class="wlbl"><div class="wtag">' + w.t + '</div><div class="wname">' + w.l + '</div></div></div></div>' 
