@@ -1,1506 +1,836 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KLAGE | PORTFOLIO</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-  <style>
-    /* =========================================
-       ЛОКАЛЬНЫЕ ШРИФТЫ
-       ========================================= */
-    @font-face { font-family: 'Involve'; src: url('assets/fonts/Involve.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Good Vibes Pro'; src: url('assets/fonts/GoodVibesPro.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-    /* ИДЕАЛЬНОЕ ВЫДЕЛЕНИЕ */
-    ::selection {
-      background: #ffb800 !important; 
-      color: #000 !important;
-      -webkit-text-fill-color: #000 !important;
-    }
-    ::-moz-selection {
-      background: #ffb800 !important;
-      color: #000 !important;
-      -webkit-text-fill-color: #000 !important;
-    }
-    html {
-      scroll-behavior: smooth
-    }
-    :root {
-      --y: #ffb800;
-      --yg: rgba(255, 184, 0, 0.4);
-      --sur: rgba(255, 255, 255, 0.04);
-      --bor: rgba(255, 255, 255, 0.09);
-      --tx: #e8e6de;
-      --mu: rgba(232, 230, 222, 0.5)
-    }
-    body {
-      background: #030100;
-      color: var(--tx);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-    /* =========================================
-       ФОН (ФИНАЛЬНАЯ ВЕРСИЯ АНИМАЦИИ)
-       ========================================= */
-    #bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: #020100;
-      overflow: hidden;
-    }
-    .bg-sphere {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(150px); 
-      pointer-events: none;
-      will-change: transform, opacity;
-    }
-    .sphere-1 { 
-      width: 70vw; height: 70vw; 
-      background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); 
-      top: -20vw; left: -20vw;
-      animation: pulse1 6s infinite alternate ease-in-out;
-    }
-    
-    .sphere-2 { 
-      width: 65vw; height: 65vw; 
-      background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); 
-      bottom: -20vw; right: -20vw;
-      animation: pulse2 7s infinite alternate ease-in-out;
-    }
-    @keyframes pulse1 { 
-      0% { transform: scale(1) translate(0, 0); opacity: 0.5; } 
-      100% { transform: scale(1.1) translate(6vw, 6vw); opacity: 1; } 
-    }
-    @keyframes pulse2 { 
-      0% { transform: scale(1) translate(0, 0); opacity: 1; } 
-      100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } 
-    }
-    /* =========================================
-       HERO & NAV
-       ========================================= */
-    #hero-wrap {
-      position: relative;
-      overflow: hidden; 
-      width: 100%;
-      z-index: 10;
-    }
-    @keyframes navDrop {
-      from { opacity: 0; transform: translate(-50%, -20px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
-    }
-    nav {
-      position: fixed;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 600;
-      width: 100%;
-      max-width: 1000px;
-      height: 64px;
-      padding: 0 16px 0 34px; 
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      transition: all .6s cubic-bezier(0.22, 1, 0.36, 1);
-      white-space: nowrap;
-      opacity: 0;
-      animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    nav::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: 100px;
-      background: rgba(8, 6, 4, .5);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, .08);
-      box-shadow: 0 4px 40px rgba(0, 0, 0, .5);
-      opacity: 0;
-      transition: opacity .4s ease;
-      pointer-events: none;
-    }
-    nav.sc::before { opacity: 1; }
-    nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
-    .nlogo {
-      justify-self: start;
-      display: flex;
-      align-items: center;
-      line-height: 1;
-      font-family: 'Involve', sans-serif;
-      font-weight: 700;
-      font-size: 7.6px; 
-      letter-spacing: 1.3em;
-      margin-right: -1.3em; 
-      text-decoration: none;
-      background: linear-gradient(to bottom, #ffffff 0%, #777777 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      transform: translateY(1px);
-    }
-    .nlinks { justify-self: center; display: flex; gap: 4px; }
-    .nlinks a {
-      color: rgba(255, 255, 255, .4);
-      text-decoration: none;
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: .04em;
-      padding: 5px 13px;
-      border-radius: 100px;
-      transition: color .28s
-    }
-    .nlinks a:hover, .nlinks a.active { color: #fff; }
-    .nright { justify-self: end; display: flex; align-items: center; gap: 9px; height: 100%; }
-    .ncta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 32px; 
-      background: var(--y);
-      color: #000;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: .05em;
-      padding: 0 17px;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: transform .22s, box-shadow .22s
-    }
-    .ncta:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--yg) }
-    .lbtn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 32px;
-      background: none;
-      border: 1px solid rgba(255, 255, 255, .1);
-      color: rgba(255, 255, 255, .4);
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 0 11px;
-      border-radius: 100px;
-      cursor: pointer;
-      letter-spacing: .1em;
-      transition: color .25s, border-color .25s;
-    }
-    .lbtn:hover { color: #fff; border-color: rgba(255, 255, 255, .35); }
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 24px; 
-      position: relative;
-      width: 100%;
-    }
-    .htitle {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px; 
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fi .9s .3s forwards;
-    }
-    .hsup {
-      font-family: 'Involve', sans-serif;
-      font-size: clamp(8.5px, 2.2vw, 9.5px); 
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      padding-left: 0.25em; 
-      text-transform: uppercase;
-      color: #ffaa00; 
-      text-shadow: 0 0 12px rgba(255, 170, 0, 0.4); 
-      margin-bottom: -4px;
-      text-align: center;
-    }
-    .hhand {
-      font-family: 'Manrope', sans-serif;
-      font-size: clamp(20px, 3.5vw, 36px); 
-      font-weight: 300; 
-      letter-spacing: 0.03em; 
-      text-transform: none; 
-      color: #fff; 
-      margin: 0; 
-      position: relative;
-      z-index: 2;
-      line-height: 1;
-    }
-    /* =========================================
-       ИДЕАЛЬНОЕ СВЕЧЕНИЕ С РАБОЧИМ ВЫДЕЛЕНИЕМ
-       ========================================= */
-    .gw-container {
-      position: relative;
-      display: inline-grid;
-      place-items: center; 
-    }
-    .gw-blur, .gw-sharp, .gw-text {
-      grid-area: 1 / 1;
-      font-family: 'Involve', sans-serif; 
-      font-size: clamp(48px, 11vw, 130px); 
-      font-weight: 700; 
-      text-transform: uppercase;
-      letter-spacing: -0.02em; 
-      line-height: 1;
-    }
-    .gw-blur {
-      color: #fff;
-      filter: blur(6px); 
-      user-select: none;
-      pointer-events: none;
-      text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.4), 
-        0 0 25px rgba(255, 200, 0, 0.9),     
-        0 0 60px rgba(255, 160, 0, 0.8),   
-        0 0 220px rgba(255, 110, 0, 0.5), 
-        0 0 300px rgba(255, 60, 0, 0.3);  
-      animation: gp 3s ease-in-out infinite alternate; 
-    }
-    .gw-sharp {
-      color: #fff;
-      user-select: none;
-      pointer-events: none;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); 
-      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
-    }
-    .gw-text {
-      color: transparent;
-      user-select: text;
-      z-index: 5;
-    }
-    @keyframes gp {
-      0%, 100% { 
-        text-shadow: 
-          0 0 10px rgba(255, 255, 255, 0.4),
-          0 0 25px rgba(255, 200, 0, 0.9),
-          0 0 60px rgba(255, 160, 0, 0.8),
-          0 0 220px rgba(255, 110, 0, 0.5),
-          0 0 300px rgba(255, 60, 0, 0.3);
-      }
-      50% { 
-        text-shadow: 
-          0 0 6px rgba(255, 255, 255, 0.2),
-          0 0 15px rgba(255, 200, 0, 0.7),
-          0 0 40px rgba(255, 160, 0, 0.5),
-          0 0 160px rgba(255, 110, 0, 0.35),
-          0 0 220px rgba(255, 60, 0, 0.15);
-      }
-    }
-    .hsub {
-      max-width: 520px;
-      font-size: clamp(14px, 1.55vw, 16.5px);
-      font-weight: 400;
-      line-height: 1.75;
-      color: var(--mu);
-      margin-top: 25px; 
-      margin-bottom: 35px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fi 1s .5s forwards;
-    }
-    .hbtns {
-      display: flex;
-      gap: 11px;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fi 1s .7s forwards
-    }
-    .sdown {
-      position: absolute;
-      bottom: 34px;
-      left: 0;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 7px;
-      font-size: 10px;
-      letter-spacing: .25em;
-      color: var(--mu);
-      opacity: 0;
-      animation: fi 1s 1.2s forwards
-    }
-    
-    .sdown span { padding-left: 0.25em; }
-    .sline {
-      width: 1px;
-      height: 38px;
-      background: linear-gradient(to bottom, var(--y), transparent);
-      animation: sd 2.2s ease-in-out infinite
-    }
-    @keyframes sd {
-      0%, 100% { transform: scaleY(1); opacity: 1 }
-      50% { transform: scaleY(.5); opacity: .3 }
-    }
-    @keyframes fi { to { opacity: 1; transform: translateY(0); } }
-    /* BUTTONS */
-    .bpri {
-      background: var(--y);
-      color: #000;
-      font-weight: 700;
-      font-size: 13.5px;
-      padding: 13px 26px;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: .05em;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      transition: transform .22s, box-shadow .22s;
-    }
-    .bpri:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px var(--yg), 0 0 60px rgba(255, 184, 0, .15)
-    }
-    .bsec {
-      background: rgba(255, 255, 255, .05);
-      color: var(--tx);
-      border: 1px solid var(--bor);
-      font-weight: 600;
-      font-size: 13.5px;
-      padding: 13px 26px;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: .05em;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      backdrop-filter: blur(10px);
-      transition: transform .22s, background .22s;
-    }
-    .bsec:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, .09)
-    }
-    /* SCROLL REVEAL */
-    .ft { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1); }
-    .ft.on { opacity: 1; transform: translateY(0); }
-    .ft:not(.on) { transition: opacity .35s ease, transform .35s ease; }
-    .fu { opacity: 0; transform: translateY(44px); transition: opacity .72s cubic-bezier(.22, 1, .36, 1), transform .72s cubic-bezier(.22, 1, .36, 1); }
-    .fu.on { opacity: 1; transform: translateY(0); }
-    .fu:not(.on) { transition: opacity .32s ease, transform .32s ease; }
-    .rs>* { opacity: 0; transform: translateY(36px); transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1); }
-    .rs.on>*:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s }
-    .rs.on>*:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s }
-    .rs.on>*:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s }
-    .rs.on>*:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s }
-    .rs.on>*:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s }
-    .rs.on>*:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s }
-    .rs:not(.on)>* { opacity: 0; transform: translateY(36px); transition: opacity .28s ease, transform .28s ease; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLAGE | PORTFOLIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;600;800&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+ЛОКАЛЬНЫЕ ШРИФТЫ
+========================================= */
+@font-face { font-family: 'Involve'; src: url('assets/fonts/Involve.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Good Vibes Pro'; src: url('assets/fonts/GoodVibesPro.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 
-    /* =========================================
-       TICKER (БЕГУЩАЯ СТРОКА С ЛОГОТИПАМИ)
-       ========================================= */
-    .tick-wrap {
-      padding: 30px 0;
-      overflow: hidden;
-      border-top: 1px solid var(--bor);
-      border-bottom: 1px solid var(--bor);
-      position: relative;
-      z-index: 10;
-      background: rgba(0,0,0,0.1);
-    }
-    .tick-track {
-      display: flex;
-      align-items: center;
-      gap: 35px; /* ИЗМЕНЕНО: было 70px, теперь 35px, чтобы совпадало с отступом ниже */
-      width: max-content;
-      animation: tk 35s linear infinite;
-    }
-    @keyframes tk {
-      from { transform: translateX(0) }
-      to { transform: translateX(-50%) }
-    }
-    .tick-item {
-      display: flex;
-      align-items: center;
-      gap: 35px; /* Этот отступ от лого до точки теперь равен отступу до следующего лого */
-    }
-    .tdot { 
-      width: 5px; 
-      height: 5px; 
-      border-radius: 50%; 
-      background: var(--y); 
-      opacity: 0.6; 
-      box-shadow: 0 0 8px var(--y); 
-    }
-    .tick-logo {
-      width: auto;
-      object-fit: contain;
-      display: block;
-      filter: brightness(0) invert(1) opacity(0.35);
-      transition: filter 0.4s ease, transform 0.4s ease;
-      cursor: pointer;
-    }
-    .tick-logo:hover {
-      filter: brightness(0) invert(1) opacity(1);
-      transform: scale(1.08);
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* SECTIONS */
-    #main-content { position: relative; z-index: 10 }
-    section { position: relative; z-index: 10 }
-    .cnt { max-width: 1000px; margin: 0 auto; padding: 0 40px }
-    
-    .sp { padding: 100px 0; }
-    
-    .slbl {
-      font-size: 10px;
-      letter-spacing: .32em;
-      padding-left: .32em;
-      text-transform: uppercase;
-      color: var(--y);
-      font-weight: 700;
-      margin-bottom: 14px
-    }
-    .stitle, .ctatitle, .txrq, .atxt p:first-of-type {
-      font-family: 'Involve', sans-serif;
-    }
-    
-    .stitle {
-      font-size: clamp(26px, 3.8vw, 46px);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -.02em;
-      margin-bottom: 18px
-    }
-    .div {
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--bor) 50%, transparent 100%);
-      margin: 0;
-    }
-    /* WORK CARDS */
-    /* ИЗМЕНЕНИЕ 3: Увеличены отступы между видео (gap 24px) */
-    .vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
-    .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
-    
-    .wcard {
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--sur);
-      border: 1px solid var(--bor);
-      cursor: pointer; /* ИЗМЕНЕНИЕ 4: Курсор клика для модального окна */
-      transition: transform .38s, box-shadow .38s
-    }
-    .wcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
-    .wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center }
-    .vi .wi { aspect-ratio: 9/16 }
-    .hi .wi { aspect-ratio: 16/9 }
-    .wi::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, .8) 0%, transparent 50%);
-      z-index: 1
-    }
-    .wph {
-      font-size: 11px;
-      letter-spacing: .15em;
-      font-weight: 600;
-      color: rgba(255, 255, 255, .15);
-      text-transform: uppercase;
-      text-align: center;
-      padding: 18px
-    }
-    .wlbl { position: absolute; bottom: 14px; left: 14px; right: 14px; z-index: 2 }
-    .wtag {
-      display: inline-block;
-      font-size: 9.5px;
-      letter-spacing: .1em;
-      color: var(--y);
-      background: rgba(255, 184, 0, .1);
-      padding: 3px 9px;
-      border-radius: 100px;
-      margin-bottom: 5px
-    }
-    .wname { display: none; font-size: 11.5px; font-weight: 600; color: rgba(255, 255, 255, .85) }
-    
-    /* ИЗМЕНЕНИЕ 4: Модальное окно для видео */
-    .modal {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.9); z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    }
-    .modal.show { opacity: 1; pointer-events: auto; }
-    .modal-close {
-      position: absolute; top: 20px; right: 24px;
-      background: none; border: none; color: #fff;
-      font-size: 40px; cursor: pointer; line-height: 1; transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--y); }
-    .modal-content {
-      width: 90%; max-width: 1000px; max-height: 90vh;
-      display: flex; align-items: center; justify-content: center; text-align: center;
-      color: rgba(255,255,255,0.5); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
-    }
+::selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+::-moz-selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
 
-    /* RESULTS */
-    /* ИЗМЕНЕНИЕ 3: Сохраняем gap 24px для консистентности на десктопе */
-    .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
-    .rcard {
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--sur);
-      border: 1px solid var(--bor);
-      transition: transform .38s, box-shadow .38s
-    }
-    .rcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
-    
-    .rimg { aspect-ratio: 4/5; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden }
-    .rblur-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 184, 0, .05), rgba(255, 184, 0, .02)) }
-    .rblur {
-      position: absolute;
-      inset: 0;
-      backdrop-filter: blur(22px); 
-      -webkit-backdrop-filter: blur(22px);
-      background: rgba(8, 6, 4, .55);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      z-index: 2
-    }
-    .rlock {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid var(--bor);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .rbtxt {
-      font-size: 10.5px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--mu);
-      text-align: center;
-      padding: 0 14px
-    }
-    /* ABOUT */
-    #about { overflow: hidden }
-    .agrid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 35px; align-items: center }
-    .aphoto { position: relative; height: 560px; }
-    .aframe {
-      position: absolute;
-      left: 0; right: 0;
-      top: 0; bottom: 0;
-      width: 100%;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    
-    /* Стили для фото: десктоп и мобильное */
-    .photo-desktop, .photo-mobile {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
-    .photo-desktop {
-      object-position: 80% center; 
-      display: block;
-    }
-    .photo-mobile {
-      display: none; 
-    }
+html { scroll-behavior: smooth; }
+:root {
+--y: #ffb800; --yg: rgba(255, 184, 0, 0.4); --sur: rgba(255, 255, 255, 0.04);
+--bor: rgba(255, 255, 255, 0.09); --tx: #e8e6de; --mu: rgba(232, 230, 222, 0.5);
+}
+body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-    .atxt p {
-      font-size: 14.5px;
-      line-height: 1.82;
-      color: rgba(232, 230, 222, .72);
-      margin-bottom: 18px
-    }
-    .atxt p:first-of-type { 
-      font-size: 34px; 
-      font-weight: 700; 
-      color: #fff; 
-      margin-bottom: 22px; 
-      letter-spacing: -0.02em; 
-      line-height: 1.2;
-    }
-    
-    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 24px 0 32px }
-    .chip {
-      font-size: 10.5px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 5px 13px;
-      border-radius: 100px;
-      border: 1px solid var(--bor);
-      color: var(--mu);
-      font-weight: 600;
-      transition: border-color .28s, color .28s
-    }
-    .chip:hover { border-color: var(--y); color: var(--y) }
-    .ab-btns {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    /* ОТЗЫВЫ */
-    .rvid, .rvoice, .rtxts { padding: 40px 0; }
-    .rvid { padding-top: 15px; }
-    .rgst {
-      font-size: 11px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.3);
-      font-weight: 700;
-      margin-bottom: 28px;
-    }
-    .vid-slider-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between; 
-      gap: 20px; 
-      width: 100%;
-      max-width: 1000px; 
-      margin: 0 auto;
-      padding: 20px 0;
-    }
-    
-    .slider-btn {
-      position: relative; 
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.4);
-      cursor: pointer;
-      transition: color 0.3s, transform 0.2s;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .slider-btn:hover { color: var(--y); transform: scale(1.1); }
-    
-    .vid-track {
-      position: relative;
-      flex: 1; 
-      max-width: 820px; 
-      height: 440px; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .vidcirc {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      cursor: pointer;
-      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .vidcirc.prev { transform: translateX(-280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; }
-    .vidcirc.active { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
-    .vidcirc.next { transform: translateX(280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; }
-    .vidcirc.hidden { opacity: 0; transform: scale(0.5); z-index: 0; pointer-events: none; transition: opacity 0.2s, transform 0s 0.2s; }
-    .vc-ring {
-      width: 320px; 
-      height: 320px;
-      border-radius: 50%;
-      background: transparent;
-      position: relative;
-      transition: transform 0.3s;
-    }
-    .vc-in {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: #1a1a1a; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08); 
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      transition: border-color 0.3s;
-    }
-    .vidcirc.active:hover .vc-in {
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-    .vc-play {
-      width: 87px; 
-      height: 87px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15); 
-      border: 1px solid rgba(255, 255, 255, 0.2); 
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: background 0.3s, transform 0.3s, border-color 0.3s;
-    }
-    
-    .vc-play svg {
-      width: 46px; 
-      height: 46px;
-      fill: #fff;
-      transition: transform 0.3s;
-    }
-    
-    .vidcirc.active:hover .vc-play {
-      background: rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: scale(1.08);
-    }
-    .vc-name {
-      font-size: 15px; 
-      font-weight: 600;
-      color: var(--tx);
-      letter-spacing: .05em;
-      opacity: 0;
-      transition: opacity .3s;
-      margin-top: 2px;
-    }
-    .vidcirc.active .vc-name { opacity: 0.8; }
-    .vidcirc.active:hover .vc-name { opacity: 1; }
-    /* ГОЛОСОВЫЕ */
-    .rvoice { padding-top: 0; }
-    .vocgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    
-    .voc-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .voccard { 
-      display: flex; 
-      align-items: center; 
-      gap: 14px; 
-      padding: 14px 18px; 
-      background: rgba(255, 255, 255, .02); 
-      border: 1px solid var(--bor); 
-      border-radius: 100px; 
-      cursor: pointer; 
-      transition: background .3s, box-shadow .3s, transform .3s; 
-    }
-    .voccard:hover { 
-      background: rgba(255, 255, 255, .04); 
-      transform: translateY(-2px); 
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); 
-    }
-    .vocplay { 
-      width: 44px; 
-      height: 44px; 
-      border-radius: 50%; 
-      background: var(--y); 
-      border: none; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      color: #000; 
-      flex-shrink: 0; 
-      transition: transform .2s, box-shadow .2s; 
-    }
-    .voccard:hover .vocplay { transform: scale(1.05); box-shadow: 0 0 15px var(--yg); }
-    .vocplay svg { 
-      width: 24px; 
-      height: 24px; 
-      fill: currentColor; 
-    }
-    .vocwave { 
-      flex: 1; 
-      height: 24px; 
-      background: repeating-linear-gradient(90deg, var(--mu) 0px, var(--mu) 2px, transparent 2px, transparent 5px); 
-      opacity: 0.5; 
-      border-radius: 2px; 
-    }
-    .voc-dur { font-size: 11px; color: var(--mu); font-family: monospace; }
-    .voc-name { font-size: 13px; font-weight: 500; color: var(--tx); padding-left: 20px; opacity: 0.8; }
-    /* ТЕКСТОВЫЕ */
-    .txrgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px }
-    .txr { 
-      background: rgba(255, 255, 255, .02); 
-      border: 1px solid var(--bor); 
-      border-radius: 11px; 
-      padding: 24px; 
-      transition: transform .3s, background .3s; 
-      cursor: default; 
-    }
-    .txr:hover { 
-      background: rgba(255, 255, 255, .03); 
-      transform: translateY(-3px); 
-    }
-    .txrq { font-size: 32px; line-height: 1; color: var(--y); font-weight: 700; margin-bottom: 5px }
-    .rtxt { font-size: 13.5px; color: var(--tx); line-height: 1.6; margin-bottom: 16px; }
-    .rauth { font-size: 11px; color: var(--mu); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-    body.lang-en .ru-only { display: none; }
-    /* FAQ */
-    .flist {
-      margin-top: 50px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px
-    }
-    .fi {
-      border: 1px solid var(--bor);
-      border-radius: 13px;
-      overflow: hidden;
-      transition: border-color .28s, box-shadow .28s
-    }
-    .fi.open { 
-      border-color: rgba(255, 184, 0, 0.5); 
-      box-shadow: 0 0 40px rgba(255, 184, 0, 0.1);
-    }
-    .fq {
-      padding: 20px 26px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-size: 14.5px;
-      font-weight: 500;
-      transition: background .28s
-    }
-    .fq:hover { background: rgba(255, 255, 255, .02) }
-    .fi.open .fq { background: rgba(255, 184, 0, .03) }
-    .fic {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 20px;
-      font-weight: 300;
-      color: var(--mu);
-      transition: color .28s, transform .32s
-    }
-    .fi.open .fic {
-      color: var(--y);
-      transform: rotate(45deg)
-    }
-    .fa {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .42s ease, padding .42s ease;
-      padding: 0 26px;
-      font-size: 13.5px;
-      color: var(--mu);
-      line-height: 1.78
-    }
-    .fi.open .fa {
-      max-height: 280px;
-      padding: 0 26px 20px
-    }
-    /* CTA */
-    #cta { padding: 110px 0 }
-    .ctabox { padding: 76px 56px; text-align: center; position: relative; }
-    .ctatitle {
-      font-size: clamp(26px, 3.8vw, 50px);
-      font-weight: 700;
-      margin-bottom: 18px;
-      line-height: 1.08;
-    }
-    .ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
-    .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-    /* FOOTER */
-    /* ИЗМЕНЕНИЕ 2: Опускаем копирайт вниз (уменьшен нижний padding, увеличен верхний) */
-    footer { 
-      position: relative; 
-      z-index: 10; 
-      padding: 80px 0 20px; 
-      text-align: center; 
-    }
-    .fcopy { color: rgba(255, 255, 255, .2); font-size: 11px; letter-spacing: .1em; font-weight: 500; 
-padding: 0px 0 30px; }
-    
-    /* =========================================
-       МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 900px)
-       ========================================= */
-    @media(max-width:900px) {
-      nav { display: flex; justify-content: space-between; }
-      /* ИЗМЕНЕНИЕ 1: Кейсы по 2 в ряд */
-      .vgrid, .rgrid { grid-template-columns: repeat(2, 1fr) }
-      .hgrid, .agrid { grid-template-columns: 1fr }
-      .aphoto { height: 450px }
-      .txrgrid { grid-template-columns: 1fr }
-      .nlinks { display: none }
-      .cnt { padding: 0 24px }
-    }
-    /* =========================================
-       МОБИЛЬНАЯ АДАПТАЦИЯ (ДО 600px)
-       ========================================= */
-    @media(max-width:600px) {
-      /* Заголовки */
-      .hsup { font-size: 7.5px; margin-bottom: -2px; } 
-      .gw-blur, .gw-sharp, .gw-text { font-size: clamp(65px, 20vw, 90px); } 
-      .hhand { font-size: clamp(20px, 6.5vw, 24px); } 
-      .htitle { gap: 8px; }
-      .hsub { margin-top: 15px; margin-bottom: 30px; font-size: 14px; line-height: 1.6; } 
-      
-      /* Навбар: сдвинутый логотип и кнопки */
-      nav { 
-        width: calc(100% - 24px);
-        padding: 8px 8px 8px 24px; 
-        gap: 8px; 
-        height: 56px; 
-        border-radius: 100px; 
-      }
-      nav.sc { 
-        width: calc(100% - 24px); 
-        height: 52px; 
-        padding: 6px 6px 6px 20px; 
-      }
-      
-      .hbtns, .ab-btns, .ctabtns { 
-        flex-direction: column; 
-        width: 100%; 
-        gap: 12px;
-      }
-      .bpri, .bsec { 
-        width: 100%; 
-        justify-content: center; 
-        font-size: 13.5px; 
-        padding: 16px 20px; 
-      }
-      
-      .sp { padding: 60px 0; }
-      #works { padding: 70px 0 30px !important; }
-      #cta { padding: 70px 0; }
-      .ctabox { padding: 40px 20px; }
-      
-      .stitle, .ctatitle { font-size: 28px; margin-bottom: 12px; }
-      .atxt p:first-of-type { font-size: 26px; }
-      .slbl { font-size: 9.5px; margin-bottom: 10px; }
-      
-      /* Смена фото в секции "Обо мне" */
-      .aphoto { height: 380px; }
-      .photo-desktop { display: none; }
-      .photo-mobile { display: block; }
-      
-      .sphere-1 { width: 140vw; height: 140vw; top: -40vw; left: -40vw; }
-      .sphere-2 { width: 120vw; height: 120vw; bottom: -40vw; right: -40vw; }
-      
-      /* ИЗМЕНЕНИЕ 3: Увеличиваем расстояние между карточками (с 10px до 16px) */
-      .vgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
-      /* ИЗМЕНЕНИЕ 1: Кейсы 2 в ряд */
-      .rgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
-      .hgrid { gap: 16px; margin-top: 30px; }
-      
-      .wph { font-size: 9px; padding: 10px; }
-      .wtag { font-size: 8px; padding: 2px 7px; margin-bottom: 4px; }
-      .wname { font-size: 10px; }
-      
-      .rlock { width: 36px; height: 36px; }
-      .rlock svg { width: 16px; height: 16px; }
-      
-      /* Видеоотзывы */
-      .vid-slider-wrap { gap: 0px; padding: 10px 0; }
-      .slider-btn { padding: 10px; z-index: 10; }
-      .slider-btn svg { width: 28px; height: 28px; }
-      .vid-track { width: 100%; height: 260px; }
-      .vidcirc.prev { transform: translateX(-80px) scale(0.55); opacity: 0.25; z-index: 1; }
-      .vidcirc.next { transform: translateX(80px) scale(0.55); opacity: 0.25; z-index: 1; } 
-      .vc-ring { width: 190px; height: 190px; } 
-      .vc-play { width: 55px; height: 55px; }
-    }
-  </style>
+/* ФОН (АНИМАЦИЯ) */
+#bg { position: fixed; inset: 0; z-index: 0; background: #020100; overflow: hidden; }
+.bg-sphere { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; will-change: transform, opacity; }
+.sphere-1 { width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); top: -20vw; left: -20vw; animation: pulse1 6s infinite alternate ease-in-out; }
+.sphere-2 { width: 65vw; height: 65vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); bottom: -20vw; right: -20vw; animation: pulse2 7s infinite alternate ease-in-out; }
+@keyframes pulse1 { 0% { transform: scale(1) translate(0, 0); opacity: 0.5; } 100% { transform: scale(1.1) translate(6vw, 6vw); opacity: 1; } }
+@keyframes pulse2 { 0% { transform: scale(1) translate(0, 0); opacity: 1; } 100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } }
+
+/* HERO & NAV */
+/* ВАЖНОЕ ИСПРАВЛЕНИЕ: Убрали z-index: 2 у обертки, чтобы выпустить кнопки наверх */
+#hero-wrap { position: relative; overflow: hidden; width: 100%; } 
+@keyframes navDrop { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; opacity: 0; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+nav::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100px; background: rgba(8, 6, 4, .5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+nav.sc::before { opacity: 1; }
+nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
+.nlogo { justify-self: start; display: flex; align-items: center; line-height: 1; font-family: 'Involve', sans-serif; font-weight: 700; font-size: 7.6px; letter-spacing: 1.3em; margin-right: -1.3em; text-decoration: none; background: linear-gradient(to bottom, #ffffff 0%, #777777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; transform: translateY(1px); }
+.nlinks { justify-self: center; display: flex; gap: 4px; }
+.nlinks a { color: rgba(255, 255, 255, .4); text-decoration: none; font-size: 11.5px; font-weight: 500; letter-spacing: .04em; padding: 5px 13px; border-radius: 100px; transition: color .28s }
+.nlinks a:hover, .nlinks a.active { color: #fff; }
+.nright { justify-self: end; display: flex; align-items: center; gap: 9px; height: 100%; }
+.ncta { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: var(--y); color: #000; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; padding: 0 17px; border-radius: 100px; text-decoration: none; transition: transform .22s, box-shadow .22s }
+.ncta:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--yg) }
+.lbtn { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: none; border: 1px solid rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .4); font-size: 10.5px; font-weight: 700; padding: 0 11px; border-radius: 100px; cursor: pointer; letter-spacing: .1em; transition: color .25s, border-color .25s; }
+.lbtn:hover { color: #fff; border-color: rgba(255, 255, 255, .35); }
+
+#hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px; position: relative; width: 100%; }
+
+/* Текст "СИЯТЬ" оставляем под шумом (z-index 2) */
+.htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); animation: fi .9s .3s forwards; position: relative; z-index: 2; }
+.hsup { font-family: 'Involve', sans-serif; font-size: clamp(8.5px, 2.2vw, 9.5px); font-weight: 700; letter-spacing: 0.25em; padding-left: 0.25em; text-transform: uppercase; color: #ffaa00; text-shadow: 0 0 12px rgba(255, 170, 0, 0.4); margin-bottom: -4px; text-align: center; }
+.hhand { font-family: 'Manrope', sans-serif; font-size: clamp(20px, 3.5vw, 36px); font-weight: 300; letter-spacing: 0.03em; text-transform: none; color: #fff; margin: 0; position: relative; z-index: 2; line-height: 1; }
+.gw-container { position: relative; display: inline-grid; place-items: center; }
+.gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
+.gw-blur { color: #fff; filter: blur(6px); user-select: none; pointer-events: none; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); animation: gp 3s ease-in-out infinite alternate; }
+.gw-sharp { color: #fff; user-select: none; pointer-events: none; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); }
+.gw-text { color: transparent; user-select: text; z-index: 5; }
+
+@keyframes gp { 0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); } 50% { text-shadow: 0 0 6px rgba(255, 255, 255, 0.2), 0 0 15px rgba(255, 200, 0, 0.7), 0 0 40px rgba(255, 160, 0, 0.5), 0 0 160px rgba(255, 110, 0, 0.35), 0 0 220px rgba(255, 60, 0, 0.15); } }
+
+/* Текст и Кнопки выносим поверх шума (z-index 10) */
+.hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translateY(30px); animation: fi 1s .5s forwards; position: relative; z-index: 10; }
+.hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(30px); animation: fi 1s .7s forwards; position: relative; z-index: 10; }
+.sdown { position: absolute; bottom: 34px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .25em; color: var(--mu); opacity: 0; animation: fi 1s 1.2s forwards; z-index: 10; }
+
+.sline { width: 1px; height: 38px; background: linear-gradient(to bottom, var(--y), transparent); animation: sd 2.2s ease-in-out infinite }
+@keyframes sd { 0%, 100% { transform: scaleY(1); opacity: 1 } 50% { transform: scaleY(.5); opacity: .3 } }
+@keyframes fi { to { opacity: 1; transform: translateY(0); } }
+
+.bpri { background: var(--y); color: #000; font-weight: 700; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: transform .22s, box-shadow .22s; }
+.bpri:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--yg), 0 0 60px rgba(255, 184, 0, .15) }
+.bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); transition: transform .22s, background .22s; }
+.bsec:hover { transform: scale(1.05); background: rgba(255, 255, 255, .09) }
+
+.ft { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1); }
+.ft.on { opacity: 1; transform: translateY(0); }
+.fu { opacity: 0; transform: translateY(44px); transition: opacity .72s cubic-bezier(.22, 1, .36, 1), transform .72s cubic-bezier(.22, 1, .36, 1); }
+.fu.on { opacity: 1; transform: translateY(0); }
+.rs>* { opacity: 0; transform: translateY(36px); transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1); }
+.rs.on>*:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s }
+.rs.on>*:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s }
+.rs.on>*:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s }
+.rs.on>*:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s }
+.rs.on>*:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s }
+.rs.on>*:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s }
+
+.tick-wrap { padding: 30px 0; overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
+.tick-inner { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
+.tick-track { display: flex; align-items: center; gap: 35px; width: max-content; animation: tk 35s linear infinite; }
+@keyframes tk { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.tick-item { display: flex; align-items: center; gap: 35px; }
+.tdot { width: 5px; height: 5px; border-radius: 50%; background: var(--y); opacity: 0.6; box-shadow: 0 0 8px var(--y); }
+.tick-logo { width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1) opacity(0.35); transition: filter 0.4s ease, transform 0.4s ease; cursor: pointer; }
+.tick-logo:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.08); }
+
+#main-content { position: relative; z-index: 10; }
+section { position: relative; z-index: 10; }
+.cnt { max-width: 1000px; margin: 0 auto; padding: 0 40px }
+.sp { padding: 100px 0; }
+.slbl { font-size: 10px; letter-spacing: .32em; padding-left: .32em; text-transform: uppercase; color: var(--y); font-weight: 700; margin-bottom: 14px }
+.stitle, .ctatitle, .txrq, .atxt p:first-of-type { font-family: 'Involve', sans-serif; }
+.stitle { font-size: clamp(26px, 3.8vw, 46px); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; margin-bottom: 18px }
+.div { height: 1px; background: linear-gradient(90deg, transparent 0%, var(--bor) 50%, transparent 100%); margin: 0; }
+
+.vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
+.hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
+.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform .38s, box-shadow .38s; position: relative; }
+.wcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
+.wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
+.vi .wi { aspect-ratio: 9/16; }
+.hi .wi { aspect-ratio: 16/9; }
+
+.w-video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
+.wi:fullscreen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
+.wi:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
+.wi:fullscreen .w-video, .wi:-webkit-full-screen .w-video { object-fit: contain !important; }
+
+.wi.ui-hidden { cursor: none; }
+.wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
+.wi:fullscreen .fs-enter, .wi:-webkit-full-screen .fs-enter { display: none; }
+.wi:fullscreen .fs-exit, .wi:-webkit-full-screen .fs-exit { display: block !important; }
+
+.w-timeline-wrap { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 90%; height: 16px; display: flex; align-items: center; cursor: pointer; z-index: 4; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, width 0.3s ease; }
+.wi.has-started .w-timeline-wrap { opacity: 1; pointer-events: auto; }
+.w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; backdrop-filter: blur(4px); transition: height 0.2s ease; }
+.w-timeline-wrap:hover .w-timeline-bg { height: 6px; }
+.w-timeline-fill { height: 100%; width: 0%; background: var(--y); border-radius: 4px; pointer-events: none; box-shadow: 0 0 10px rgba(255, 184, 0, 0.5); transition: width 0.25s linear; }
+
+.vi .wi:fullscreen, .vi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 9 / 16); }
+.hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
+.wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
+.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
+
+/* ДИЗАЙН КНОПКИ PLAY */
+.w-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 3; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 0; pointer-events: none; }
+.wi:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
+.w-play-btn svg { width: 32px; height: 32px; fill: currentColor; stroke: currentColor; stroke-width: 1.5; margin-left: -2px; transition: transform 0.2s; }
+.w-play-btn.is-playing svg { margin-left: 0; }
+.w-play-btn.is-playing { opacity: 0; background: rgba(0, 0, 0, 0.4); border-color: transparent; }
+.wi:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.w-fs-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(255, 255, 255, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer; z-index: 4; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all 0.2s ease; opacity: 0; }
+.wi:hover .w-fs-btn, .wi:active .w-fs-btn { opacity: 1; }
+@media (hover: none) { .w-fs-btn { opacity: 1; } }
+.w-fs-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.05); border-color: rgba(255, 255, 255, 0.4); }
+.w-fs-btn svg { width: 18px; height: 18px; }
+
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
+.rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform .38s, box-shadow .38s }
+.rcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
+.rimg { aspect-ratio: 4/5; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden }
+.rblur-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 184, 0, .05), rgba(255, 184, 0, .02)) }
+.rblur { position: absolute; inset: 0; backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); background: rgba(8, 6, 4, .55); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; z-index: 2 }
+.rlock { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, .03); border: 1px solid var(--bor); display: flex; align-items: center; justify-content: center; }
+.rbtxt { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mu); text-align: center; padding: 0 14px }
+
+#about { overflow: hidden }
+.agrid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 35px; align-items: center }
+.aphoto { position: relative; height: 560px; }
+.aframe { position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; border-radius: 20px; overflow: hidden; }
+.photo-desktop, .photo-mobile { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+.photo-desktop { object-position: 80% center; display: block; }
+.photo-mobile { display: none; }
+.atxt p { font-size: 14.5px; line-height: 1.82; color: rgba(232, 230, 222, .72); margin-bottom: 18px }
+.atxt p:first-of-type { font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 22px; letter-spacing: -0.02em; line-height: 1.2; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 24px 0 32px }
+.chip { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 13px; border-radius: 100px; border: 1px solid var(--bor); color: var(--mu); font-weight: 600; transition: border-color .28s, color .28s }
+.chip:hover { border-color: var(--y); color: var(--y) }
+.ab-btns { display: flex; gap: 10px; align-items: center; }
+
+/* === ВИДЕО-КРУЖОЧКИ (С КНОПКОЙ PLAY И ЗВУКОМ) === */
+.rvid, .rvoice, .rtxts { padding: 40px 0; }
+.rvid { padding-top: 15px; }
+.rgst { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); font-weight: 700; margin-bottom: 28px; }
+.vid-slider-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0; }
+.slider-btn { position: relative; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.3s, transform 0.2s; padding: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.slider-btn:hover { color: var(--y); transform: scale(1.1); }
+.vid-track { position: relative; flex: 1; max-width: 820px; height: 440px; display: flex; align-items: center; justify-content: center; }
+.vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+.vidcirc.prev { transform: translateX(-280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+.vidcirc.active { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
+.vidcirc.next { transform: translateX(280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+.vidcirc.hidden { opacity: 0; transform: scale(0.5); z-index: 0; pointer-events: none; transition: opacity 0.2s, transform 0s 0.2s; }
+.vc-ring { width: 320px; height: 320px; border-radius: 50%; background: transparent; position: relative; transition: transform 0.3s; }
+.vc-in { width: 100%; height: 100%; border-radius: 50%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); transition: border-color 0.3s; }
+.vidcirc.active:hover .vc-in { border-color: rgba(255, 255, 255, 0.3); }
+
+/* Курсор и кликабельность только для активного кружка */
+.vidcirc.active .vc-in { cursor: pointer; }
+
+/* Видео внутри кружка */
+.vc-in video {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.02); pointer-events: none;
+    border: none; outline: none; border-radius: 50%;
+}
+
+/* Ховер эффекты для кнопки Play ТОЛЬКО в активном кружке */
+.vidcirc.active .vc-in:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
+.vidcirc.active .vc-in:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.vc-name { font-size: 15px; font-weight: 600; color: var(--tx); letter-spacing: .05em; opacity: 0; transition: opacity .3s; margin-top: 2px; }
+.vidcirc.active .vc-name { opacity: 0.8; }
+.vidcirc.active:hover .vc-name { opacity: 1; }
+
+.rvoice { padding-top: 0; }
+.vocgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.voc-wrapper { display: flex; flex-direction: column; gap: 10px; }
+.voccard { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(255, 255, 255, .02); border: 1px solid var(--bor); border-radius: 100px; cursor: pointer; transition: background .3s, box-shadow .3s, transform .3s; }
+.voccard:hover { background: rgba(255, 255, 255, .04); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+.vocplay { width: 44px; height: 44px; border-radius: 50%; background: var(--y); border: none; display: flex; align-items: center; justify-content: center; color: #000; flex-shrink: 0; transition: transform .2s, box-shadow .2s; }
+.voccard:hover .vocplay { transform: scale(1.05); box-shadow: 0 0 15px var(--yg); }
+.vocplay svg { width: 24px; height: 24px; fill: currentColor; margin-left: -1px; }
+.vocwave { flex: 1; height: 24px; background: repeating-linear-gradient(90deg, var(--mu) 0px, var(--mu) 2px, transparent 2px, transparent 5px); opacity: 0.5; border-radius: 2px; }
+.voc-dur { font-size: 11px; color: var(--mu); font-family: monospace; }
+.voc-name { font-size: 13px; font-weight: 500; color: var(--tx); padding-left: 20px; opacity: 0.8; }
+
+.txrgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px }
+.txr { background: rgba(255, 255, 255, .02); border: 1px solid var(--bor); border-radius: 11px; padding: 24px; transition: transform .3s, background .3s; cursor: default; }
+.txr:hover { background: rgba(255, 255, 255, .03); transform: translateY(-3px); }
+.txrq { font-size: 32px; line-height: 1; color: var(--y); font-weight: 700; margin-bottom: 5px }
+.rtxt { font-size: 13.5px; color: var(--tx); line-height: 1.6; margin-bottom: 16px; }
+.rauth { font-size: 11px; color: var(--mu); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+body.lang-en .ru-only { display: none; }
+
+.flist { margin-top: 50px; display: flex; flex-direction: column; gap: 10px }
+.fi { border: 1px solid var(--bor); border-radius: 13px; overflow: hidden; transition: border-color .28s, box-shadow .28s }
+.fi.open { border-color: rgba(255, 184, 0, 0.5); box-shadow: 0 0 40px rgba(255, 184, 0, 0.1); }
+.fq { padding: 20px 26px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14.5px; font-weight: 500; transition: background .28s }
+.fq:hover { background: rgba(255, 255, 255, .02) }
+.fi.open .fq { background: rgba(255, 184, 0, .03) }
+.fic { display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; font-weight: 300; color: var(--mu); transition: color .28s, transform .32s }
+.fi.open .fic { color: var(--y); transform: rotate(45deg) }
+.fa { max-height: 0; overflow: hidden; transition: max-height .42s ease, padding .42s ease; padding: 0 26px; font-size: 13.5px; color: var(--mu); line-height: 1.78 }
+.fi.open .fa { max-height: 280px; padding: 0 26px 20px }
+
+#cta { padding: 110px 0 }
+.ctabox { padding: 76px 56px; text-align: center; position: relative; }
+.ctatitle { font-size: clamp(26px, 3.8vw, 50px); font-weight: 700; margin-bottom: 18px; line-height: 1.08; }
+.ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
+.ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+
+footer { position: relative; z-index: 10; padding: 80px 0 20px; text-align: center; }
+.fcopy { color: rgba(255, 255, 255, .2); font-size: 11px; letter-spacing: .1em; font-weight: 500; padding: 0px 0 30px; }
+
+@media(max-width:900px) {
+nav { display: flex; justify-content: space-between; }
+.vgrid, .rgrid { grid-template-columns: repeat(2, 1fr) }
+.hgrid, .agrid { grid-template-columns: 1fr }
+.aphoto { height: 450px }
+.txrgrid { grid-template-columns: 1fr }
+.nlinks { display: none }
+.cnt { padding: 0 24px }
+}
+@media(max-width:600px) {
+.hsup { font-size: 7.5px; margin-bottom: -2px; }
+.gw-blur, .gw-sharp, .gw-text { font-size: clamp(65px, 20vw, 90px); }
+.hhand { font-size: clamp(20px, 6.5vw, 24px); }
+.htitle { gap: 8px; }
+.hsub { margin-top: 15px; margin-bottom: 30px; font-size: 14px; line-height: 1.6; }
+nav { width: calc(100% - 24px); padding: 8px 8px 8px 24px; gap: 8px; height: 56px; border-radius: 100px; }
+nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
+.hbtns, .ab-btns, .ctabtns { flex-direction: column; width: 100%; gap: 12px; }
+.bpri, .bsec { width: 100%; justify-content: center; font-size: 13.5px; padding: 16px 20px; }
+.sp { padding: 60px 0; }
+#works { padding: 70px 0 30px !important; }
+#cta { padding: 70px 0; }
+.ctabox { padding: 40px 20px; }
+.stitle, .ctatitle { font-size: 28px; margin-bottom: 12px; }
+.atxt p:first-of-type { font-size: 26px; }
+.slbl { font-size: 9.5px; margin-bottom: 10px; }
+.aphoto { height: 380px; }
+.photo-desktop { display: none; }
+.photo-mobile { display: block; }
+.sphere-1 { width: 140vw; height: 140vw; top: -40vw; left: -40vw; }
+.sphere-2 { width: 120vw; height: 120vw; bottom: -40vw; right: -40vw; }
+.vgrid, .rgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
+.hgrid { gap: 16px; margin-top: 30px; }
+.vid-slider-wrap { gap: 0px; padding: 10px 0; }
+.slider-btn { padding: 10px; z-index: 10; }
+.slider-btn svg { width: 28px; height: 28px; }
+.vid-track { width: 100%; height: 260px; }
+.vidcirc.prev { transform: translateX(-80px) scale(0.55); opacity: 0.25; z-index: 1; }
+.vidcirc.next { transform: translateX(80px) scale(0.55); opacity: 0.25; z-index: 1; }
+.vc-ring { width: 190px; height: 190px; }
+.w-timeline-wrap { height: 20px; } 
+.w-timeline-bg { height: 5px; }
+}
+</style>
 </head>
 <body>
-  <div id="bg">
-    <div class="bg-sphere sphere-1"></div>
-    <div class="bg-sphere sphere-2"></div>
-  </div>
-  
-  <canvas id="noise" width="0" height="0" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.04;filter:grayscale(100%);"></canvas>
-  <div id="wrap">
-    <nav id="nav">
-      <a href="#hero" class="nlogo">KLAGE</a>
-      <div class="nlinks">
-        <a href="#works" class="nl" data-s="works" data-ru="Работы" data-en="Projects">Работы</a>
-        <a href="#results" class="nl" data-s="results" data-ru="Результаты" data-en="Results">Результаты</a>
-        <a href="#about" class="nl" data-s="about" data-ru="Обо мне" data-en="About">Обо мне</a>
-      </div>
-      <div class="nright">
-        <button class="lbtn" id="lb" onclick="tl()">EN</button>
-        <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="ncta" data-ru="Связаться" data-en="Contact">Связаться</a>
-      </div>
-    </nav>
-    <div id="hero-wrap">
-      <section id="hero">
-        <h1 class="htitle">
-          <span class="hsup" data-ru="монтаж • контент • визуал" data-en="editing • content • visuals">монтаж • контент • визуал</span>
-          <span class="hhand" data-ru="заставь свои видео" data-en="make your videos">заставь свои видео</span>
-          <span class="gw-container">
-            <span class="gw-blur" aria-hidden="true" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
-            <span class="gw-sharp" aria-hidden="true" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
-            <span class="gw-text" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
-          </span>
-        </h1>
-        <p class="hsub" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по&nbsp;всему&nbsp;миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по&nbsp;всему&nbsp;миру</p>
-        <div class="hbtns">
-          <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri">
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0">
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" />
-            </svg> 
-            <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
-          </a>
-          <a href="mailto:your@email.com" class="bsec">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span>
-          </a>
-        </div>
-        <div class="sdown"><span data-ru="ЛИСТАЙ" data-en="SCROLL">ЛИСТАЙ</span>
-          <div class="sline"></div>
-        </div>
-      </section>
-    </div>
-    <div class="tick-wrap fu">
-      <div class="tick-track" id="tt"></div>
-    </div>
-    <div id="main-content">
-      <section id="works" style="padding: 100px 0 50px; position:relative; z-index:10">
-        <div class="cnt">
-          <div class="ft">
-            <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
-            <h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical Works">Вертикальные работы</h2>
-          </div>
-          <div class="vgrid rs" id="vg"></div>
-        </div>
-      </section>
-      <section style="padding: 50px 0 100px; position:relative; z-index:10">
-        <div class="cnt">
-          <div class="ft">
-            <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
-            <h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal Works">Горизонтальные работы</h2>
-          </div>
-          <div class="hgrid rs" id="hg"></div>
-        </div>
-      </section>
-      <div class="div"></div>
-      <section id="results" class="sp">
-        <div class="cnt">
-          <div class="ft">
-            <div class="slbl" data-ru="Кейсы" data-en="Cases">Кейсы</div>
-            <h2 class="stitle" data-ru="Результаты клиентов" data-en="Client Results">Результаты клиентов</h2>
-          </div>
-          <div class="rgrid rs" id="rg"></div>
-        </div>
-      </section>
-      <div class="div"></div>
-      <section id="about" class="sp">
-        <div class="cnt">
-          <div class="agrid">
-            <div class="aphoto fu">
-              <div class="aframe">
-                <!-- =============================================================== -->
-                <!-- ↓↓↓ УКАЖИ ЗДЕСЬ ПРАВИЛЬНЫЕ ПУТИ К ДВУМ ФОТОГРАФИЯМ ↓↓↓ -->
-                <!-- =============================================================== -->
-                <img src="assets/images/photo_desktop.png" alt="Илья — KLAGE" class="photo-desktop">
-                <img src="assets/images/photo_mobile.png" alt="Илья — KLAGE" class="photo-mobile">
-              </div>
-            </div>
-            <div class="atxt ft">
-              <div class="slbl" data-ru="Обо мне" data-en="About Me">Обо мне</div>
-              <p data-ru="Привет, я Илья" data-en="Hi, I'm Ilya">Привет, я Илья</p>
-              <p data-ru="Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали." data-en="I create unique, structured videos where every detail works towards the goal. I work with rhythm, clarity, and the meaning of the frame so that videos are not just watched, but felt and remembered.">Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали.</p>
-              <p data-ru="Монтаж для меня - это не просто работа, а любимое хобби и дело всей жизни, поэтому к каждому проекту я подхожу с максимальной внимательностью к деталям и желанием предоставить по-настоящему впечатляющий результат!" data-en="For me, video editing is not just a job, but a beloved hobby and a life's work. Therefore, I approach every project with the utmost attention to detail and a desire to deliver a truly impressive result!">Монтаж для меня - это не просто работа, а любимое хобби и дело всей жизни, поэтому к каждому проекту я подхожу с максимальной внимательностью к деталям и желанием предоставить по-настоящему впечатляющий результат!</p>
-              <div class="chips">
-                  <span class="chip">Reels &amp; Shorts</span>
-                  <span class="chip" data-ru="Цветокоррекция" data-en="Color Grading">Цветокоррекция</span>
-                  <span class="chip">Motion Design</span>
-                  <span class="chip">Sound Design</span>
-                  <span class="chip" data-ru="Вертикальный монтаж" data-en="Vertical Editing">Вертикальный монтаж</span>
-              </div>
-              
-              <div class="ab-btns">
-                <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18"
-                    viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0">
-                    <path
-                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" />
-                  </svg> <span data-ru="Обсудить проект" data-en="Discuss Project">Обсудить проект</span></a>
-                <a href="mailto:your@email.com" class="bsec">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                  <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="div"></div>
-      <section id="reviews" class="sp">
-        <div class="cnt">
-          <div class="ft">
-            <div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
-            <h2 class="stitle" data-ru="Что говорят клиенты" data-en="What Clients Say">Что говорят клиенты</h2>
-          </div>
-          <div class="rbox fu">
-            
-            <div class="rvid ru-only">
-              <div class="rgst">Видеоотзывы</div>
-              
-              <div class="vid-slider-wrap">
-                <button class="slider-btn" id="prevBtn">
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
-                </button>
-                
-                <div class="vid-track" id="vidTrack">
-                  <div class="vidcirc" data-index="0">
-                    <div class="vc-ring">
-                      <div class="vc-in">
-                        <div class="vc-play">
-                          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="vc-name">Аркадий</div>
-                  </div>
-                  <div class="vidcirc" data-index="1">
-                    <div class="vc-ring">
-                      <div class="vc-in">
-                        <div class="vc-play">
-                          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="vc-name">Валерий</div>
-                  </div>
-                  <div class="vidcirc" data-index="2">
-                    <div class="vc-ring">
-                      <div class="vc-in">
-                        <div class="vc-play">
-                          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="vc-name">Probazis</div>
-                  </div>
-                  <div class="vidcirc" data-index="3">
-                    <div class="vc-ring">
-                      <div class="vc-in">
-                        <div class="vc-play">
-                          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="vc-name">Клиент 4</div>
-                  </div>
-                </div>
-                <button class="slider-btn" id="nextBtn">
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19l7-7-7-7"/></svg>
-                </button>
-              </div>
-            </div>
-            <div class="rvoice ru-only">
-              <div class="rgst">Голосовые отзывы</div>
-              <div class="vocgrid">
-                <div class="voc-wrapper">
-                  <div class="voccard">
-                    <div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
-                    <div class="vocwave"></div>
-                    <div class="voc-dur">0:15</div>
-                  </div>
-                  <div class="voc-name">Андрей</div>
-                </div>
-                <div class="voc-wrapper">
-                  <div class="voccard">
-                    <div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
-                    <div class="vocwave"></div>
-                    <div class="voc-dur">0:24</div>
-                  </div>
-                  <div class="voc-name">Максим</div>
-                </div>
-                <div class="voc-wrapper">
-                  <div class="voccard">
-                    <div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
-                    <div class="vocwave"></div>
-                    <div class="voc-dur">1:02</div>
-                  </div>
-                  <div class="voc-name">Екатерина</div>
-                </div>
-              </div>
-            </div>
-            <div class="rtxts">
-              <div class="rgst" data-ru="Текстовые отзывы" data-en="Text Reviews">Текстовые отзывы</div>
-              <div class="txrgrid">
-                <div class="txr">
-                  <div class="txrq">"</div>
-                  <p class="rtxt" data-ru="Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!" data-en="Ilya edited the video at the highest level. The video got record views. Highly recommended!">Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!</p>
-                  <div class="rauth" data-ru="— Аркадий" data-en="— Arkady">— Аркадий</div>
-                </div>
-                <div class="txr">
-                  <div class="txrq">"</div>
-                  <p class="rtxt" data-ru="Профессиональный подход, внимание к деталям, результат превзошёл все ожидания." data-en="Professional approach, attention to detail, the result exceeded all expectations.">Профессиональный подход, внимание к деталям, результат превзошёл все ожидания.</p>
-                  <div class="rauth" data-ru="— Валерий" data-en="— Valery">— Валерий</div>
-                </div>
-                <div class="txr">
-                  <div class="txrq">"</div>
-                  <p class="rtxt" data-ru="Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко." data-en="Content became noticeably better, reach has grown. Deadlines met, everything is perfect.">Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко.</p>
-                  <div class="rauth">— Probazis</div>
-                </div>
-                <div class="txr">
-                  <div class="txrq">"</div>
-                  <p class="rtxt" data-ru="Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал." data-en="Works fast, with high quality and soul. Exactly the video editor I was looking for.">Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал.</p>
-                  <div class="rauth" data-ru="— Клиент" data-en="— Client">— Клиент</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="div"></div>
-      <section id="faq" class="sp">
-        <div class="cnt">
-          <div class="ft">
-            <div class="slbl">FAQ</div>
-            <h2 class="stitle" data-ru="Частые вопросы" data-en="Frequent Questions">Частые вопросы</h2>
-          </div>
-          <div class="flist fu" id="fl"></div>
-        </div>
-      </section>
-      <div class="div"></div>
-      <section id="cta">
-        <div class="cnt">
-          <div class="ctabox fu">
-            <div class="slbl" data-ru="Начнём?" data-en="Let's start?">Начнём?</div>
-            <h2 class="ctatitle" data-ru="Готов вывести свой контент на новый уровень?" data-en="Ready to take your content to the next level?">Готов вывести свой контент на новый уровень?</h2>
-            <div class="ctabtns">
-              <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18"
-                  viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0">
-                  <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" />
-                </svg> <span data-ru="Получить консультацию" data-en="Get a Consultation">Получить консультацию</span></a>
-              <a href="mailto:your@email.com" class="bsec">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <footer>
-        <div class="fcopy" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
-      </footer>
+
+<div id="bg">
+<div class="bg-sphere sphere-1"></div>
+<div class="bg-sphere sphere-2"></div>
+</div>
+
+<!-- ШУМ НАХОДИТСЯ ЗДЕСЬ (z-index: 5) ОН ПЕРЕКРЫВАЕТ ФОН И ТЕКСТ HERO, НО КНОПКИ И КАРТОЧКИ ВЫШЕ НЕГО -->
+<canvas id="noise" width="0" height="0" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;opacity:0.04;filter:grayscale(100%);"></canvas>
+
+<div id="wrap">
+<nav id="nav">
+<a href="#hero" class="nlogo">KLAGE</a>
+<div class="nlinks">
+<a href="#works" class="nl" data-s="works" data-ru="Работы" data-en="Projects">Работы</a>
+<a href="#results" class="nl" data-s="results" data-ru="Результаты" data-en="Results">Результаты</a>
+<a href="#about" class="nl" data-s="about" data-ru="Обо мне" data-en="About">Обо мне</a>
+</div>
+<div class="nright">
+<button class="lbtn" id="lb" onclick="tl()">EN</button>
+<a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="ncta" data-ru="Связаться" data-en="Contact">Связаться</a>
+</div>
+</nav>
+
+<div id="hero-wrap">
+<section id="hero">
+<h1 class="htitle">
+<span class="hsup" data-ru="монтаж • контент • визуал" data-en="editing • content • visuals">монтаж • контент • визуал</span>
+<span class="hhand" data-ru="заставь свои видео" data-en="make your videos">заставь свои видео</span>
+<span class="gw-container">
+<span class="gw-blur" aria-hidden="true" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
+<span class="gw-sharp" aria-hidden="true" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
+<span class="gw-text" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
+</span>
+</h1>
+<p class="hsub" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру</p>
+<div class="hbtns">
+<a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri">
+<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg>
+<span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
+</a>
+<a href="mailto:your@email.com" class="bsec">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+<span data-ru="Написать Email" data-en="Write an Email">Написать Email</span>
+</a>
+</div>
+<div class="sdown"><span data-ru="ЛИСТАЙ" data-en="SCROLL">ЛИСТАЙ</span>
+<div class="sline"></div>
+</div>
+</section>
+</div>
+
+<div class="tick-wrap fu">
+<div class="tick-inner"><div class="tick-track" id="tt"></div></div>
+</div>
+
+<div id="main-content">
+
+<section id="works" style="padding: 100px 0 50px; position:relative; z-index:10">
+<div class="cnt">
+<div class="ft">
+<div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
+<h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical Works">Вертикальные работы</h2>
+</div>
+<div class="vgrid rs" id="vg"></div>
+</div>
+</section>
+
+<section style="padding: 50px 0 100px; position:relative; z-index:10">
+<div class="cnt">
+<div class="ft">
+<div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
+<h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal Works">Горизонтальные работы</h2>
+</div>
+<div class="hgrid rs" id="hg"></div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<section id="results" class="sp">
+<div class="cnt">
+<div class="ft">
+<div class="slbl" data-ru="Кейсы" data-en="Cases">Кейсы</div>
+<h2 class="stitle" data-ru="Результаты клиентов" data-en="Client Results">Результаты клиентов</h2>
+</div>
+<div class="rgrid rs" id="rg"></div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<section id="about" class="sp">
+<div class="cnt">
+<div class="agrid">
+<div class="aphoto fu">
+<div class="aframe">
+<img src="assets/images/photo_desktop.png" alt="Илья — KLAGE" class="photo-desktop">
+<img src="assets/images/photo_mobile.png" alt="Илья — KLAGE" class="photo-mobile">
+</div>
+</div>
+<div class="atxt ft">
+<div class="slbl" data-ru="Обо мне" data-en="About Me">Обо мне</div>
+<p data-ru="Привет, я Илья" data-en="Hi, I'm Ilya">Привет, я Илья</p>
+<p data-ru="Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали." data-en="I create unique, structured videos where every detail works towards the goal. I work with rhythm, clarity, and the meaning of the frame so that videos are not just watched, but felt and remembered.">Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали.</p>
+<p data-ru="Монтаж для меня - это не просто работа, а любимое хобби и дело всей жизни, поэтому к каждому проекту я подхожу с максимальной внимательностью к деталям и желанием предоставить по-настоящему впечатляющий результат!" data-en="For me, video editing is not just a job, but a beloved hobby and a life's work. Therefore, I approach every project with the utmost attention to detail and a desire to deliver a truly impressive result!">Монтаж для меня - это не просто работа, а любимое хобби и дело всей жизни, поэтому к каждому проекту я подхожу с максимальной внимательностью к деталям и желанием предоставить по-настоящему впечатляющий результат!</p>
+<div class="chips">
+<span class="chip">Reels &amp; Shorts</span>
+<span class="chip" data-ru="Цветокоррекция" data-en="Color Grading">Цветокоррекция</span>
+<span class="chip">Motion Design</span>
+<span class="chip">Sound Design</span>
+<span class="chip" data-ru="Вертикальный монтаж" data-en="Vertical Editing">Вертикальный монтаж</span>
+</div>
+<div class="ab-btns">
+<a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Обсудить проект" data-en="Discuss Project">Обсудить проект</span></a>
+<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<section id="reviews" class="sp">
+<div class="cnt">
+<div class="ft">
+<div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
+<h2 class="stitle" data-ru="Что говорят клиенты" data-en="What Clients Say">Что говорят клиенты</h2>
+</div>
+
+<div class="rbox fu">
+<div class="rvid ru-only">
+<div class="rgst">Видеоотзывы</div>
+<div class="vid-slider-wrap">
+<button class="slider-btn" id="prevBtn">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
+</button>
+
+<div class="vid-track" id="vidTrack">
+
+<div class="vidcirc" data-index="0">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/videos/rev1.mp4" loop playsinline preload="metadata"></video>
+      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
     </div>
   </div>
-  
-  <!-- ИЗМЕНЕНИЕ 4: Модальное окно -->
-  <div id="video-modal" class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-content" id="modal-content"></div>
+  <div class="vc-name">Аркадий</div>
+</div>
+
+<div class="vidcirc" data-index="1">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/videos/rev2.mp4" loop playsinline preload="metadata"></video>
+      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
+    </div>
   </div>
+  <div class="vc-name">Валерий</div>
+</div>
 
-  <script>
-    // НОВЫЙ МАССИВ С ЛОГОТИПАМИ КЛИЕНТОВ (ВМЕСТО СТАРОГО ТЕКСТА)
-    const LOGOS = [
-      { src: 'assets/logos/africa.png', alt: 'Африка', size: 90 }, 
-      { src: 'assets/logos/fullflat.png', alt: 'fullflat', size: 85 },
-      { src: 'assets/logos/probazis.png', alt: 'Probazis', size: 200 },
-      { src: 'assets/logos/fscr.png', alt: 'FSCR', size: 80 },
-      { src: 'assets/logos/remsart.png', alt: 'Remstart', size: 120 }, 
-      { src: 'assets/logos/narnia.png', alt: 'Шкафы Нарния', size: 140 },
-      { src: 'assets/logos/region.png', alt: 'Region Online', size: 150 },
-      { src: 'assets/logos/nutreasy.png', alt: 'Nutreasy', size: 150 }
-    ];
+<div class="vidcirc" data-index="2">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/videos/rev3.mp4" loop playsinline preload="metadata"></video>
+      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
+    </div>
+  </div>
+  <div class="vc-name">Probazis</div>
+</div>
 
-    const VW = [{ l: 'Reels · Probazis', t: 'SMM' }, { l: 'Shorts · FSCR', t: 'Спорт' }, { l: 'Reels · Remstart', t: 'Бизнес' }, { l: 'Reels · fullflat', t: 'Недвижимость' }, { l: 'Shorts · Nutreasy', t: 'Продукт' }, { l: 'Reels · Region Online', t: 'Медиа' }];
-    const HW = [{ l: 'YouTube · Probazis', t: 'Обзор' }, { l: 'YouTube · ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', t: 'Travel' }, { l: 'Highlight · Шкафы Нарния', t: 'Реклама' }, { l: 'Corporate · Remstart', t: 'Корпоратив' }];
-    
-    const RS = [
-      { type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' }, 
-      { type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' }, 
-      { type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' }, 
-      { type: 'insta', client: 'Валерий', handle: '@valery', desc: 'Рост охватов +230%', descEn: 'Reach growth +230%' }, 
-      { type: 'insta', client: 'Валерий', handle: '@valery', desc: 'ER вырос с 2% до 7.4%', descEn: 'ER grew from 2% to 7.4%' }, 
-      { type: 'insta', client: 'Probazis', handle: '@probazis', desc: '+15 000 подписчиков за месяц', descEn: '+15k followers per month' }
-    ];
-    const FAQ = [
-      { q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов, в первую очередь от сложности и объема работы. Давайте обсудим ваш проект, и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and depends on multiple factors, primarily the complexity and volume of work. Let's discuss your project and I'll be able to give you the exact price." } },
-      { q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель и также зависят в первую очередь от сложности и объема работы, а также от моей занятости на момент начала работы. На этапе обсуждения проекта без проблем смогу подсказать точные сроки.', en: 'The timeline for each project can vary from 1 day to several weeks, depending primarily on the complexity and volume of the work, as well as my current workload. I will be happy to provide exact deadlines during our project discussion.' } },
-      { q: { ru: 'Что нужно для начала?', en: 'What do I need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
-      { q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
-    ];
-    let lang = 'ru';
+<div class="vidcirc" data-index="3">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/videos/rev4.mp4" loop playsinline preload="metadata"></video>
+      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
+    </div>
+  </div>
+  <div class="vc-name">Клиент 4</div>
+</div>
 
-    // НОВАЯ ФУНКЦИЯ ДЛЯ ОТРИСОВКИ ЛОГОТИПОВ
-    function buildTicker() { 
-      const track = [...LOGOS, ...LOGOS];
-      const baseHeight = 28; 
-      document.getElementById('tt').innerHTML = track.map(logo => {
-        const newHeight = (baseHeight * (logo.size || 100)) / 100;
-        return `
-        <div class="tick-item">
-          <img src="${logo.src}" alt="${logo.alt}" class="tick-logo" loading="lazy" decoding="async" style="height: ${newHeight}px;">
-          <span class="tdot"></span>
-        </div>`;
-      }).join(''); 
-    }
-    
-    function wCard(w, cls) { 
-      const txt = lang === 'ru' ? '📂 Добавьте видео' : '📂 Add video';
-      return '<div class="' + cls + ' wcard" onclick="openModal()"><div class="wi"><div class="wph">' + txt + '</div><div class="wlbl"><div class="wtag">' + w.t + '</div><div class="wname">' + w.l + '</div></div></div></div>' 
-    }
-    
-    function buildWorks() { 
-      document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join(''); 
-      document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('') 
-    }
-    
-    function buildResults() {
-      const copyTxt = lang === 'ru' ? 'Авторские права' : 'Copyright';
-      const statTxt = lang === 'ru' ? '📂 Добавьте скриншот<br>со статистикой' : '📂 Add screenshot<br>with stats';
-      document.getElementById('rg').innerHTML = RS.map(r => {
-        if (r.type === 'blur') return '<div class="rcard"><div class="rimg"><div class="rblur-bg"></div><div class="rblur"><div class="rlock"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><div class="rbtxt">' + copyTxt + '</div></div></div></div>';
-        return '<div class="rcard"><div class="rimg" style="min-height:140px"><div class="wph" style="text-align:center; width: 100%; padding: 0 10px; line-height: 1.5;">' + statTxt + '</div></div></div>';
-      }).join('');
-    }
-    function buildFAQ() { document.getElementById('fl').innerHTML = FAQ.map((f, i) => '<div class="fi" id="f' + i + '"><div class="fq" onclick="tf(' + i + ')"><span>' + f.q[lang] + '</span><div class="fic">+</div></div><div class="fa">' + f.a[lang] + '</div></div>').join('') }
-    
-    function tf(i) { const e = document.getElementById('f' + i); const was = e.classList.contains('open'); document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); if (!was) e.classList.add('open') }
-    
-    function tl() { 
-      lang = lang === 'ru' ? 'en' : 'ru'; 
-      document.getElementById('lb').textContent = lang === 'ru' ? 'EN' : 'RU'; 
-      
-      if(lang === 'en') {
-        document.body.classList.add('lang-en');
-      } else {
-        document.body.classList.remove('lang-en');
-      }
-      document.querySelectorAll('[data-ru]').forEach(el => { 
-        const t = lang === 'ru' ? el.dataset.ru : el.dataset.en; 
-        if (t) el.innerHTML = t; 
-      }); 
-      
-      buildWorks();
-      buildResults();
-      buildFAQ(); 
-    }
+<div class="vidcirc" data-index="4">
+  <div class="vc-ring">
+    <div class="vc-in" onclick="toggleCircleVideo(this)">
+      <video src="assets/videos/rev5.mp4" loop playsinline preload="metadata"></video>
+      <div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
+    </div>
+  </div>
+  <div class="vc-name">Клиент 5</div>
+</div>
 
-    // ЛОГИКА МОДАЛЬНОГО ОКНА ДЛЯ ВИДЕО
-    function openModal() {
-      document.getElementById('video-modal').classList.add('show');
-      document.getElementById('modal-content').innerHTML = lang === 'ru' ? 'Здесь будет открываться видео на полный экран' : 'Video will open in full screen here';
-    }
-    function closeModal() {
-      document.getElementById('video-modal').classList.remove('show');
-      setTimeout(() => { document.getElementById('modal-content').innerHTML = ''; }, 300);
-    }
-    document.getElementById('video-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
+</div>
 
-    const circles = Array.from(document.querySelectorAll('.vidcirc'));
-    let activeIndex = 1; 
-    function updateSlider() {
-      circles.forEach(c => {
-        c.className = 'vidcirc hidden';
-      });
-      const total = circles.length;
-      const prevIndex = (activeIndex - 1 + total) % total;
-      const nextIndex = (activeIndex + 1) % total;
-      circles[activeIndex].classList.add('active');
-      circles[activeIndex].classList.remove('hidden');
-      circles[prevIndex].classList.add('prev');
-      circles[prevIndex].classList.remove('hidden');
-      circles[nextIndex].classList.add('next');
-      circles[nextIndex].classList.remove('hidden');
+<button class="slider-btn" id="nextBtn">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19l7-7-7-7"/></svg>
+</button>
+</div>
+</div>
+
+<div class="rvoice ru-only">
+<div class="rgst">Голосовые отзывы</div>
+<div class="vocgrid">
+<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">0:15</div></div><div class="voc-name">Андрей</div></div>
+<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">0:24</div></div><div class="voc-name">Максим</div></div>
+<div class="voc-wrapper"><div class="voccard"><div class="vocplay"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div><div class="vocwave"></div><div class="voc-dur">1:02</div></div><div class="voc-name">Екатерина</div></div>
+</div>
+</div>
+
+<div class="rtxts">
+<div class="rgst" data-ru="Текстовые отзывы" data-en="Text Reviews">Текстовые отзывы</div>
+<div class="txrgrid">
+<div class="txr">
+<div class="txrq">"</div>
+<p class="rtxt" data-ru="Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!" data-en="Ilya edited the video at the highest level. The video got record views. Highly recommended!">Илья сделал монтаж на высочайшем уровне. Видео набрало рекордные просмотры. Рекомендую!</p>
+<div class="rauth" data-ru="— Аркадий" data-en="— Arkady">— Аркадий</div>
+</div>
+<div class="txr">
+<div class="txrq">"</div>
+<p class="rtxt" data-ru="Профессиональный подход, внимание к деталям, результат превзошёл все ожидания." data-en="Professional approach, attention to detail, the result exceeded all expectations.">Профессиональный подход, внимание к деталям, результат превзошёл все ожидания.</p>
+<div class="rauth" data-ru="— Валерий" data-en="— Valery">— Валерий</div>
+</div>
+<div class="txr">
+<div class="txrq">"</div>
+<p class="rtxt" data-ru="Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко." data-en="Content became noticeably better, reach has grown. Deadlines met, everything is perfect.">Контент стал заметно лучше, охваты выросли. Сроки соблюдены, всё чётко.</p>
+<div class="rauth">— Probazis</div>
+</div>
+<div class="txr">
+<div class="txrq">"</div>
+<p class="rtxt" data-ru="Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал." data-en="Works fast, with high quality and soul. Exactly the video editor I was looking for.">Работает быстро, качественно и с душой. Именно такой монтажёр, которого искал.</p>
+<div class="rauth" data-ru="— Клиент" data-en="— Client">— Клиент</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<section id="faq" class="sp">
+<div class="cnt">
+<div class="ft">
+<div class="slbl">FAQ</div>
+<h2 class="stitle" data-ru="Частые вопросы" data-en="Frequent Questions">Частые вопросы</h2>
+</div>
+<div class="flist fu" id="fl"></div>
+</div>
+</section>
+
+<div class="div"></div>
+
+<section id="cta">
+<div class="cnt">
+<div class="ctabox fu">
+<div class="slbl" data-ru="Начнём?" data-en="Let's start?">Начнём?</div>
+<h2 class="ctatitle" data-ru="Готов вывести свой контент на новый уровень?" data-en="Ready to take your content to the next level?">Готов вывести свой контент на новый уровень?</h2>
+<div class="ctabtns">
+<a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Получить консультацию" data-en="Get a Consultation">Получить консультацию</span></a>
+<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Write an Email">Написать Email</span></a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="fcopy" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
+</footer>
+</div>
+</div>
+
+<script>
+const LOGOS = [
+{ src: 'assets/logos/africa.png', alt: 'Африка', size: 90 },
+{ src: 'assets/logos/fullflat.png', alt: 'fullflat', size: 85 },
+{ src: 'assets/logos/probazis.png', alt: 'Probazis', size: 200 },
+{ src: 'assets/logos/fscr.png', alt: 'FSCR', size: 80 },
+{ src: 'assets/logos/remsart.png', alt: 'Remstart', size: 120 },
+{ src: 'assets/logos/narnia.png', alt: 'Шкафы Нарния', size: 140 },
+{ src: 'assets/logos/region.png', alt: 'Region Online', size: 150 },
+{ src: 'assets/logos/nutreasy.png', alt: 'Nutreasy', size: 150 }
+];
+const VW = [
+{ l: 'Reels · Probazis', t: 'SMM', v: 'assets/videos/v1.mp4', p: 'assets/videos/v1.jpg' },
+{ l: 'Shorts · FSCR', t: 'Спорт', v: 'assets/videos/v2.mp4', p: 'assets/videos/v2.jpg' },
+{ l: 'Reels · Remstart', t: 'Бизнес', v: 'assets/videos/v3.mp4', p: 'assets/videos/v3.jpg' },
+{ l: 'Reels · fullflat', t: 'Недвижимость', v: 'assets/videos/v4.mp4', p: 'assets/videos/v4.jpg' },
+{ l: 'Shorts · Nutreasy', t: 'Продукт', v: 'assets/videos/v5.mp4', p: 'assets/videos/v5.jpg' },
+{ l: 'Reels · Region Online', t: 'Медиа', v: 'assets/videos/v6.mp4', p: 'assets/videos/v6.jpg' }
+];
+const HW = [
+{ l: 'YouTube · Probazis', t: 'Обзор', v: 'assets/videos/h1.mp4', p: 'assets/videos/h1.jpg' },
+{ l: 'YouTube · ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', t: 'Travel', v: 'assets/videos/h2.mp4', p: 'assets/videos/h2.jpg' },
+{ l: 'Highlight · Шкафы Нарния', t: 'Реклама', v: 'assets/videos/h3.mp4', p: 'assets/videos/h3.jpg' },
+{ l: 'Corporate · Remstart', t: 'Корпоратив', v: 'assets/videos/h4.mp4', p: 'assets/videos/h4.jpg' }
+];
+const RS = [
+{ type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' },
+{ type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' },
+{ type: 'blur', client: 'Аркадий', desc: 'Проект под защитой авторских прав', descEn: 'Project protected by copyright' },
+{ type: 'insta', client: 'Валерий', handle: '@valery', desc: 'Рост охватов +230%', descEn: 'Reach growth +230%' },
+{ type: 'insta', client: 'Валерий', handle: '@valery', desc: 'ER вырос с 2% до 7.4%', descEn: 'ER grew from 2% to 7.4%' },
+{ type: 'insta', client: 'Probazis', handle: '@probazis', desc: '+15 000 подписчиков за месяц', descEn: '+15k followers per month' }
+];
+const FAQ = [
+{ q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов, в первую очередь от сложности и объема работы. Давайте обсудим ваш проект, и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and depends on multiple factors, primarily the complexity and volume of work. Let's discuss your project and I'll be able to give you the exact price." } },
+{ q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель и также зависят в первую очередь от сложности и объема работы, а также от моей занятости на момент начала работы. На этапе обсуждения проекта без проблем смогу подсказать точные сроки.', en: 'The timeline for each project can vary from 1 day to several weeks, depending primarily on the complexity and volume of the work, as well as my current workload. I will be happy to provide exact deadlines during our project discussion.' } },
+{ q: { ru: 'Что нужно для начала?', en: 'What do I need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
+{ q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
+];
+let lang = 'ru';
+
+function buildTicker() {
+const track = [...LOGOS, ...LOGOS];
+const baseHeight = 28;
+document.getElementById('tt').innerHTML = track.map(logo => {
+const newHeight = (baseHeight * (logo.size || 100)) / 100;
+return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" loading="lazy" decoding="async" style="height: ${newHeight}px;"><span class="tdot"></span></div>`;
+}).join('');
+}
+
+function resetIdleTimer(container) {
+    container.classList.remove('ui-hidden');
+    clearTimeout(container.idleTimeout);
+    const video = container.querySelector('.w-video');
+    if (video && !video.paused) {
+        container.idleTimeout = setTimeout(() => { container.classList.add('ui-hidden'); }, 1000);
     }
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      activeIndex = (activeIndex - 1 + circles.length) % circles.length;
-      updateSlider();
-    });
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      activeIndex = (activeIndex + 1) % circles.length;
-      updateSlider();
-    });
-    circles.forEach((c, index) => {
-      c.addEventListener('click', () => {
-        if (c.classList.contains('prev') || c.classList.contains('next')) {
-          activeIndex = index;
-          updateSlider();
+}
+
+function hideUIFast(container) {
+    const video = container.querySelector('.w-video');
+    if (video && !video.paused) { container.classList.add('ui-hidden'); }
+}
+
+function onVideoEnded(video) {
+    video.currentTime = 0; 
+    video.pause();
+    const container = video.closest('.wi');
+    const btn = container.querySelector('.w-play-btn');
+    container.classList.remove('has-started'); 
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+    btn.classList.remove('is-playing');
+    container.classList.remove('ui-hidden'); 
+}
+
+function updateTimeline(video) {
+    const fill = video.parentElement.querySelector('.w-timeline-fill');
+    if (fill && video.duration) {
+        const percentage = (video.currentTime / video.duration) * 100;
+        fill.style.width = percentage + '%';
+    }
+}
+
+function seekVideo(event, wrap) {
+    event.stopPropagation(); 
+    const video = wrap.parentElement.querySelector('.w-video');
+    if (!video.duration) return;
+    const rect = wrap.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+    video.currentTime = percentage * video.duration;
+}
+
+function togglePlayAction(container) {
+container.classList.add('has-started'); 
+const video = container.querySelector('.w-video');
+const btn = container.querySelector('.w-play-btn');
+if (video.paused) {
+video.play();
+btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+btn.classList.add('is-playing');
+resetIdleTimer(container);
+} else {
+video.pause();
+btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+btn.classList.remove('is-playing');
+container.classList.remove('ui-hidden');
+clearTimeout(container.idleTimeout);
+}
+}
+
+function toggleFullScreen(btn, event) {
+event.stopPropagation();
+const card = btn.closest('.wi');
+if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+if (card.requestFullscreen) { card.requestFullscreen(); } else if (card.webkitRequestFullscreen) { card.webkitRequestFullscreen(); } else if (card.msRequestFullscreen) { card.msRequestFullscreen(); }
+} else {
+if (document.exitFullscreen) { document.exitFullscreen(); } else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); } else if (document.msExitFullscreen) { document.msExitFullscreen(); }
+}
+}
+
+function wCard(w, cls) {
+const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, this)"><div class="w-timeline-bg"><div class="w-timeline-fill"></div></div></div>`;
+return `
+<div class="${cls} wcard">
+<div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
+<video class="w-video" src="${w.v}" poster="${w.p}" playsinline preload="metadata" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
+<div class="w-play-btn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></div>
+<button class="w-fs-btn" onclick="toggleFullScreen(this, event)">
+<svg class="fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+<svg class="fs-exit" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+</button>
+${timelineHTML}
+</div>
+</div>`;
+}
+
+function buildWorks() {
+document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
+document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
+}
+
+function buildResults() {
+const copyTxt = lang === 'ru' ? 'Авторские права' : 'Copyright';
+const statTxt = lang === 'ru' ? '📂 Добавьте скриншот<br>со статистикой' : '📂 Add screenshot<br>with stats';
+document.getElementById('rg').innerHTML = RS.map(r => {
+if (r.type === 'blur') return `<div class="rcard"><div class="rimg"><div class="rblur-bg"></div><div class="rblur"><div class="rlock"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><div class="rbtxt">${copyTxt}</div></div></div></div>`;
+return `<div class="rcard"><div class="rimg" style="min-height:140px"><div class="wph" style="text-align:center; width: 100%; padding: 0 10px; line-height: 1.5;">${statTxt}</div></div></div>`;
+}).join('');
+}
+
+function buildFAQ() { document.getElementById('fl').innerHTML = FAQ.map((f, i) => `<div class="fi" id="f${i}"><div class="fq" onclick="tf(${i})"><span>${f.q[lang]}</span><div class="fic">+</div></div><div class="fa">${f.a[lang]}</div></div>`).join('') }
+function tf(i) { const e = document.getElementById('f' + i); const was = e.classList.contains('open'); document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); if (!was) e.classList.add('open') }
+
+function tl() {
+lang = lang === 'ru' ? 'en' : 'ru';
+document.getElementById('lb').textContent = lang === 'ru' ? 'EN' : 'RU';
+if(lang === 'en') { document.body.classList.add('lang-en'); } else { document.body.classList.remove('lang-en'); }
+document.querySelectorAll('[data-ru]').forEach(el => { const t = lang === 'ru' ? el.dataset.ru : el.dataset.en; if (t) el.innerHTML = t; });
+buildWorks(); buildResults(); buildFAQ();
+}
+
+/* === ЛОГИКА СЛАЙДЕРА С ВИДЕОКРУЖКАМИ === */
+const circles = Array.from(document.querySelectorAll('.vidcirc'));
+let activeIndex = 0;
+
+function updateSlider() {
+circles.forEach((c, index) => { 
+    c.className = 'vidcirc hidden'; 
+    const v = c.querySelector('video');
+    const b = c.querySelector('.w-play-btn');
+    if (v && !v.paused) {
+        v.pause();
+        v.currentTime = 0; 
+        if(b) {
+            b.classList.remove('is-playing');
+            b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
         }
-      });
-    });
-    updateSlider();
-    
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      document.getElementById('nav').classList.toggle('sc', scrollY > 40);
-      
-      const ids = ['works', 'results', 'about']; let act = '';
-      ids.forEach(id => { const el = document.getElementById(id); if (!el) return; const r = el.getBoundingClientRect(); if (r.top <= 110 && r.bottom > 0) act = id });
-      document.querySelectorAll('.nl').forEach(a => a.classList.toggle('active', a.dataset.s === act));
-    }, { passive: true });
-    
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('on');
-        } else if (e.boundingClientRect.top > window.innerHeight * 0.4) {
-          e.target.classList.remove('on');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
-    setTimeout(() => {
-      document.querySelectorAll('.rv,.fu,.ft,.rs').forEach(el => obs.observe(el));
-    }, 100);
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) });
-    });
-    // МОНОХРОМНЫЙ ШУМ
-    (function () {
-      const cv = document.getElementById('noise');
-      const ctx = cv.getContext('2d');
-      const nw = 128, nh = 128;
-      const oc = document.createElement('canvas');
-      oc.width = nw; oc.height = nh;
-      const octx = oc.getContext('2d');
-      let w, h;
-      function resize() {
-        w = cv.width = window.innerWidth;
-        h = cv.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-      function tick() {
-        const id = octx.createImageData(nw, nh);
-        const d = id.data;
-        for (let i = 0; i < d.length; i += 4) {
-          const val = Math.random() > 0.5 ? 255 : 0; 
-          d[i] = val;     // R
-          d[i+1] = val;   // G
-          d[i+2] = val;   // B
-          d[i+3] = 255;   // Alpha
-        }
-        octx.putImageData(id, 0, 0);
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = ctx.createPattern(oc, 'repeat');
-        ctx.fillRect(0, 0, w, h);
-        setTimeout(tick, 50); 
-      }
-      tick();
-    })();
-    buildTicker(); buildWorks(); buildResults(); buildFAQ();
-  </script>
+    }
+});
+const total = circles.length;
+const prevIndex = (activeIndex - 1 + total) % total;
+const nextIndex = (activeIndex + 1) % total;
+circles[activeIndex].classList.add('active'); circles[activeIndex].classList.remove('hidden');
+circles[prevIndex].classList.add('prev'); circles[prevIndex].classList.remove('hidden');
+circles[nextIndex].classList.add('next'); circles[nextIndex].classList.remove('hidden');
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => { activeIndex = (activeIndex - 1 + circles.length) % circles.length; updateSlider(); });
+document.getElementById('nextBtn').addEventListener('click', () => { activeIndex = (activeIndex + 1) % circles.length; updateSlider(); });
+
+circles.forEach((c, index) => { 
+    c.addEventListener('click', () => { 
+        if (c.classList.contains('prev') || c.classList.contains('next')) { 
+            activeIndex = index; 
+            updateSlider(); 
+        } 
+    }); 
+});
+updateSlider();
+
+function toggleCircleVideo(container) {
+    const circle = container.closest('.vidcirc');
+    if (!circle.classList.contains('active')) return;
+    const video = container.querySelector('video');
+    const btn = container.querySelector('.w-play-btn');
+
+    if (video.paused) {
+        document.querySelectorAll('.vidcirc video').forEach(v => {
+            if(v !== video) {
+                v.pause(); v.currentTime = 0;
+                const b = v.nextElementSibling;
+                if(b && b.classList.contains('w-play-btn')) {
+                    b.classList.remove('is-playing');
+                    b.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+                }
+            }
+        });
+        video.play();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+        btn.classList.add('is-playing');
+    } else {
+        video.pause();
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
+        btn.classList.remove('is-playing');
+    }
+}
+/* ========================================= */
+
+window.addEventListener('scroll', () => {
+const scrollY = window.scrollY;
+document.getElementById('nav').classList.toggle('sc', scrollY > 40);
+const ids = ['works', 'results', 'about']; let act = '';
+ids.forEach(id => { const el = document.getElementById(id); if (!el) return; const r = el.getBoundingClientRect(); if (r.top <= 110 && r.bottom > 0) act = id });
+document.querySelectorAll('.nl').forEach(a => a.classList.toggle('active', a.dataset.s === act));
+}, { passive: true });
+
+const obs = new IntersectionObserver(entries => {
+entries.forEach(e => {
+if (e.isIntersecting) { e.target.classList.add('on'); } else if (e.boundingClientRect.top > window.innerHeight * 0.4) { e.target.classList.remove('on'); }
+});
+}, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+setTimeout(() => { document.querySelectorAll('.rv,.fu,.ft,.rs').forEach(el => obs.observe(el)); }, 100);
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) });
+});
+
+(function () {
+const cv = document.getElementById('noise'); const ctx = cv.getContext('2d');
+const nw = 128, nh = 128; const oc = document.createElement('canvas'); oc.width = nw; oc.height = nh; const octx = oc.getContext('2d');
+let w, h;
+function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize, { passive: true });
+function tick() {
+const id = octx.createImageData(nw, nh); const d = id.data;
+for (let i = 0; i < d.length; i += 4) { const val = Math.random() > 0.5 ? 255 : 0; d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255; }
+octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.createPattern(oc, 'repeat'); ctx.fillRect(0, 0, w, h);
+setTimeout(tick, 50);
+}
+tick();
+})();
+
+buildTicker(); buildWorks(); buildResults(); buildFAQ();
+</script>
 </body>
 </html>
