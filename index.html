@@ -117,6 +117,7 @@ section { position: relative; z-index: 10; }
 .div { height: 1px; background: linear-gradient(90deg, transparent 0%, var(--bor) 50%, transparent 100%); margin: 0; }
 .vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
+
 .wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform .38s, box-shadow .38s; position: relative; }
 .wcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
 .wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
@@ -124,32 +125,27 @@ section { position: relative; z-index: 10; }
 .hi .wi { aspect-ratio: 16/9; }
 .w-video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
 
-/* РАБОТА С ПОЛНОЭКРАННЫМ РЕЖИМОМ (Нативный) */
+/* РАБОТА С ПОЛНОЭКРАННЫМ РЕЖИМОМ */
 .wi:fullscreen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
 .wi:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
 .wi:fullscreen .w-video { object-fit: contain !important; }
 .wi:-webkit-full-screen .w-video { object-fit: contain !important; }
-
-/* Скрытие UI в полноэкранном режиме при бездействии */
 .wi.ui-hidden { cursor: none; }
 .wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
-
 .wi:fullscreen .fs-enter { display: none; }
 .wi:fullscreen .fs-exit { display: block !important; }
 .wi:-webkit-full-screen .fs-enter { display: none; }
 .wi:-webkit-full-screen .fs-exit { display: block !important; }
 
-/* ТАЙМЛАЙН (PROGRESS BAR) */
+/* ТАЙМЛАЙН */
 .w-timeline-wrap { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 90%; height: 16px; display: flex; align-items: center; cursor: pointer; z-index: 4; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, width 0.3s ease; }
 .wi.has-started .w-timeline-wrap { opacity: 1; pointer-events: auto; }
 .w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; backdrop-filter: blur(4px); transition: height 0.2s ease; }
 .w-timeline-wrap:hover .w-timeline-bg { height: 6px; }
 .w-timeline-fill { height: 100%; width: 0%; background: var(--y); border-radius: 4px; pointer-events: none; box-shadow: 0 0 10px rgba(255, 184, 0, 0.5); transition: width 0.25s linear; }
 
-/* ИДЕАЛЬНЫЕ ОГРАНИЧЕНИЯ ДЛЯ ПОЛНОЭКРАННОГО РЕЖИМА */
 .vi .wi:fullscreen, .vi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 9 / 16); }
 .hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
-
 .wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
 .wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
 
@@ -172,19 +168,28 @@ section { position: relative; z-index: 10; }
 
 /* ПРОПОРЦИИ КЕЙСОВ */
 .rimg-wrap { aspect-ratio: 671 / 1035; width: 100%; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0a0a0a;}
-.rimg { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
-.rcard:hover .rimg { transform: scale(1.05); }
+.rimg { width: 100%; height: 100%; object-fit: contain; transition: none !important; transform: none !important; }
+
+/* ЗАЩИТА NDA ИЗОБРАЖЕНИЙ */
+.nda-card .rimg {
+    filter: grayscale(100%);
+    pointer-events: none !important; /* Отключаем любые взаимодействия */
+    user-select: none !important; /* Отключаем выделение */
+    -webkit-user-select: none !important;
+    -webkit-user-drag: none !important; /* Отключаем перетаскивание */
+}
+
 .rtxt-box { padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; background: #080604; flex-grow: 1; justify-content: center; position: relative; z-index: 5; border-top: 1px solid rgba(255,255,255,0.05); }
 .rtxt-main { font-family: 'Involve', sans-serif; font-size: 22px; font-weight: 700; color: var(--y); line-height: 1.1; letter-spacing: -0.02em; }
 .rtxt-sub { font-size: 13px; color: rgba(232, 230, 222, 0.6); line-height: 1.4; }
 
-/* ИСПРАВЛЕНО: ИДЕАЛЬНО ЧИСТЫЙ БЛЮР С ЧИСТЫМ НИЗОМ ДЛЯ ТЕКСТА НА КАРТИНКЕ */
+/* Общая маска для всех NDA карточек: Идеально резкий срез */
 .rblur { 
     position: absolute; 
     inset: 0; 
-    backdrop-filter: blur(25px); 
-    -webkit-backdrop-filter: blur(25px); 
-    background: rgba(8, 6, 4, .55); 
+    backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
+    background: rgba(8, 6, 4, 0.65); 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -192,9 +197,9 @@ section { position: relative; z-index: 10; }
     gap: 11px; 
     z-index: 2; 
     pointer-events: none;
-    /* Плотный до 88%, быстрый спад до 93%, оставляя низ 100% чистым для просмотра цифр */
-    mask-image: linear-gradient(to bottom, black 0%, black 92%, transparent 93%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 92%, transparent 93%, transparent 100%);
+    
+    mask-image: linear-gradient(to bottom, black 0%, black 91.5%, transparent 92.5%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 91.5%, transparent 92.5%);
 }
 
 .rlock { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, .03); border: 1px solid var(--bor); display: flex; align-items: center; justify-content: center; }
@@ -279,13 +284,9 @@ body.lang-en .ru-only { display: none; }
 .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 
 /* МИНИМАЛИСТИЧНЫЙ ФУТЕР */
-footer { position: relative; z-index: 10; border-top: 1px solid var(--bor); }
-.f-container { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 20px 40px; }
+footer { position: relative; z-index: 10; }
+.f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 20px 40px; text-align: center; }
 .fcopy { color: rgba(255, 255, 255, .25); font-size: 11px; letter-spacing: .1em; font-weight: 500; }
-.fsocials { display: flex; align-items: center; gap: 16px; }
-.fsocials a { color: rgba(255, 255, 255, 0.4); display: inline-flex; transition: color 0.3s, transform 0.3s; }
-.fsocials a:hover { color: var(--y); transform: scale(1.1); }
-.fsocials svg { width: 22px; height: 22px; fill: currentColor; }
 
 @media(max-width:900px) {
 nav { display: flex; justify-content: space-between; }
@@ -462,7 +463,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="cnt">
 <div class="ft">
 <div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
-<h2 class="stitle" data-ru="Что говорят клиенты" data-en="What Clients Say">Что говорят клиенты</h2>
+<h2 class="stitle" data-ru="Что говорят клиенты" data-en="Что говорят клиенты">Что говорят клиенты</h2>
 </div>
 <div class="rbox fu">
 <div class="rvid ru-only">
@@ -614,17 +615,6 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <footer>
 <div class="f-container">
     <div class="fcopy" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
-    <div class="fsocials">
-        <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" title="Telegram">
-            <svg viewBox="0 0 24 24"><path d="M22,3.25a1.26,1.26,0,0,0-1.45-.24L2.83,9.45a1.24,1.24,0,0,0-.2,2.32l4.47,1.4,1.4,4.48A1.23,1.23,0,0,0,9.75,19a1.2,1.2,0,0,0,.73-.22l2.17-1.59,3.33,2.45a1.25,1.25,0,0,0,1.9-.89l3.2-14.2A1.25,1.25,0,0,0,22,3.25ZM5.56,11.23,18.8,5.43,8.71,15.77,7,15.22Zm8,5.4L18.44,19,9.48,12.3Z"/></svg>
-        </a>
-        <a href="#" target="_blank" title="Behance">
-            <svg viewBox="0 0 24 24"><path d="M22,8.27H14.23V6.32h6.58ZM14,12.32h7.68a3.33,3.33,0,0,1-3.21,2.81,3.23,3.23,0,0,1-3.32-3.1h-.1Zm0-6V18h7.79a5.1,5.1,0,0,0,.15-9.69Z"/><path d="M9.8,12.32a3.86,3.86,0,0,1,3.58,3.23H2V12.32Zm-.36,5.1a5.6,5.6,0,0,0,4.42-4.9H2v3.13a2,2,0,0,0,1.86,2Z"/><path d="M2,6.32H13.8V9.1H2Z"/></svg>
-        </a>
-        <a href="#" target="_blank" title="Dribbble">
-            <svg viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm8.15,11.23a8,8,0,0,1-6.18,5.64,12.63,12.63,0,0,1-8.54-3.41,12.44,12.44,0,0,1-3.32-8.1,8,8,0,0,1,5.55-6.6A12.52,12.52,0,0,1,16,4.05,12.7,12.7,0,0,1,20.15,11.23ZM18.4,10.45A10.82,10.82,0,0,0,10.3,3.78,6.21,6.21,0,0,0,6.6,12.28a10.48,10.48,0,0,0,8.44,6.58,6.22,6.22,0,0,0,7.18-5.3A10.8,10.8,0,0,0,18.4,10.45Z"/></svg>
-        </a>
-    </div>
 </div>
 </footer>
 </div>
@@ -642,36 +632,73 @@ const LOGOS = [
 ];
 
 const VW = [
-{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos/v1.mp4', p: 'assets/videos/v1.jpg' },
-{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos/v2.mp4', p: 'assets/videos/v2.jpg' },
-{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos/v3.mp4', p: 'assets/videos/v3.jpg' },
-{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos/v4.mp4', p: 'assets/videos/v4.jpg' },
-{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos/v5.mp4', p: 'assets/videos/v5.jpg' },
-{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos/v6.mp4', p: 'assets/videos/v6.jpg' }
+{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/videos/v1.mp4', p: 'assets/covers_h/cover1.png' },
+{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/videos/v2.mp4', p: 'assets/covers_h/cover2.png' },
+{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/videos/v3.mp4', p: 'assets/covers_h/cover3.png' },
+{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/videos/v4.mp4', p: 'assets/covers_h/cover4.png' },
+{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/videos/v5.mp4', p: 'assets/covers_h/cover5.png' },
+{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/videos/v6.mp4', p: 'assets/covers_h/cover6.png' }
 ];
 
 const HW = [
-{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/videos/h1.mp4', p: 'assets/videos/h1.jpg' },
-{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/videos/h2.mp4', p: 'assets/videos/h2.jpg' },
-{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/videos/h3.mp4', p: 'assets/videos/h3.jpg' },
-{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/videos/h4.mp4', p: 'assets/videos/h4.jpg' }
+{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/videos/h1.mp4', p: 'assets/covers_v/cover1.png' },
+{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/videos/h2.mp4', p: 'assets/covers_v/cover2.png' },
+{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/videos/h3.mp4', p: 'assets/covers_v/cover3.png' },
+{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/videos/h4.mp4', p: 'assets/covers_v/cover4.png' }
 ];
 
 const RS = [
-{ type: 'blur', img: 'assets/images/nda1.png', main: '1.2M', sub: 'Просмотров на<br>NDA проекте', subEn: 'Views on an<br>NDA project' },
-{ type: 'blur', img: 'assets/images/nda2.png', main: '+400%', sub: 'Рост вовлеченности<br>за 2 недели', subEn: 'Engagement growth<br>in 2 weeks' },
-{ type: 'blur', img: 'assets/images/nda3.png', main: '35,000', sub: 'Лайков под одним<br>Reels клиента', subEn: 'Likes under one<br>client Reels' },
-{ type: 'open', img: 'assets/images/case1.png', main: '48.5K', sub: 'Просмотров при 750<br>подписчиках в Reels', subEn: 'Views with 750<br>followers on Reels' },
-{ type: 'open', img: 'assets/images/case2.png', main: '+230%', sub: 'Рост органических<br>охватов за 1 месяц', subEn: 'Organic reach growth<br>in 1 month' },
-{ type: 'open', img: 'assets/images/case3.png', main: '+230%', sub: 'Рост органических<br>охватов за 1 месяц', subEn: 'Organic reach growth<br>in 1 month' },
-{ type: 'open', img: 'assets/images/case4.png', main: '+230%', sub: 'Рост органических<br>охватов за 1 месяц', subEn: 'Organic reach growth<br>in 1 month' },
-{ type: 'open', img: 'assets/images/case5.png', main: '15,000', sub: 'Новых целевых<br>подписчиков', subEn: 'New targeted<br>followers' }
+  // --- ЗАБЛЮРЕННЫЕ КЕЙСЫ (NDA) ---
+  { 
+    type: 'blur', 
+    img: 'assets/images/nda1.png', 
+    main: '570K', 
+    sub: 'Просмотров для<br>крупного автора',
+    subEn: 'Views for a<br>large creator' 
+  },
+  { 
+    type: 'blur', 
+    img: 'assets/images/nda2.png', 
+    main: '177K', 
+    sub: 'Просмотров для<br>крупного автора',
+    subEn: 'Engagement growth<br>in 2 weeks' 
+  },
+  { 
+    type: 'blur', 
+    img: 'assets/images/nda3.png', 
+    main: '276K', 
+    sub: 'Просмотров для<br>крупного автора',
+    subEn: 'Likes under one<br>client Reels' 
+  },
+
+  // --- ОТКРЫТЫЕ КЕЙСЫ (с указанием подписчиков) ---
+  { 
+    type: 'open', 
+    img: 'assets/images/case1.png', 
+    main: '278K', 
+    sub: 'Просмотров при 2400<br>подписчиках', 
+    subEn: 'Views with 2400<br>followers' 
+  },
+  { 
+    type: 'open', 
+    img: 'assets/images/case2.png', 
+    main: '154K', 
+    sub: 'Просмотров при 950 <br>подписчиках', 
+    subEn: 'Views with 950 <br>followers' 
+  },
+  { 
+    type: 'open', 
+    img: 'assets/images/case3.png', 
+    main: '82.6K+', 
+    sub: 'Просмотров при 850<br>подписчиках', 
+    subEn: 'Views with 850<br>followers' 
+  }
 ];
 
 const FAQ = [
 { q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов, в первую очередь от сложности и объема работы. Давайте обсудим ваш проект, и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and depends on multiple factors, primarily the complexity and volume of work. Let's discuss your project and I'll be able to give you the exact price." } },
 { q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель и также зависят в первую очередь от сложности и объема работы, а также от моей занятости на момент начала работы. На этапе обсуждения проекта без проблем смогу подсказать точные сроки.', en: 'The timeline for each project can vary from 1 day to several weeks, depending primarily on the complexity and volume of the work, as well as my current workload. I will be happy to provide exact deadlines during our project discussion.' } },
-{ q: { ru: 'Что нужно для начала?', en: 'What do I need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
+{ q: { ru: 'Что нужно для начала?', en: 'Что нужно для начала?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
 { q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
 ];
 
@@ -762,7 +789,6 @@ function togglePlayAction(container) {
     }
 }
 
-// Полноэкранный режим (нативный способ)
 function toggleFullScreen(btn, event) {
     event.stopPropagation();
     const card = btn.closest('.wi');
@@ -806,14 +832,17 @@ document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
 document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
 }
 
-
 function buildResults() {
     const copyTxt = lang === 'ru' ? 'Проект под защитой<br>авторских прав' : 'Project protected<br>by copyright';
     document.getElementById('rg').innerHTML = RS.map(r => {
         const subtext = lang === 'ru' ? r.sub : (r.subEn || r.sub);
         
-        const imagePart = r.type === 'blur' ? `
-            <img src="${r.img}" class="rimg" loading="lazy" alt="Кейс NDA">
+        const isBlur = r.type === 'blur';
+        const cardClass = isBlur ? 'rcard nda-card' : 'rcard';
+        
+        // Для NDA добавляем жесткую защиту от любых взаимодействий
+        const imagePart = isBlur ? `
+            <img src="${r.img}" class="rimg" loading="lazy" alt="Кейс NDA" draggable="false">
             <div class="rblur">
                 <div class="rlock">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -822,9 +851,12 @@ function buildResults() {
             </div>` : 
             `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс">`;
         
+        // Добавляем блок правой кнопки мыши для контейнера картинки NDA
+        const wrapAttrs = isBlur ? 'oncontextmenu="return false;" draggable="false"' : '';
+
         return `
-        <div class="rcard">
-            <div class="rimg-wrap">
+        <div class="${cardClass}">
+            <div class="rimg-wrap" ${wrapAttrs}>
                 ${imagePart}
             </div>
             <div class="rtxt-box">
