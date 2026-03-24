@@ -4,16 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="KLAGE — создание выдающегося и уникального визуала. Профессиональный монтаж видео, Reels, Shorts и контент, который помогает брендам выйти на новый уровень.">
+
+<!-- Базовые заголовки безопасности (Security Optimization) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; media-src 'self' https: data:;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>KLAGE | PORTFOLIO</title>
 
 <!-- Оптимизированная загрузка шрифтов -->
 <link rel="preload" href="assets/fonts/Involve.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap&subset=cyrillic,latin">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap&subset=cyrillic,latin">
 <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@300&display=swap&subset=cyrillic,latin">
 </noscript>
 
 <style>
@@ -24,8 +30,8 @@
 @font-face { font-family: 'Good Vibes Pro'; src: url('assets/fonts/GoodVibesPro.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-::selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
-::-moz-selection { background: #ffb800 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+::selection { background: #ffb800; color: #000; -webkit-text-fill-color: #000; }
+::-moz-selection { background: #ffb800; color: #000; -webkit-text-fill-color: #000; }
 
 html { scroll-behavior: smooth; }
 
@@ -74,11 +80,21 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
 
 .gw-container { position: relative; display: inline-grid; place-items: center; }
 .gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
-.gw-blur { color: #fff; filter: blur(6px); user-select: none; pointer-events: none; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); animation: gp 3s ease-in-out infinite alternate; }
+
+/* ОПТИМИЗИРОВАННАЯ АНИМАЦИЯ СВЕЧЕНИЯ ДЛЯ PAGESPEED */
+.gw-blur { 
+    color: #fff; 
+    filter: blur(6px); 
+    user-select: none; 
+    pointer-events: none; 
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); 
+    will-change: opacity;
+    animation: gp-opacity 3s ease-in-out infinite alternate; 
+}
+@keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
 .gw-sharp { color: #fff; user-select: none; pointer-events: none; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); }
 .gw-text { color: transparent; user-select: text; z-index: 5; }
-
-@keyframes gp { 0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); } 50% { text-shadow: 0 0 6px rgba(255, 255, 255, 0.2), 0 0 15px rgba(255, 200, 0, 0.7), 0 0 40px rgba(255, 160, 0, 0.5), 0 0 160px rgba(255, 110, 0, 0.35), 0 0 220px rgba(255, 60, 0, 0.15); } }
 
 .hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translateY(30px); animation: fi 1s .5s forwards; position: relative; z-index: 10; }
 .hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(30px); animation: fi 1s .7s forwards; position: relative; z-index: 10; }
@@ -137,10 +153,10 @@ section { position: relative; z-index: 10; }
 .w-video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
 
 /* РАБОТА С ПОЛНОЭКРАННЫМ РЕЖИМОМ */
-.wi:fullscreen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
-.wi:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #000; border-radius: 0; z-index: 9999; }
-.wi:fullscreen .w-video { object-fit: contain !important; }
-.wi:-webkit-full-screen .w-video { object-fit: contain !important; }
+.wi:fullscreen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
+.wi:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
+.wi:fullscreen .w-video { object-fit: contain; }
+.wi:-webkit-full-screen .w-video { object-fit: contain; }
 .wi.ui-hidden { cursor: none; }
 .wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
 .wi:fullscreen .fs-enter { display: none; }
