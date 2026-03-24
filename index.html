@@ -356,7 +356,16 @@ nav { display: flex; justify-content: space-between; }
 .hsub { margin-top: 15px; margin-bottom: 30px; font-size: 14px; line-height: 1.6; }
 nav { width: calc(100% - 24px); padding: 8px 8px 8px 24px; gap: 8px; height: 56px; border-radius: 100px; }
 nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
-.hbtns, .ab-btns, .ctabtns { flex-direction: row; width: auto; gap: 12px; }
+.hbtns, .ctabtns { flex-direction: row; width: auto; gap: 12px; }
+
+/* Центрируем только кнопки в секции "Обо мне" */
+.ab-btns { justify-content: center; width: 100%; }
+
+/* Уменьшаем отступы и размер логотипов в бегущей строке на 30% */
+.tick-track { gap: 20px; }
+.tick-item { gap: 20px; }
+.tick-logo { height: calc(var(--base-h) * 0.7) !important; }
+
 .bpri, .bsec { width: auto; justify-content: center; font-size: 13.5px; padding: 13px 26px; }
 .sp { padding: 60px 0; }
 #works { padding: 70px 0 30px !important; }
@@ -774,7 +783,7 @@ const track = [...LOGOS, ...LOGOS];
 const baseHeight = 28;
 document.getElementById('tt').innerHTML = track.map(logo => {
 const newHeight = (baseHeight * (logo.size || 100)) / 100;
-return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" loading="lazy" decoding="async" style="height: ${newHeight}px;"><span class="tdot"></span></div>`;
+return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" loading="lazy" decoding="async" style="--base-h: ${newHeight}px; height: var(--base-h);"><span class="tdot"></span></div>`;
 }).join('');
 }
 
