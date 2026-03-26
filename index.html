@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="KLAGE — создание выдающегося и уникального визуала. Профессиональный монтаж видео, Reels, Shorts и контент, который помогает брендам выйти на новый уровень.">
 
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -89,7 +89,7 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 @-webkit-keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } } 
 @keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } }
 
-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1), border-color .4s ease, background .4s ease, box-shadow .4s ease; white-space: nowrap; opacity: 0; -webkit-animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; box-sizing: border-box; border-radius: 100px; border: 1px solid transparent; background: transparent; }
+nav { position: fixed; top: max(18px, env(safe-area-inset-top, 18px)); left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1), border-color .4s ease, background .4s ease, box-shadow .4s ease; white-space: nowrap; opacity: 0; -webkit-animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; box-sizing: border-box; border-radius: 100px; border: 1px solid transparent; background: transparent; }
 nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgba(8, 6, 4, .65); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-color: rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); }
 
 .nlogo { justify-self: start; display: flex; align-items: center; justify-content: center; line-height: 1; font-family: 'Involve', sans-serif; font-weight: 700; font-size: 7.6px; letter-spacing: 1.3em; margin-right: -1.3em; text-decoration: none; background: linear-gradient(to bottom, #ffffff 0%, #777777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding: 0; }
@@ -195,6 +195,10 @@ section { position: relative; z-index: 10; }
 .hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
 .wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
 .wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
+.wi:fullscreen .w-play-btn, .wi:-webkit-full-screen .w-play-btn { pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { opacity: 1 !important; pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-play-btn.is-playing, .wi:-webkit-full-screen .w-play-btn.is-playing { opacity: 0; }
+.wi:fullscreen:hover .w-play-btn.is-playing, .wi:-webkit-full-screen:hover .w-play-btn.is-playing { opacity: 1; }
 
 /* Тень для кнопок, чтобы они не сливались с белым фоном */
 .w-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 3; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 0; pointer-events: none; outline: none; }
