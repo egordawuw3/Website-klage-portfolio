@@ -34,7 +34,7 @@
   "@type": "ProfessionalService",
   "name": "KLAGE",
   "description": "Профессиональный видеомонтаж и создание визуального контента для брендов",
-  "url": "https://klage.pro",
+  "url": "https://klageportfolio.com",
   "serviceType": ["Видеомонтаж", "Контент-продакшн", "Визуал"],
   "areaServed": "Worldwide"
 }
@@ -200,21 +200,152 @@ section { position: relative; z-index: 10; }
 .wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; position: relative; transform: translateZ(0); }
 .wcard:hover, .wcard:active { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
 
-.wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
+.wi { position: relative; overflow: hidden !important; display: block; width: 100%; isolation: isolate; background: #000; }
 .vi .wi { aspect-ratio: 9/16; }
 .hi .wi { aspect-ratio: 16/9; }
+/* Весь plyr строго внутри .wi */
+.wi .plyr { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; overflow: hidden !important; background-color: #000 !important; }
 
 /* Кастомизация Plyr под сайт */
-.wi .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: #000; }
-.wi .plyr__video-wrapper { height: 100%; background: transparent; }
-.wi video, .wi .plyr__video-wrapper video { 
-    object-fit: contain !important; 
+.wi .plyr,
+.wi .plyr--video,
+.wi .plyr__video-wrapper,
+.wi .plyr__video-wrapper--fixed-ratio,
+.wi .plyr__video-embed,
+.wi .plyr__video-embed__container {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    max-width: none !important;
+    min-width: 0 !important;
 }
 
+.wi .plyr__video-wrapper,
+.wi .plyr__video-embed__container {
+    height: 100% !important;
+    padding-bottom: 0 !important;
+}
+
+.wi .plyr__poster {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #000 !important;
+}
+
+.wi video,
+.wi .plyr__video-wrapper video {
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    inset: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    transform: none !important;
+    background: #000 !important;
+}
+
+/* Fullscreen: видео НЕ обрезается, чёрные полосы по бокам */
+video:fullscreen,
+video:-webkit-full-screen,
+*:-webkit-full-screen video,
+*:fullscreen video {
+    object-fit: contain !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    position: fixed !important;
+    inset: 0 !important;
+    transform: none !important;
+    background: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.wi:-webkit-full-screen,
+.wi:fullscreen {
+    background: #000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.wi:-webkit-full-screen video,
+.wi:fullscreen video {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    inset: auto !important;
+    object-fit: contain !important;
+    transform: none !important;
+}
+
+.wi .plyr__controls {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    z-index: 5 !important;
+    background: transparent !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.wi .plyr__controls .plyr__progress {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin-right: 0 !important;
+}
+
+.wi .plyr__controls .plyr__control {
+    flex: 0 0 auto;
+    padding: 4px !important;
+}
+
+.wi .plyr__controls .plyr__control svg {
+    width: 14px;
+    height: 14px;
+}
+
+.wi .plyr__time { display: none !important; }
+.wi .plyr--full-ui input[type=range] { min-width: 0 !important; }
+.wi .plyr--full-ui input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 0; opacity: 0; }
+.wi .plyr--full-ui input[type=range]::-moz-range-thumb { width: 0; height: 0; border: 0; opacity: 0; }
+
 .vc-in .plyr { width: 100%; height: 100%; border-radius: 50%; }
-.vc-in .plyr__video-wrapper { height: 100%; border-radius: 50%; }
+.vc-in .plyr__video-wrapper { height: 100%; border-radius: 50%; overflow: hidden; }
+.vc-in .plyr__poster { border-radius: 50%; background-size: cover !important; background-position: center center !important; }
 .vc-in video { object-fit: cover; transform: scale(1.02); border-radius: 50%; }
-.vc-in .plyr__controls { display: none !important; } /* Прячем нижнюю панель у круглых видео */
+.vc-in .plyr__controls { display: none !important; }
+.vc-in .plyr__control:not(.plyr__control--overlaid) { display: none !important; }
+.vc-in .plyr__progress { display: none !important; }
+.vc-in .plyr__time { display: none !important; }
+.vc-in .plyr__menu { display: none !important; }
+.vc-in .plyr__volume { display: none !important; }
+.vc-in [data-plyr="fullscreen"] { display: none !important; }
+.vc-in [data-plyr="pip"] { display: none !important; }
+.vc-in [data-plyr="captions"] { display: none !important; }
+.vc-in [data-plyr="settings"] { display: none !important; }
+.vc-in [data-plyr="mute"] { display: none !important; }
 
 .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; transform: translateZ(0); }
@@ -378,14 +509,89 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .f-container { padding: 50px 24px; }
 }
 
-.plyr--video .plyr__control--overlaid {
-    padding: 20px; 
+@media(max-width:460px) {
+    .vgrid { gap: 10px; }
+    .wcard { border-radius: 12px; }
+    .wi .plyr__controls { padding: 5px 6px !important; gap: 4px; }
+    .wi .plyr__controls .plyr__control { padding: 3px !important; }
+    .wi .plyr__controls .plyr__control svg { width: 13px; height: 13px; }
 }
 
-.plyr--video .plyr__control--overlaid svg {
-    width: 20px; /* Сама иконка больше */
-    height: 20px;
+/* Кнопка Play — чистый gaussian blur, без hover */
+.plyr--video .plyr__control--overlaid {
+    padding: 22px;
+    background: rgba(255, 255, 255, 0.08) !important;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
+.plyr--video .plyr__control--overlaid svg {
+    width: 22px;
+    height: 22px;
+    fill: #fff !important;
+    color: #fff !important;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+}
+
+/* 2) Кружки-видеоотзывы: убрать всё кроме play/pause, фиксация круга */
+.vc-in .plyr__control--overlaid {
+    padding: 14px;
+}
+.vc-in .plyr { border-radius: 50% !important; overflow: hidden !important; }
+.vc-in .plyr__video-wrapper { border-radius: 50% !important; overflow: hidden !important; }
+.vc-in .plyr--playing .plyr__control--overlaid { opacity: 0; pointer-events: none; }
+.vc-in .plyr--paused .plyr__control--overlaid { opacity: 1; pointer-events: auto; }
+
+/* Controls + fullscreen скрыты до первого запуска видео */
+.wi:not(.has-played) .plyr__controls { display: none !important; }
+.wi:not(.has-played) .custom-fs-btn { display: none !important; }
+/* После первого запуска: controls автоскрываются через 1с при воспроизведении */
+.wi.has-played .plyr__controls { opacity: 1; pointer-events: auto; transition: opacity 0.4s ease !important; }
+.wi.has-played .custom-fs-btn { opacity: 1; pointer-events: auto; transition: opacity 0.4s ease !important; }
+.wi.has-played.controls-hidden .plyr__controls { opacity: 0 !important; pointer-events: none !important; }
+.wi.has-played.controls-hidden .custom-fs-btn { opacity: 0 !important; pointer-events: none !important; }
+
+/* В fullscreen контролы всегда доступны */
+.wi.is-fullscreen-ui .plyr__controls { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
+.wi.is-fullscreen-ui .custom-fs-btn { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
+
+/* 6) Белый кружок на слайдере — убрать */
+.plyr--full-ui input[type=range]::-webkit-slider-thumb { -webkit-appearance: none !important; appearance: none !important; width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
+.plyr--full-ui input[type=range]::-moz-range-thumb { width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
+.plyr__progress__buffer { height: 3px !important; }
+.plyr--full-ui input[type=range] { height: 3px !important; }
+
+/* 8) Кнопка fullscreen — правый верхний угол с фоном */
+.wi .plyr__controls [data-plyr="fullscreen"] {
+    display: none !important;
+}
+.custom-fs-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+    outline: none;
+}
+.custom-fs-btn:hover { background: rgba(0, 0, 0, 0.6); transform: scale(1.08); }
+.custom-fs-btn svg { width: 16px; height: 16px; }
+
+/* Стрелки в отзывах всегда видны */
+.slider-btn { transition: opacity 0.3s ease; }
 
 
 
@@ -532,7 +738,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev1.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Семён</div>
@@ -540,7 +746,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev2.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Марк</div>
@@ -548,7 +754,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev3.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Айша</div>
@@ -556,7 +762,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev4.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Александр</div>
@@ -564,7 +770,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="4">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev5.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Валерий</div>
@@ -572,7 +778,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="5">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" src="assets/rev/rev6.mp4" loop playsinline preload="auto"></video>
     </div>
   </div>
   <div class="vc-name">Евгений</div>
@@ -711,9 +917,9 @@ const HW = [
 const RS = [
   { type: 'blur', img: 'assets/images/nda1.avif', main: '596K', sub: 'Просмотров для<br>крупного автора', subEn: 'Views for a<br>large creator' },
   { type: 'blur', img: 'assets/images/nda2.avif', main: '188K', sub: 'Просмотров для<br>крупного автора', subEn: 'Engagement growth<br>in 2 weeks' },
-  { type: 'blur', img: 'assets/images/nda3.avif', main: '276K', sub: 'Просмотров для<br>крупного автора', subEn: 'Likes under one<br>client Reels' },
-  { type: 'open', img: 'assets/images/case1.avif', main: '283K', sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">1000+</span> подписчиков', subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">600+</span> followers' },
-  { type: 'open', img: 'assets/images/case2.avif', main: '308K', sub: 'Просмотров при 2400<br>подписчиках', subEn: 'Views with 2400<br>followers' },
+  { type: 'blur', img: 'assets/images/nda3.avif', main: '284K', sub: 'Просмотров для<br>крупного автора', subEn: 'Likes under one<br>client Reels' },
+  { type: 'open', img: 'assets/images/case1.avif', main: '308K', sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">1000+</span> подписчиков', subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">600+</span> followers' },
+  { type: 'open', img: 'assets/images/case2.avif', main: '283K', sub: 'Просмотров при 2400<br>подписчиках', subEn: 'Views with 2400<br>followers' },
   { type: 'open', img: 'assets/images/case3.avif', main: '83K', sub: 'Просмотров при 850<br>подписчиках', subEn: 'Views with 850<br>followers' }
 ];
 
@@ -761,10 +967,125 @@ function wCard(w, cls) {
     <div class="${cls} wcard reveal" ontouchstart="">
         <div class="wi">
             <video class="plyr-video" src="${w.v}" poster="${w.p}" playsinline preload="none"></video>
+            <button class="custom-fs-btn" type="button" aria-label="На весь экран">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            </button>
         </div>
     </div>`;
 }
 
+function toggleCustomFS(btn, e) {
+    if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    const wi = btn?.closest('.wi');
+    const video = wi?.querySelector('video');
+    if (!wi || !video) return;
+
+    const setFsUiState = (enabled) => {
+        wi.classList.toggle('is-fullscreen-ui', enabled);
+        if (enabled) wi.classList.remove('controls-hidden');
+    };
+
+    const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+    const inThisFullscreen = () => {
+        const el = fsEl();
+        return !!(el && (el === wi || el === video || wi.contains(el)));
+    };
+
+    const exitFullscreen = () => {
+        try {
+            if (document.exitFullscreen && fsEl()) {
+                const res = document.exitFullscreen();
+                if (res && typeof res.then === 'function') res.finally(() => setFsUiState(false));
+                else setFsUiState(false);
+                return true;
+            }
+        } catch (_) {}
+
+        try {
+            if (document.webkitExitFullscreen && document.webkitFullscreenElement) {
+                document.webkitExitFullscreen();
+                setFsUiState(false);
+                return true;
+            }
+        } catch (_) {}
+
+        try {
+            if (video.webkitDisplayingFullscreen && video.webkitExitFullscreen) {
+                video.webkitExitFullscreen();
+                setFsUiState(false);
+                return true;
+            }
+        } catch (_) {}
+
+        try {
+            if (video.webkitPresentationMode === 'fullscreen' && video.webkitSetPresentationMode) {
+                video.webkitSetPresentationMode('inline');
+                setFsUiState(false);
+                return true;
+            }
+        } catch (_) {}
+
+        return false;
+    };
+
+    if (inThisFullscreen() || video.webkitDisplayingFullscreen || video.webkitPresentationMode === 'fullscreen') {
+        if (exitFullscreen()) return;
+    }
+
+    const openNativeIOSFullscreen = () => {
+        if (!video.webkitEnterFullscreen) return false;
+        try {
+            video.controls = true;
+            video.setAttribute('controls', 'controls');
+            setFsUiState(true);
+            video.addEventListener('webkitendfullscreen', () => {
+                setFsUiState(false);
+                video.controls = false;
+                video.removeAttribute('controls');
+            }, { once: true });
+            video.webkitEnterFullscreen();
+            return true;
+        } catch (_) {
+            return false;
+        }
+    };
+
+    const tryRequest = (fn) => {
+        try {
+            const result = fn?.();
+            if (result && typeof result.then === 'function') {
+                result.then(() => setFsUiState(true)).catch(() => {});
+            } else {
+                setFsUiState(true);
+            }
+            return true;
+        } catch (_) {
+            return false;
+        }
+    };
+
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const plyrRoot = wi.querySelector('.plyr');
+
+    if (isiOS && openNativeIOSFullscreen()) return;
+
+    /* ВАЖНО: fullscreen сначала на контейнер (wi/plyr), а не на video,
+       иначе в fullscreen может пропадать UI (таймлайн/кнопки). */
+    if (tryRequest(() => wi.requestFullscreen && wi.requestFullscreen())) return;
+    if (tryRequest(() => plyrRoot?.requestFullscreen && plyrRoot.requestFullscreen())) return;
+    if (tryRequest(() => wi.webkitRequestFullscreen && wi.webkitRequestFullscreen())) return;
+    if (tryRequest(() => plyrRoot?.webkitRequestFullscreen && plyrRoot.webkitRequestFullscreen())) return;
+
+    /* Fallback на video только в самом конце */
+    if (tryRequest(() => video.requestFullscreen && video.requestFullscreen())) return;
+    if (tryRequest(() => video.webkitRequestFullscreen && video.webkitRequestFullscreen())) return;
+    openNativeIOSFullscreen();
+}
 function buildWorks() {
     plyrInstances.forEach(p => p.destroy());
     plyrInstances = [];
@@ -774,10 +1095,92 @@ function buildWorks() {
     
     document.querySelectorAll('.plyr-video').forEach(v => {
         const player = new Plyr(v, {
-            controls: ['play-large', 'progress', 'fullscreen']
+            controls: ['play-large', 'progress'],
+            fullscreen: { enabled: false },
+            clickToPlay: true
         });
         plyrInstances.push(player);
-        player.on('play', (event) => pauseAllMedia(event.detail.plyr));
+        let hideTimer = null;
+        const wi = v.closest('.wi');
+        
+        function showControls() {
+            if (!wi) return;
+            wi.classList.remove('controls-hidden');
+            clearTimeout(hideTimer);
+            if (player.playing && !wi.classList.contains('is-fullscreen-ui')) {
+                hideTimer = setTimeout(() => wi.classList.add('controls-hidden'), 1200);
+            }
+        }
+        function hideControls() {
+            if (!wi || !player.playing || wi.classList.contains('is-fullscreen-ui')) return;
+            hideTimer = setTimeout(() => wi.classList.add('controls-hidden'), 1200);
+        }
+
+        function handleFsChange() {
+            if (!wi) return;
+            const fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+            const inFs = !!(fsEl && (fsEl === wi || fsEl === v || wi.contains(fsEl)));
+            wi.classList.toggle('is-fullscreen-ui', inFs);
+            if (inFs) {
+                wi.classList.remove('controls-hidden');
+                clearTimeout(hideTimer);
+            }
+        }
+        
+        player.on('play', (event) => {
+            pauseAllMedia(event.detail.plyr);
+            if (wi && !wi.classList.contains('has-played')) {
+                wi.classList.add('has-played');
+            }
+            showControls();
+        });
+        player.on('pause', () => {
+            if (wi) {
+                clearTimeout(hideTimer);
+                wi.classList.remove('controls-hidden');
+            }
+        });
+        
+        if (wi) {
+            wi.addEventListener('mouseenter', showControls);
+            wi.addEventListener('mousemove', showControls);
+            wi.addEventListener('mouseleave', hideControls);
+            wi.addEventListener('touchstart', showControls, { passive: true });
+
+            const fsBtn = wi.querySelector('.custom-fs-btn');
+            if (fsBtn) {
+                let lastTouchTs = 0;
+                const onFsTrigger = (ev) => {
+                    if (ev.type === 'click' && Date.now() - lastTouchTs < 450) return;
+                    if (ev.type === 'touchend') lastTouchTs = Date.now();
+                    toggleCustomFS(fsBtn, ev);
+                };
+                fsBtn.addEventListener('click', onFsTrigger);
+                fsBtn.addEventListener('touchend', onFsTrigger, { passive: false });
+            }
+
+            document.addEventListener('fullscreenchange', handleFsChange);
+            document.addEventListener('webkitfullscreenchange', handleFsChange);
+            v.addEventListener('webkitbeginfullscreen', () => {
+                wi.classList.add('is-fullscreen-ui');
+                wi.classList.remove('controls-hidden');
+                clearTimeout(hideTimer);
+            });
+            v.addEventListener('webkitendfullscreen', () => {
+                wi.classList.remove('is-fullscreen-ui');
+            });
+        }
+        
+        // 3) Мобильная пауза по тапу на видео + показ контролов
+        if (wi) {
+            wi.addEventListener('touchend', (e) => {
+                if (e.target.closest('.custom-fs-btn') || e.target.closest('.plyr__controls') || e.target.closest('.plyr__control--overlaid')) return;
+                e.preventDefault();
+                if (player.playing) player.pause();
+                else player.play();
+            }, { passive: false });
+            wi.addEventListener('touchstart', () => { if (player.playing) showControls(); }, { passive: true });
+        }
     });
     
     observeNewElements();
@@ -1006,10 +1409,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.plyr-circ').forEach(v => {
         const player = new Plyr(v, {
             controls: ['play-large'],
-            clickToPlay: true
+            clickToPlay: true,
+            fullscreen: { enabled: false }
         });
         circPlyrInstances.push(player);
-        player.on('play', (event) => pauseAllMedia(event.detail.plyr));
+        player.on('play', (event) => {
+            pauseAllMedia(event.detail.plyr);
+        });
+        player.on('pause', () => {});
+        
+        // 3) Мобильная пауза по тапу на кружок
+        const vcIn = v.closest('.vc-in');
+        if (vcIn) {
+            vcIn.addEventListener('touchend', (e) => {
+                const circ = vcIn.closest('.vidcirc');
+                if (!circ || !circ.classList.contains('active')) return;
+                if (e.target.closest('.plyr__control--overlaid')) return;
+                e.preventDefault();
+                if (player.playing) player.pause();
+                else player.play();
+            }, { passive: false });
+        }
     });
     
     document.querySelectorAll('.vocwave-box').forEach((box, i) => {
