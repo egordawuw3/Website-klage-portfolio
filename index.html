@@ -12,7 +12,7 @@
 <meta name="author" content="KLAGE">
 <link rel="canonical" href="https://klage.pro">
 <link type="image/x-icon" href="favicon.png" rel="icon">
-<title>KLAGE — Профессиональный видеомонтаж и визуал для брендов</title>
+<title>KLAGE — Portfolio</title>
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -241,6 +241,14 @@ section { position: relative; z-index: 10; }
     background-position: center center !important;
     background-repeat: no-repeat !important;
     background-color: #000 !important;
+    z-index: 3 !important;
+    opacity: 1 !important;
+    transition: opacity 0.2s ease !important;
+}
+.wi.has-played .plyr__poster,
+.wi .plyr--playing .plyr__poster {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .wi video,
@@ -442,8 +450,8 @@ body.lang-en .ru-only { display: none; }
 .fi.open .fa-wrapper { grid-template-rows: 1fr; }
 .fi.open .fa { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
 
-#cta { padding: 110px 0 50px 0; }
-.ctabox { padding: 76px 56px; text-align: center; position: relative; }
+#cta { padding: 15px 0 55px 0; }
+.ctabox { padding: 40px 56px; text-align: center; position: relative; }
 .ctatitle { font-size: clamp(26px, 3.8vw, 50px); font-weight: 700; margin-bottom: 18px; line-height: 1.08; }
 .ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
 .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
@@ -482,7 +490,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 
 .sp { padding: 60px 0; }
 #projects { padding: 70px 0 30px !important; }
-#cta { padding: 70px 0 50px 0; }
+#cta { padding: 20px 0 60px 0; }
 .ctabox { padding: 40px 20px; }
 .stitle, .ctatitle { font-size: 28px; margin-bottom: 12px; }
 .atxt p:first-of-type { font-size: 26px; }
@@ -517,26 +525,42 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     .wi .plyr__controls .plyr__control svg { width: 13px; height: 13px; }
 }
 
-/* Кнопка Play — чистый gaussian blur, без hover */
+/* Кнопка Play — тёмный блюр, как кнопка fullscreen, без hover */
 .plyr--video .plyr__control--overlaid {
     padding: 22px;
-    background: rgba(255, 255, 255, 0.08) !important;
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.4) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    transform: translate(-50%, -50%) !important;
+    transition: none !important;
+    top: 50% !important;
+    left: 50% !important;
+    margin: 0 !important;
+    z-index: 5 !important;
+}
+.plyr--video .plyr__control--overlaid:hover,
+.plyr--video .plyr__control--overlaid:focus {
+    background: rgba(0, 0, 0, 0.4) !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 1 !important;
 }
 .plyr--video .plyr__control--overlaid svg {
     width: 22px;
     height: 22px;
     fill: #fff !important;
     color: #fff !important;
-    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 /* 2) Кружки-видеоотзывы: убрать всё кроме play/pause, фиксация круга */
 .vc-in .plyr__control--overlaid {
-    padding: 14px;
+    padding: 20px;
+}
+.vc-in .plyr__control--overlaid svg {
+    width: 28px !important;
+    height: 28px !important;
 }
 .vc-in .plyr { border-radius: 50% !important; overflow: hidden !important; }
 .vc-in .plyr__video-wrapper { border-radius: 50% !important; overflow: hidden !important; }
@@ -878,7 +902,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="div"></div>
 <footer>
 <div class="f-container">
-    <div class="fcopy" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
+    <div class="fcopy" style="white-space: nowrap; overflow: visible; transform: translateZ(0);" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
 </div>
 </footer>
 </div>
@@ -966,7 +990,7 @@ function wCard(w, cls) {
     return `
     <div class="${cls} wcard reveal" ontouchstart="">
         <div class="wi">
-            <video class="plyr-video" src="${w.v}" poster="${w.p}" playsinline preload="none"></video>
+            <video class="plyr-video" src="${w.v}" poster="${w.p}" playsinline preload="metadata"></video>
             <button class="custom-fs-btn" type="button" aria-label="На весь экран">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
             </button>
@@ -1096,8 +1120,6 @@ function buildWorks() {
     document.querySelectorAll('.plyr-video').forEach(v => {
         // Safari: загружаем первый кадр для превью
         v.addEventListener('loadeddata', () => { if (v.currentTime === 0) v.currentTime = 0.001; }, { once: true });
-        if (v.readyState >= 2 && v.currentTime === 0) v.currentTime = 0.001;
-        v.load();
 
         const player = new Plyr(v, {
             controls: ['play-large', 'progress'],
