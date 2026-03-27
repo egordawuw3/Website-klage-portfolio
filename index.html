@@ -450,8 +450,8 @@ body.lang-en .ru-only { display: none; }
 .fi.open .fa-wrapper { grid-template-rows: 1fr; }
 .fi.open .fa { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
 
-#faq { padding-bottom: 30px; }
-#cta { padding: 0 0 55px 0; }
+#faq { padding-bottom: 50px; }
+#cta { padding: 80px 0 100px 0; }
 .ctabox { padding: 40px 56px; text-align: center; position: relative; }
 .ctatitle { font-size: clamp(26px, 3.8vw, 50px); font-weight: 700; margin-bottom: 18px; line-height: 1.08; }
 .ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
@@ -491,8 +491,8 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 
 .sp { padding: 60px 0; }
 #projects { padding: 70px 0 30px !important; }
-#faq { padding-bottom: 20px; }
-#cta { padding: 0 0 60px 0; }
+#faq { padding-bottom: 40px; }
+#cta { padding: 40px 0 80px 0; }
 .ctabox { padding: 40px 20px; }
 .stitle, .ctatitle { font-size: 28px; margin-bottom: 12px; }
 .atxt p:first-of-type { font-size: 26px; }
@@ -515,7 +515,10 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .vidcirc.prev { transform: translate3d(-70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 .vidcirc.next { transform: translate3d(70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
 
-.vc-ring { width: 190px; height: 190px; }
+.vc-ring { width: 240px; height: 240px; }
+.vc-in .plyr__control--overlaid { padding: 12px !important; }
+.vc-in .plyr__control--overlaid svg { width: 18px !important; height: 18px !important; }
+
 .f-container { padding: 50px 24px; }
 }
 
@@ -527,16 +530,17 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     .wi .plyr__controls .plyr__control svg { width: 13px; height: 13px; }
 }
 
-/* Кнопка Play — тёмный блюр, как кнопка fullscreen, без hover */
+/* Кнопка Play — всегда видна, темный фон и блюр */
 .plyr--video .plyr__control--overlaid {
     padding: 22px !important;
-    background: rgba(0, 0, 0, 0.4) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    background-image: none !important;
     -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
     transform: translate(-50%, -50%) !important;
-    transition: background 0.2s, transform 0.2s !important;
+    transition: background-color 0.2s, transform 0.2s !important;
     top: 50% !important;
     left: 50% !important;
     margin: 0 !important;
@@ -544,7 +548,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 }
 .plyr--video .plyr__control--overlaid:hover,
 .plyr--video .plyr__control--overlaid:focus {
-    background: rgba(0, 0, 0, 0.6) !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
     transform: translate(-50%, -50%) !important;
     opacity: 1 !important;
 }
@@ -556,13 +560,13 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
-/* 2) Кружки-видеоотзывы: убрать всё кроме play/pause, фиксация круга */
+/* Кружки-видеоотзывы: убрать всё кроме play/pause, фиксация круга */
 .vc-in .plyr__control--overlaid {
-    padding: 28px !important;
+    padding: 22px !important;
 }
 .vc-in .plyr__control--overlaid svg {
-    width: 36px !important;
-    height: 36px !important;
+    width: 22px !important;
+    height: 22px !important;
 }
 .vc-in .plyr { border-radius: 50% !important; overflow: hidden !important; }
 .vc-in .plyr__video-wrapper { border-radius: 50% !important; overflow: hidden !important; }
@@ -582,13 +586,13 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 .wi.is-fullscreen-ui .plyr__controls { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
 .wi.is-fullscreen-ui .custom-fs-btn { display: flex !important; opacity: 1 !important; pointer-events: auto !important; }
 
-/* 6) Белый кружок на слайдере — убрать */
+/* Белый кружок на слайдере — убрать */
 .plyr--full-ui input[type=range]::-webkit-slider-thumb { -webkit-appearance: none !important; appearance: none !important; width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
 .plyr--full-ui input[type=range]::-moz-range-thumb { width: 0 !important; height: 0 !important; opacity: 0 !important; background: transparent !important; border: 0 !important; }
 .plyr__progress__buffer { height: 3px !important; }
 .plyr--full-ui input[type=range] { height: 3px !important; }
 
-/* 8) Кнопка fullscreen — правый верхний угол с фоном */
+/* Кнопка fullscreen — правый верхний угол с фоном */
 .wi .plyr__controls [data-plyr="fullscreen"] {
     display: none !important;
 }
@@ -600,7 +604,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -610,16 +614,37 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
     cursor: pointer;
     color: #fff;
     padding: 0;
-    transition: background 0.2s, transform 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
     outline: none;
 }
-.custom-fs-btn:hover { background: rgba(0, 0, 0, 0.6); transform: scale(1.08); }
+.custom-fs-btn:hover { background-color: rgba(0, 0, 0, 0.6); transform: scale(1.08); }
 .custom-fs-btn svg { width: 16px; height: 16px; }
 
 /* Стрелки в отзывах всегда видны */
 .slider-btn { transition: opacity 0.3s ease; }
 
 </style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(108241751, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        ecommerce: "dataLayer",
+        ssr: true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108241751" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </head>
 <body>
 
@@ -948,10 +973,10 @@ const RS = [
 ];
 
 const FAQ = [
-{ q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов, в первую очередь от сложности и объема работы. Давайте обсудим ваш проект, и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and depends on multiple factors, primarily the complexity and volume of work. Let's discuss your project and I'll be able to give you the exact price." } },
-{ q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель и также зависят в первую очередь от сложности и объема работы, а также от моей занятости на момент начала работы. На этапе обсуждения проекта без проблем смогу подсказать точные сроки.', en: 'The timeline for each project can vary from 1 day to several weeks, depending primarily on the complexity and volume of the work, as well as my current workload. I will be happy to provide exact deadlines during our project discussion.' } },
-{ q: { ru: 'Что нужно для начала?', en: 'What do you need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ, материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам, и при необходимости буду готов помочь с его составлением.', en: "To start working, I'll need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules, and I'll be glad to help you put one together if needed." } },
-{ q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки, которые совершил по своей вине, абсолютно бесплатны. Но если потребуется что-то добавить или внести изменения, которые не прописаны в изначальном ТЗ, они потребуют небольшой доплаты.', en: 'All revisions made due to my fault are absolutely free. However, if you need to add something or make changes that were not included in the original brief, a small additional fee will be required.' } }
+{ q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов. В первую очередь, от сложности и объема работы. Давайте обсудим ваш проект и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and can depend on multiple factors. Primarily, on the complexity and volume of the work. Let's discuss your project and I'll be able to give you the exact price." } },
+{ q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель. Также они зависят от сложности, объема работы и моей загруженности в этот период. На этапе обсуждения проекта мы всегда обговариваем точные сроки.', en: 'Timelines for each project can vary from 1 day to several weeks. They also depend on the complexity, volume of work, and my current workload. We always agree on exact deadlines during the project discussion stage.' } },
+{ q: { ru: 'Что нужно для начала?', en: 'What do you need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ (техническое задание), материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам. При необходимости буду готов помочь с его составлением.', en: "To get started, I will need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules. If needed, I'm ready to help you put one together." } },
+{ q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки в рамках ТЗ (технического задания) абсолютно бесплатны. Внесение дополнительных изменений оплачивается отдельно.', en: 'All revisions within the scope of the original brief are absolutely free. Any additional changes are paid separately.' } }
 ];
 
 let lang = 'ru';
@@ -1170,7 +1195,29 @@ function buildWorks() {
             wi.addEventListener('mouseenter', showControls);
             wi.addEventListener('mousemove', showControls);
             wi.addEventListener('mouseleave', hideControls);
-            wi.addEventListener('touchstart', showControls, { passive: true });
+            
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            wi.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                if (player.playing) showControls();
+            }, { passive: true });
+
+            wi.addEventListener('touchend', (e) => {
+                if (e.target.closest('.custom-fs-btn') || e.target.closest('.plyr__controls') || e.target.closest('.plyr__control--overlaid')) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                
+                // Если движение пальца меньше 10px - считаем это тапом (кликом)
+                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                    e.preventDefault();
+                    if (player.playing) player.pause();
+                    else player.play();
+                }
+            }, { passive: false });
 
             const fsBtn = wi.querySelector('.custom-fs-btn');
             if (fsBtn) {
@@ -1194,16 +1241,6 @@ function buildWorks() {
             v.addEventListener('webkitendfullscreen', () => {
                 wi.classList.remove('is-fullscreen-ui');
             });
-        }
-        
-        if (wi) {
-            wi.addEventListener('touchend', (e) => {
-                if (e.target.closest('.custom-fs-btn') || e.target.closest('.plyr__controls') || e.target.closest('.plyr__control--overlaid')) return;
-                e.preventDefault();
-                if (player.playing) player.pause();
-                else player.play();
-            }, { passive: false });
-            wi.addEventListener('touchstart', () => { if (player.playing) showControls(); }, { passive: true });
         }
     });
     
@@ -1447,16 +1484,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         player.on('pause', () => {});
         
-        // 3) Мобильная пауза по тапу на кружок
+        // Мобильная пауза по тапу на кружок (с проверкой на скролл)
         const vcIn = v.closest('.vc-in');
         if (vcIn) {
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            vcIn.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
             vcIn.addEventListener('touchend', (e) => {
                 const circ = vcIn.closest('.vidcirc');
                 if (!circ || !circ.classList.contains('active')) return;
                 if (e.target.closest('.plyr__control--overlaid')) return;
-                e.preventDefault();
-                if (player.playing) player.pause();
-                else player.play();
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                
+                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                    e.preventDefault();
+                    if (player.playing) player.pause();
+                    else player.play();
+                }
             }, { passive: false });
         }
     });
