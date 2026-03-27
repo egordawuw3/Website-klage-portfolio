@@ -2,16 +2,44 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="KLAGE — создание выдающегося и уникального визуала. Профессиональный монтаж видео, Reels, Shorts и контент, который помогает брендам выйти на новый уровень.">
 
-<!-- Базовые заголовки безопасности (Security Optimization) -->
 <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="видеомонтаж, монтаж видео, Reels, Shorts, визуал, контент, видеопродакшн, KLAGE">
+<meta name="author" content="KLAGE">
+<link rel="canonical" href="https://klage.pro">
+<link type="image/x-icon" href="favicon.png" rel="icon">
+<title>KLAGE — Профессиональный видеомонтаж и визуал для брендов</title>
 
-<title>KLAGE | PORTFOLIO</title>
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="KLAGE — Профессиональный видеомонтаж и визуал">
+<meta property="og:description" content="Создаю выдающийся визуал, который запоминается и помогает брендам выйти на новый уровень по всему миру.">
+<meta property="og:url" content="https://klage.pro">
+<meta property="og:site_name" content="KLAGE">
+<meta property="og:locale" content="ru_RU">
 
-<!-- Оптимизированная загрузка шрифтов (только кириллица и латиница) -->
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KLAGE — Видеомонтаж и визуал">
+<meta name="twitter:description" content="Профессиональный монтаж видео, Reels, Shorts. Визуал, который помогает брендам сиять.">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "KLAGE",
+  "description": "Профессиональный видеомонтаж и создание визуального контента для брендов",
+  "url": "https://klage.pro",
+  "serviceType": ["Видеомонтаж", "Контент-продакшн", "Визуал"],
+  "areaServed": "Worldwide"
+}
+</script>
+
 <link rel="preload" href="assets/fonts/Involve.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,17 +50,29 @@
 </noscript>
 
 <style>
-/* =========================================
-ЛОКАЛЬНЫЕ ШРИФТЫ
-========================================= */
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: > 0.5%,last 2 versions,not dead
+*/
+
 @font-face { font-family: 'Involve'; src: url('assets/fonts/Involve.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Good Vibes Pro'; src: url('assets/fonts/GoodVibesPro.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-::selection { background: #ffb800; color: #000; -webkit-text-fill-color: #000; }
-::-moz-selection { background: #ffb800; color: #000; -webkit-text-fill-color: #000; }
+/* Глобальное удаление синих/серых квадратов выделения при тапе на всех устройствах */
+*, *::before, *::after { 
+    box-sizing: border-box; margin: 0; padding: 0; 
+    -webkit-tap-highlight-color: transparent !important; 
+}
+*:focus { outline: none !important; }
 
-html { scroll-behavior: smooth; }
+/* Единый цвет выделения для Chrome и Safari */
+::-moz-selection { background-color: #ffb800 !important; color: #000000 !important; text-shadow: none !important; }
+::selection { background-color: #ffb800 !important; color: #000000 !important; text-shadow: none !important; }
+
+/* Плавный скролл с идеальным отступом под шапку для всех браузеров */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 :root {
 --y: #ffb800; --yg: rgba(255, 184, 0, 0.4); --sur: rgba(255, 255, 255, 0.04);
@@ -43,95 +83,107 @@ body { background: #030100; color: var(--tx); font-family: 'Inter', sans-serif; 
 
 #wrap { position: relative; overflow-x: hidden; }
 
-/* ФОН (АНИМАЦИЯ) */
+/* ФОН (Бесшовный, плавный цикл анимации градиентов без дерганий) */
 #bg { position: fixed; inset: 0; z-index: 0; background: #020100; overflow: hidden; }
-.bg-sphere { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; will-change: transform, opacity; }
-.sphere-1 { width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.3) 0%, rgba(255, 160, 0, 0) 70%); top: -20vw; left: -20vw; animation: pulse1 6s infinite alternate ease-in-out; }
-.sphere-2 { width: 65vw; height: 65vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); bottom: -20vw; right: -20vw; animation: pulse2 7s infinite alternate ease-in-out; }
+.bg-sphere { position: absolute; border-radius: 50%; filter: blur(150px); pointer-events: none; will-change: opacity; }
+.sphere-1 { width: 80vw; height: 80vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.25) 0%, rgba(255, 160, 0, 0) 70%); top: -25vw; left: -25vw; -webkit-animation: pulse1 16s infinite ease-in-out; animation: pulse1 16s infinite ease-in-out; transform: translateZ(0); }
+.sphere-2 { width: 75vw; height: 75vw; background: radial-gradient(circle, rgba(255, 160, 0, 0.22) 0%, rgba(255, 160, 0, 0) 70%); bottom: -25vw; right: -25vw; -webkit-animation: pulse2 18s infinite ease-in-out; animation: pulse2 18s infinite ease-in-out; transform: translateZ(0); }
+@media (prefers-reduced-motion: reduce) { .bg-sphere { animation: none !important; } }
 
-@keyframes pulse1 { 0% { transform: scale(1) translate(0, 0); opacity: 0.5; } 100% { transform: scale(1.1) translate(6vw, 6vw); opacity: 1; } }
-@keyframes pulse2 { 0% { transform: scale(1) translate(0, 0); opacity: 1; } 100% { transform: scale(1.15) translate(-6vw, -6vw); opacity: 0.6; } }
+@-webkit-keyframes pulse1 {
+  0% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.5; }
+  33% { transform: scale(1.05) translate3d(4vw, 4vw, 0); opacity: 0.8; }
+  66% { transform: scale(0.95) translate3d(-2vw, 2vw, 0); opacity: 0.6; }
+  100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.5; }
+}
+@keyframes pulse1 {
+  0% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.5; }
+  33% { transform: scale(1.05) translate3d(4vw, 4vw, 0); opacity: 0.8; }
+  66% { transform: scale(0.95) translate3d(-2vw, 2vw, 0); opacity: 0.6; }
+  100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.5; }
+}
+@-webkit-keyframes pulse2 {
+  0% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.6; }
+  33% { transform: scale(1.08) translate3d(-4vw, -4vw, 0); opacity: 0.9; }
+  66% { transform: scale(0.95) translate3d(2vw, -2vw, 0); opacity: 0.5; }
+  100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.6; }
+}
+@keyframes pulse2 {
+  0% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.6; }
+  33% { transform: scale(1.08) translate3d(-4vw, -4vw, 0); opacity: 0.9; }
+  66% { transform: scale(0.95) translate3d(2vw, -2vw, 0); opacity: 0.5; }
+  100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.6; }
+}
 
-/* HERO & NAV */
 #hero-wrap { position: relative; overflow: hidden; width: 100%; } 
-@keyframes navDrop { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@-webkit-keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } } 
+@keyframes navDrop { from { opacity: 0; transform: translate3d(-50%, -20px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } }
 
-nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1); white-space: nowrap; opacity: 0; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-nav::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 100px; background: rgba(8, 6, 4, .5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
-nav.sc::before { opacity: 1; }
-nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; }
+nav { position: fixed; top: max(18px, env(safe-area-inset-top, 18px)); left: 50%; transform: translateX(-50%); z-index: 600; width: 100%; max-width: 1000px; height: 64px; padding: 0 16px 0 34px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; transition: all .6s cubic-bezier(0.22, 1, 0.36, 1), border-color .4s ease, background .4s ease, box-shadow .4s ease; white-space: nowrap; opacity: 0; -webkit-animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation: navDrop 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; box-sizing: border-box; border-radius: 100px; border: 1px solid transparent; background: transparent; }
+nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgba(8, 6, 4, .65); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-color: rgba(255, 255, 255, .08); box-shadow: 0 4px 40px rgba(0, 0, 0, .5); }
 
-.nlogo { justify-self: start; display: flex; align-items: center; line-height: 1; font-family: 'Involve', sans-serif; font-weight: 700; font-size: 7.6px; letter-spacing: 1.3em; margin-right: -1.3em; text-decoration: none; background: linear-gradient(to bottom, #ffffff 0%, #777777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; transform: translateY(1px); }
+.nlogo { justify-self: start; display: flex; align-items: center; justify-content: center; line-height: 1; font-family: 'Involve', sans-serif; font-weight: 700; font-size: 7.6px; letter-spacing: 1.3em; margin-right: -1.3em; text-decoration: none; background: linear-gradient(to bottom, #ffffff 0%, #777777 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding: 0; }
 .nlinks { justify-self: center; display: flex; gap: 4px; }
 .nlinks a { color: rgba(255, 255, 255, .4); text-decoration: none; font-size: 11.5px; font-weight: 500; letter-spacing: .04em; padding: 5px 13px; border-radius: 100px; transition: color .28s }
 .nlinks a:hover, .nlinks a.active { color: #fff; }
-.nright { justify-self: end; display: flex; align-items: center; gap: 9px; height: 100%; }
+.nright { justify-self: end; display: flex; align-items: center; gap: 9px; height: 100%; flex-shrink: 0; }
 
-.ncta { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: var(--y); color: #000; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; padding: 0 17px; border-radius: 100px; text-decoration: none; transition: transform .22s, box-shadow .22s }
+.ncta { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: var(--y); color: #000; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; padding: 0 17px; border-radius: 100px; text-decoration: none; transition: transform .22s, box-shadow .22s; margin-right: 4px; }
 .ncta:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--yg) }
 .lbtn { display: inline-flex; align-items: center; justify-content: center; height: 32px; background: none; border: 1px solid rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .4); font-size: 10.5px; font-weight: 700; padding: 0 11px; border-radius: 100px; cursor: pointer; letter-spacing: .1em; transition: color .25s, border-color .25s; }
 .lbtn:hover { color: #fff; border-color: rgba(255, 255, 255, .35); }
 
 #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 100px 24px; position: relative; width: 100%; }
-.htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(30px); animation: fi .9s .3s forwards; position: relative; z-index: 2; }
+.htitle { display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translate3d(0, 30px, 0); -webkit-animation: fi .9s .1s forwards; animation: fi .9s .1s forwards; position: relative; z-index: 2; will-change: opacity, transform; }
 .hsup { font-family: 'Involve', sans-serif; font-size: clamp(8.5px, 2.2vw, 9.5px); font-weight: 700; letter-spacing: 0.25em; padding-left: 0.25em; text-transform: uppercase; color: #ffaa00; text-shadow: 0 0 12px rgba(255, 170, 0, 0.4); margin-bottom: -4px; text-align: center; }
 .hhand { font-family: 'Manrope', sans-serif; font-size: clamp(20px, 3.5vw, 36px); font-weight: 300; letter-spacing: 0.03em; text-transform: none; color: #fff; margin: 0; position: relative; z-index: 2; line-height: 1; }
 
-.gw-container { position: relative; display: inline-grid; place-items: center; }
-.gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
+.gw-container { position: relative; display: inline-grid; place-items: center; transform: translateZ(0); }
+.gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; padding: 0 0.05em; }
 
-/* ОПТИМИЗИРОВАННАЯ АНИМАЦИЯ СВЕЧЕНИЯ ДЛЯ PAGESPEED */
 .gw-blur { 
-    color: #fff; 
-    filter: blur(6px); 
-    user-select: none; 
-    pointer-events: none; 
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 220px rgba(255, 110, 0, 0.5), 0 0 300px rgba(255, 60, 0, 0.3); 
-    will-change: opacity;
-    animation: gp-opacity 3s ease-in-out infinite alternate; 
+    color: #fff; filter: blur(6px); -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
+    /* Упростил тени для устранения фризов в Safari */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 200, 0, 0.9), 0 0 60px rgba(255, 160, 0, 0.8), 0 0 150px rgba(255, 110, 0, 0.5); 
+    will-change: opacity; -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; animation: gp-opacity 4s ease-in-out infinite alternate; transform: translateZ(0);
 }
+@-webkit-keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 @keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-.gw-sharp { color: #fff; user-select: none; pointer-events: none; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); }
-.gw-text { color: transparent; user-select: text; z-index: 5; }
+.gw-sharp { color: #fff; -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 10%, black 20%, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%); }
+.gw-text { color: transparent; -webkit-user-select: text; -moz-user-select: text; user-select: text; z-index: 5; }
 
-.hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translateY(30px); animation: fi 1s .5s forwards; position: relative; z-index: 10; }
-.hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(30px); animation: fi 1s .7s forwards; position: relative; z-index: 10; }
+.hsub { max-width: 520px; font-size: clamp(14px, 1.55vw, 16.5px); font-weight: 400; line-height: 1.75; color: var(--mu); margin-top: 25px; margin-bottom: 35px; opacity: 0; transform: translate3d(0, 30px, 0); -webkit-animation: fi 1s .3s forwards; animation: fi 1s .3s forwards; position: relative; z-index: 10; will-change: opacity, transform; }
+.hbtns { display: flex; gap: 11px; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translate3d(0, 30px, 0); -webkit-animation: fi 1s .5s forwards; animation: fi 1s .5s forwards; position: relative; z-index: 10; will-change: opacity, transform; }
 
-.sdown { position: absolute; bottom: 34px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .25em; color: var(--mu); opacity: 0; animation: fi 1s 1.2s forwards; z-index: 10; }
-.sline { width: 1px; height: 38px; background: linear-gradient(to bottom, var(--y), transparent); animation: sd 2.2s ease-in-out infinite }
+.sdown { position: absolute; bottom: 34px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .25em; color: var(--mu); opacity: 0; -webkit-animation: fi 1s 1s forwards; animation: fi 1s 1s forwards; z-index: 10; }
+.sline { width: 1px; height: 38px; background: linear-gradient(to bottom, var(--y), transparent); -webkit-animation: sd 2.2s ease-in-out infinite; animation: sd 2.2s ease-in-out infinite }
+@-webkit-keyframes sd { 0%, 100% { transform: scaleY(1); opacity: 1 } 50% { transform: scaleY(.5); opacity: .3 } }
 @keyframes sd { 0%, 100% { transform: scaleY(1); opacity: 1 } 50% { transform: scaleY(.5); opacity: .3 } }
-@keyframes fi { to { opacity: 1; transform: translateY(0); } }
+@-webkit-keyframes fi { to { opacity: 1; transform: translate3d(0,0,0); } }
+@keyframes fi { to { opacity: 1; transform: translate3d(0,0,0); } }
 
 .bpri { background: var(--y); color: #000; font-weight: 700; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: transform .22s, box-shadow .22s; white-space: nowrap; }
 .bpri:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--yg), 0 0 60px rgba(255, 184, 0, .15) }
 
-.bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); transition: transform .22s, background .22s; white-space: nowrap; }
+.bsec { background: rgba(255, 255, 255, .05); color: var(--tx); border: 1px solid var(--bor); font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 100px; text-decoration: none; letter-spacing: .05em; display: inline-flex; align-items: center; justify-content: center; gap: 9px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform .22s, background .22s; white-space: nowrap; }
 .bsec:hover { transform: scale(1.05); background: rgba(255, 255, 255, .09) }
 
-.ft { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1); }
-.ft.on { opacity: 1; transform: translateY(0); }
-.fu { opacity: 0; transform: translateY(44px); transition: opacity .72s cubic-bezier(.22, 1, .36, 1), transform .72s cubic-bezier(.22, 1, .36, 1); }
-.fu.on { opacity: 1; transform: translateY(0); }
-.rs>* { opacity: 0; transform: translateY(36px); transition: opacity .65s cubic-bezier(.22, 1, .36, 1), transform .65s cubic-bezier(.22, 1, .36, 1); }
-.rs.on>*:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s }
-.rs.on>*:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s }
-.rs.on>*:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s }
-.rs.on>*:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s }
-.rs.on>*:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s }
-.rs.on>*:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s }
-.rs.on>*:nth-child(7) { opacity: 1; transform: none; transition-delay: .47s }
-.rs.on>*:nth-child(8) { opacity: 1; transform: none; transition-delay: .54s }
-.rs.on>*:nth-child(9) { opacity: 1; transform: none; transition-delay: .61s }
+/* АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ */
+.reveal { opacity: 0; transition: opacity 0.5s ease; will-change: opacity; }
+.reveal.on { opacity: 1; }
 
-.tick-wrap { padding: 30px 0; overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
-.tick-inner { width: 100%; overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
-.tick-track { display: flex; align-items: center; gap: 35px; width: max-content; animation: tk 35s linear infinite; }
-@keyframes tk { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+/* ПЛАВНАЯ БЕГУЩАЯ СТРОКА */
+.tick-wrap { overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
+.tick-inner { width: 100%; padding: 30px 0; display: flex; flex-wrap: nowrap; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
+.tick-track { display: flex; align-items: center; gap: 35px; padding-right: 35px; width: -webkit-max-content; width: -moz-max-content; width: max-content; flex-shrink: 0; -webkit-animation: tk 60s linear infinite; animation: tk 60s linear infinite; transform: translateZ(0); will-change: transform; }
+@-webkit-keyframes tk { from { transform: translate3d(0,0,0) } to { transform: translate3d(-100%,0,0) } }
+@keyframes tk { from { transform: translate3d(0,0,0) } to { transform: translate3d(-100%,0,0) } }
 .tick-item { display: flex; align-items: center; gap: 35px; }
 .tdot { width: 5px; height: 5px; border-radius: 50%; background: var(--y); opacity: 0.6; box-shadow: 0 0 8px var(--y); }
-.tick-logo { width: auto; object-fit: contain; display: block; filter: brightness(0) invert(1) opacity(0.35); transition: filter 0.4s ease, transform 0.4s ease; cursor: pointer; }
-.tick-logo:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.08); }
+
+.tick-logo { width: auto; -o-object-fit: contain; object-fit: contain; display: block; filter: brightness(0) invert(1) opacity(0.35); transition: filter 0.4s ease, transform 0.4s ease; cursor: pointer; transform: translateZ(0); will-change: transform, filter; }
+.tick-logo:hover { filter: brightness(0) invert(1) opacity(1); transform: scale(1.08) translateZ(0); }
 
 #main-content { position: relative; z-index: 10; }
 section { position: relative; z-index: 10; }
@@ -144,29 +196,28 @@ section { position: relative; z-index: 10; }
 .vgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
 .hgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px }
 
-.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform .38s, box-shadow .38s; position: relative; }
-.wcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.025) }
+/* Вылет работает и при hover, и при тапе на мобилках (:active) */
+.wcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; position: relative; transform: translateZ(0); }
+.wcard:hover, .wcard:active { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
 .wi { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; transition: all 0.3s ease; }
 .vi .wi { aspect-ratio: 9/16; }
 .hi .wi { aspect-ratio: 16/9; }
-.w-video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
+.w-video { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0; background: #000; pointer-events: none; }
 
-/* РАБОТА С ПОЛНОЭКРАННЫМ РЕЖИМОМ */
 .wi:fullscreen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
 .wi:-webkit-full-screen { width: 100vw; height: 100vh; background: #000; border-radius: 0; z-index: 9999; }
-.wi:fullscreen .w-video { object-fit: contain; }
+.wi:fullscreen .w-video { -o-object-fit: contain; object-fit: contain; }
 .wi:-webkit-full-screen .w-video { object-fit: contain; }
 .wi.ui-hidden { cursor: none; }
 .wi.ui-hidden .w-play-btn, .wi.ui-hidden .w-fs-btn, .wi.ui-hidden .w-timeline-wrap { opacity: 0 !important; pointer-events: none !important; transition: opacity 0.2s ease; }
 .wi:fullscreen .fs-enter { display: none; }
-.wi:fullscreen .fs-exit { display: block !important; }
 .wi:-webkit-full-screen .fs-enter { display: none; }
+.wi:fullscreen .fs-exit { display: block !important; }
 .wi:-webkit-full-screen .fs-exit { display: block !important; }
 
-/* ТАЙМЛАЙН */
 .w-timeline-wrap { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 90%; height: 16px; display: flex; align-items: center; cursor: pointer; z-index: 4; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease, width 0.3s ease; }
 .wi.has-started .w-timeline-wrap { opacity: 1; pointer-events: auto; }
-.w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; backdrop-filter: blur(4px); transition: height 0.2s ease; }
+.w-timeline-bg { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: height 0.2s ease; }
 .w-timeline-wrap:hover .w-timeline-bg { height: 6px; }
 .w-timeline-fill { height: 100%; width: 0%; background: var(--y); border-radius: 4px; pointer-events: none; box-shadow: 0 0 10px rgba(255, 184, 0, 0.5); transition: width 0.25s linear; }
 
@@ -174,83 +225,39 @@ section { position: relative; z-index: 10; }
 .hi .wi:fullscreen, .hi .wi:-webkit-full-screen { --vid-w: min(100vw, 100vh * 16 / 9); }
 .wi:fullscreen .w-timeline-wrap, .wi:-webkit-full-screen .w-timeline-wrap { width: calc(var(--vid-w) * 0.9); }
 .wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { right: auto; left: calc(50% + (var(--vid-w) / 2) - 46px); }
+.wi:fullscreen .w-play-btn, .wi:-webkit-full-screen .w-play-btn { pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-fs-btn, .wi:-webkit-full-screen .w-fs-btn { opacity: 1 !important; pointer-events: auto !important; z-index: 10; }
+.wi:fullscreen .w-play-btn.is-playing, .wi:-webkit-full-screen .w-play-btn.is-playing { opacity: 0; }
+.wi:fullscreen:hover .w-play-btn.is-playing, .wi:-webkit-full-screen:hover .w-play-btn.is-playing { opacity: 1; }
 
+/* Тень для кнопок, чтобы они не сливались с белым фоном */
 .w-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 3; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 0; pointer-events: none; outline: none; }
 .wi:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
-.w-play-btn svg { width: 32px; height: 32px; fill: currentColor; stroke: currentColor; stroke-width: 1.5; margin-left: -2px; transition: transform 0.2s; }
-.w-play-btn.is-playing svg { margin-left: 0; }
+.w-play-btn svg { width: 32px; height: 32px; fill: currentColor; stroke: currentColor; stroke-width: 1.5; margin-left: -2px; transition: transform 0.2s; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
+.w-play-btn.is-playing svg { margin-left: 0; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
 .w-play-btn.is-playing { opacity: 0; background: rgba(0, 0, 0, 0.4); border-color: transparent; }
 .wi:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.w-fs-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(255, 255, 255, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer; z-index: 4; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all 0.2s ease; opacity: 0; outline: none; }
+
+.w-fs-btn { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(255, 255, 255, 0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; cursor: pointer; z-index: 10; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.15); transition: all 0.2s ease; opacity: 0; outline: none; pointer-events: auto; touch-action: manipulation; }
 .wi:hover .w-fs-btn, .wi:active .w-fs-btn { opacity: 1; }
-@media (hover: none) { .w-fs-btn { opacity: 1; } }
+@media (hover: none) { .w-fs-btn { opacity: 1; pointer-events: auto; } }
 .w-fs-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.05); border-color: rgba(255, 255, 255, 0.4); }
-.w-fs-btn svg { width: 18px; height: 18px; }
+.w-fs-btn svg { width: 18px; height: 18px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6)); }
 
-/* === ДИЗАЙН КЕЙСОВ === */
 .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px }
-.rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); transition: transform .38s, box-shadow .38s, border-color .38s; display: flex; flex-direction: column; cursor: pointer; }
-.rcard:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
+.rcard { border-radius: 14px; overflow: hidden; background: var(--sur); border: 1px solid var(--bor); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.15s ease, opacity 0.5s ease; transform: translateZ(0); }
+.rcard:hover, .rcard:active { transform: translate3d(0, -5px, 0); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-color: rgba(255, 184, 0, 0.3); }
 
-/* ПРОПОРЦИИ КЕЙСОВ */
-.rimg-wrap { 
-    aspect-ratio: 671 / 1035; 
-    width: 100%; 
-    position: relative; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: #0a0a0a;
-}
+.rimg-wrap { aspect-ratio: 671 / 1035; width: 100%; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+.rimg { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; transform: scale(1.02); transition: transform 0.3s ease; }
 
-.rimg { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transform: scale(1.02); 
-    transition: transform 0.3s ease; 
-}
-
-/* ЗАЩИТА NDA ИЗОБРАЖЕНИЙ */
-.nda-card .rimg {
-    pointer-events: none !important; 
-    user-select: none !important; 
-    -webkit-user-select: none !important;
-    -webkit-user-drag: none !important; 
-    transform: none; /* Убираем зум 1.02 */
-    object-position: center top; /* Поднимаем картинку к верхнему краю, чтобы снизу было место */
-}
-
+.nda-card .rimg { pointer-events: none !important; -moz-user-select: none !important; user-select: none !important; -webkit-user-select: none !important; -webkit-user-drag: none !important; transform: none; -o-object-position: center top; object-position: center top; }
 .rtxt-box { padding: 20px 24px; display: flex; flex-direction: column; gap: 6px; background: #080604; flex-grow: 1; justify-content: center; position: relative; z-index: 5; border-top: 1px solid rgba(255,255,255,0.05); }
 .rtxt-main { font-family: 'Involve', sans-serif; font-size: 19px; font-weight: 700; color: var(--y); line-height: 1.1; letter-spacing: -0.02em; }
 .rtxt-sub { font-size: 12.5px; color: rgba(232, 230, 222, 0.6); line-height: 1.4; }
 
-.rblur { 
-    position: absolute; 
-    inset: 0; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 11px; 
-    z-index: 2; 
-    pointer-events: none;
-}
-
-.rblur::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;  
-    height: 130px; 
-    background: rgba(30, 30, 30, 0.75); 
-    filter: blur(25px); 
-    z-index: -1; 
-}
-
+.rblur { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; z-index: 2; pointer-events: none; }
+.rblur::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; height: 130px; background: rgba(30, 30, 30, 0.75); filter: blur(25px); z-index: -1; }
 .rlock { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, .03); border: 1px solid var(--bor); display: flex; align-items: center; justify-content: center; }
 .rbtxt { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mu); text-align: center; padding: 0 14px; font-weight: 600; }
 
@@ -258,8 +265,8 @@ section { position: relative; z-index: 10; }
 .agrid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 35px; align-items: center }
 .aphoto { position: relative; height: 560px; }
 .aframe { position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; border-radius: 20px; overflow: hidden; }
-.photo-desktop, .photo-mobile { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
-.photo-desktop { object-position: 80% center; display: block; }
+.photo-desktop, .photo-mobile { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; -o-object-position: center center; object-position: center center; }
+.photo-desktop { -o-object-position: 80% center; object-position: 80% center; display: block; }
 .photo-mobile { display: none; }
 .atxt p { font-size: 14.5px; line-height: 1.82; color: rgba(232, 230, 222, .72); margin-bottom: 18px }
 .atxt p:first-of-type { font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 22px; letter-spacing: -0.02em; line-height: 1.2; }
@@ -268,108 +275,117 @@ section { position: relative; z-index: 10; }
 .chip:hover { border-color: var(--y); color: var(--y) }
 .ab-btns { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-/* ВИДЕО-КРУЖОЧКИ */
 .rvid, .rvoice, .rtxts { padding: 40px 0; }
 .rvid { padding-top: 15px; }
 .rgst { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.3); font-weight: 700; margin-bottom: 28px; }
 .vid-slider-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0; overflow-x: hidden; }
 .slider-btn { position: relative; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.3s, transform 0.2s; padding: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; outline: none; }
 .slider-btn:hover { color: var(--y); transform: scale(1.1); }
-.vid-track { position: relative; flex: 1; max-width: 820px; height: 440px; display: flex; align-items: center; justify-content: center; }
-.vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
-.vidcirc.prev { transform: translateX(-280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
-.vidcirc.active { transform: translateX(0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
-.vidcirc.next { transform: translateX(280px) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
-.vidcirc.hidden { opacity: 0; transform: scale(0.5); z-index: 0; pointer-events: none; transition: opacity 0.2s, transform 0s 0.2s; }
+/* Ширина трека сужена для придвижения стрелок */
+.vid-track { position: relative; flex: 1; max-width: 600px; height: 440px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+.vidcirc { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 16px; transition: transform 0.5s ease, opacity 0.5s ease; transform: translateZ(0); will-change: transform, opacity; }
+
+/* Круги смещены ближе к центру, чтобы заходить за основной */
+.vidcirc.prev { transform: translate3d(-160px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+.vidcirc.active { transform: translate3d(0, 0, 0) scale(1); opacity: 1; z-index: 3; pointer-events: auto; }
+.vidcirc.next { transform: translate3d(160px, 0, 0) scale(0.75); opacity: 0.4; z-index: 1; pointer-events: auto; cursor: pointer; }
+
+.vidcirc.hidden { opacity: 0; transform: scale(0.5); z-index: 0; pointer-events: none; transition: transform 0.5s ease, opacity 0.3s ease; }
 .vc-ring { width: 320px; height: 320px; border-radius: 50%; background: transparent; position: relative; transition: transform 0.3s; }
 .vc-in { width: 100%; height: 100%; border-radius: 50%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); transition: border-color 0.3s; }
 .vidcirc.active:hover .vc-in { border-color: rgba(255, 255, 255, 0.3); }
 .vidcirc.active .vc-in { cursor: pointer; }
-.vc-in video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); pointer-events: none; border: none; outline: none; border-radius: 50%; }
+.vc-in video { width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; transform: scale(1.02); pointer-events: none; border: none; outline: none; border-radius: 50%; }
 .vidcirc.active .vc-in:hover .w-play-btn { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.4); transform: translate(-50%, -50%) scale(1.08); }
 .vidcirc.active .vc-in:hover .w-play-btn.is-playing { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .vc-name { font-size: 15px; font-weight: 600; color: var(--tx); letter-spacing: .05em; opacity: 0; transition: opacity .3s; margin-top: 2px; }
 .vidcirc.active .vc-name { opacity: 0.8; }
 .vidcirc.active:hover .vc-name { opacity: 1; }
 
-/* ГОЛОСОВОЙ ПЛЕЕР */
 .rvoice { padding-top: 0; }
 .vocgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .voc-wrapper { display: flex; flex-direction: column; gap: 10px; }
 .voccard { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(255, 255, 255, .02); border: 1px solid var(--bor); border-radius: 100px; cursor: pointer; transition: background .3s, box-shadow .3s, transform .3s; }
-.voccard:hover { background: rgba(255, 255, 255, .04); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); border-color: rgba(255, 184, 0, 0.2); }
-.vocplay { width: 44px; height: 44px; border-radius: 50%; background: var(--y); border: none; display: flex; align-items: center; justify-content: center; color: #000; flex-shrink: 0; transition: transform .2s, box-shadow .2s; outline: none; }
-.voccard:hover .vocplay { transform: scale(1.05); box-shadow: 0 0 15px var(--yg); }
+.voccard:hover, .voccard:active { background: rgba(255, 255, 255, .04); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); border-color: rgba(255, 184, 0, 0.2); }
+.vocplay { width: 44px; height: 44px; border-radius: 50%; background: var(--y); border: none; display: flex; align-items: center; justify-content: center; color: #000; flex-shrink: 0; transition: transform .2s, box-shadow .2s; outline: none; cursor: pointer; }
+.voccard:hover .vocplay, .voccard:active .vocplay { transform: scale(1.05); box-shadow: 0 0 15px var(--yg); }
 .vocplay svg { width: 24px; height: 24px; fill: currentColor; margin-left: -1px; }
-.vocwave-box { flex: 1; height: 24px; position: relative; border-radius: 2px; display: flex; align-items: center; cursor: pointer; }
-.vocwave-bg { width: 100%; height: 100%; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 2px, transparent 2px, transparent 5px); position: absolute; left: 0; top: 0; border-radius: 2px; }
-.vocwave-fill { height: 100%; width: 0%; background: repeating-linear-gradient(90deg, var(--y) 0px, var(--y) 2px, transparent 2px, transparent 5px); position: absolute; left: 0; top: 0; pointer-events: none; transition: width 0.1s linear; border-radius: 2px; }
+.vocwave-box { flex: 1; height: 24px; position: relative; cursor: pointer; display: flex; align-items: center; }
+
+/* Динамические волны ГС */
+.vbar-track { display: flex; align-items: center; justify-content: space-between; gap: 2px; width: 100%; height: 100%; position: absolute; left: 0; top: 0; }
+.vbar-bg .vbar { background: rgba(255,255,255,0.15); }
+.vbar-fill { -webkit-clip-path: inset(0 100% 0 0); clip-path: inset(0 100% 0 0); transition: -webkit-clip-path 0.1s linear; transition: clip-path 0.1s linear; transition: clip-path 0.1s linear, -webkit-clip-path 0.1s linear; pointer-events: none; z-index: 2; }
+.vbar-fill .vbar { background: var(--y); box-shadow: 0 0 5px rgba(255, 184, 0, 0.4); }
+.vbar { flex: 1; border-radius: 2px; }
+
 .voc-dur { font-size: 11px; color: var(--mu); font-family: monospace; width: 30px; text-align: right; }
 .voc-name { font-size: 13px; font-weight: 500; color: var(--tx); padding-left: 20px; opacity: 0.8; }
 .txrgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px }
 .txr { background: rgba(255, 255, 255, .02); border: 1px solid var(--bor); border-radius: 11px; padding: 24px; transition: transform .3s, background .3s; cursor: default; }
-.txr:hover { background: rgba(255, 255, 255, .03); transform: translateY(-3px); }
+.txr:hover, .txr:active { background: rgba(255, 255, 255, .03); transform: translateY(-3px); }
 .txrq { font-size: 32px; line-height: 1; color: var(--y); font-weight: 700; margin-bottom: 5px }
 .rtxt { font-size: 13.5px; color: var(--tx); line-height: 1.6; margin-bottom: 16px; }
 .rauth { font-size: 11px; color: var(--mu); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
 
 body.lang-en .ru-only { display: none; }
 
+/* ПЛАВНЫЙ FAQ */
 .flist { margin-top: 50px; display: flex; flex-direction: column; gap: 10px }
 .fi { border: 1px solid var(--bor); border-radius: 13px; overflow: hidden; transition: border-color .28s, box-shadow .28s }
 .fi.open { border-color: rgba(255, 184, 0, 0.5); box-shadow: 0 0 40px rgba(255, 184, 0, 0.1); }
-.fq { padding: 20px 26px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14.5px; font-weight: 500; transition: background .28s }
+.fq { padding: 20px 26px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14.5px; font-weight: 500; transition: background .28s; -moz-user-select: none; user-select: none; -webkit-user-select: none; }
 .fq:hover { background: rgba(255, 255, 255, .02) }
 .fi.open .fq { background: rgba(255, 184, 0, .03) }
-.fic { display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; font-weight: 300; color: var(--mu); transition: color .28s, transform .32s }
+.fic { display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; font-weight: 300; color: var(--mu); transition: color .28s, transform .32s; -moz-user-select: none; user-select: none; -webkit-user-select: none; }
 .fi.open .fic { color: var(--y); transform: rotate(45deg) }
-.fa { max-height: 0; overflow: hidden; transition: max-height .42s ease, padding .42s ease; padding: 0 26px; font-size: 13.5px; color: var(--mu); line-height: 1.78 }
-.fi.open .fa { max-height: 280px; padding: 0 26px 20px }
+.fa-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease; }
+.fa-inner { overflow: hidden; }
+.fa { padding: 14px 26px 24px 26px; font-size: 13.5px; color: var(--mu); line-height: 1.78; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s ease, transform 0.4s ease; }
+.fi.open .fa-wrapper { grid-template-rows: 1fr; }
+.fi.open .fa { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
 
-#cta { padding: 110px 0 }
+#cta { padding: 110px 0 50px 0; }
 .ctabox { padding: 76px 56px; text-align: center; position: relative; }
 .ctatitle { font-size: clamp(26px, 3.8vw, 50px); font-weight: 700; margin-bottom: 18px; line-height: 1.08; }
 .ctasub { font-size: 15.5px; color: var(--mu); margin-bottom: 40px; max-width: 440px; margin-left: auto; margin-right: auto; line-height: 1.72 }
 .ctabtns { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 
-/* МИНИМАЛИСТИЧНЫЙ ФУТЕР */
 footer { position: relative; z-index: 10; }
-.f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 20px 40px; text-align: center; }
+.f-container { display: flex; justify-content: center; align-items: center; max-width: 1000px; margin: 0 auto; padding: 50px 40px 50px; text-align: center; }
 .fcopy { color: rgba(255, 255, 255, .5); font-size: 11px; letter-spacing: .1em; font-weight: 500; }
 
 @media(max-width:900px) {
-nav { display: flex; justify-content: space-between; }
+nav { display: flex; justify-content: space-between; align-items: center; }
 .vgrid, .rgrid { grid-template-columns: repeat(2, 1fr) }
 .hgrid, .agrid { grid-template-columns: 1fr }
 .aphoto { height: 450px }
 .txrgrid { grid-template-columns: 1fr }
 .nlinks { display: none }
 .cnt { padding: 0 24px }
-.f-container { padding: 20px 24px; }
 }
 
 @media(max-width:600px) {
+html { scroll-padding-top: 60px; }
 .hsup { font-size: 7.5px; margin-bottom: -2px; }
 .gw-blur, .gw-sharp, .gw-text { font-size: clamp(65px, 20vw, 90px); }
 .hhand { font-size: clamp(20px, 6.5vw, 24px); }
 .htitle { gap: 8px; }
 .hsub { margin-top: 15px; margin-bottom: 30px; font-size: 14px; line-height: 1.6; }
-nav { width: calc(100% - 24px); padding: 8px 8px 8px 24px; gap: 8px; height: 56px; border-radius: 100px; }
-nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
-.hbtns, .ctabtns { flex-direction: row; width: auto; gap: 12px; }
 
-/* Центрируем только кнопки в секции "Обо мне" */
-.ab-btns { justify-content: center; width: 100%; }
+nav { max-width: calc(100vw - 32px); width: 100%; padding: 8px 6px 8px 20px; gap: 8px; height: 56px; border-radius: 100px; box-sizing: border-box; top: env(safe-area-inset-top, 18px); }
+nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px; box-sizing: border-box; }
+.ncta { padding: 0 12px; }
 
-/* Уменьшаем отступы и размер логотипов в бегущей строке на 30% */
+.hbtns, .ctabtns, .ab-btns { flex-direction: column; align-items: stretch; width: -webkit-max-content; width: -moz-max-content; width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; gap: 12px; }
 .tick-track { gap: 20px; }
 .tick-item { gap: 20px; }
 .tick-logo { height: calc(var(--base-h) * 0.7) !important; }
+.bpri, .bsec { width: 100%; justify-content: center; font-size: 13.5px; padding: 13px 26px; }
 
-.bpri, .bsec { width: auto; justify-content: center; font-size: 13.5px; padding: 13px 26px; }
 .sp { padding: 60px 0; }
-#works { padding: 70px 0 30px !important; }
-#cta { padding: 70px 0; }
+#projects { padding: 70px 0 30px !important; }
+#cta { padding: 70px 0 50px 0; }
 .ctabox { padding: 40px 20px; }
 .stitle, .ctatitle { font-size: 28px; margin-bottom: 12px; }
 .atxt p:first-of-type { font-size: 26px; }
@@ -388,14 +404,16 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 .slider-btn { padding: 10px; z-index: 10; }
 .slider-btn svg { width: 28px; height: 28px; }
 .vid-track { width: 100%; height: 260px; }
-.vidcirc.prev { transform: translateX(-80px) scale(0.55); opacity: 0.25; z-index: 1; }
-.vidcirc.next { transform: translateX(80px) scale(0.55); opacity: 0.25; z-index: 1; }
+
+/* Круги на мобильной версии заходят друг за друга */
+.vidcirc.prev { transform: translate3d(-70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
+.vidcirc.next { transform: translate3d(70px,0,0) scale(0.55); opacity: 0.25; z-index: 1; }
+
 .vc-ring { width: 190px; height: 190px; }
 .w-timeline-wrap { height: 20px; } 
 .w-timeline-bg { height: 5px; }
-.f-container { flex-direction: column; gap: 20px; }
+.f-container { padding: 50px 24px; }
 
-/* Уменьшаем кнопки управления на мобильных для вертикальных видео */
 .vi .w-play-btn { width: 48px; height: 48px; }
 .vi .w-play-btn svg { width: 24px; height: 24px; }
 .vi .w-fs-btn { width: 30px; height: 30px; top: 10px; right: 10px; }
@@ -417,7 +435,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <nav id="nav">
 <a href="#hero" class="nlogo">KLAGE</a>
 <div class="nlinks">
-<a href="#works" class="nl" data-s="works" data-ru="Работы" data-en="Projects">Работы</a>
+<a href="#projects" class="nl" data-s="projects" data-ru="Работы" data-en="Projects">Работы</a>
 <a href="#results" class="nl" data-s="results" data-ru="Результаты" data-en="Results">Результаты</a>
 <a href="#about" class="nl" data-s="about" data-ru="Обо мне" data-en="About">Обо мне</a>
 </div>
@@ -429,6 +447,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <div id="hero-wrap">
 <section id="hero">
+<!-- Убран класс reveal, чтобы не было задержки при загрузке. CSS анимация keyframes отрабатывает сразу. -->
 <h1 class="htitle">
 <span class="hsup" data-ru="монтаж • контент • визуал" data-en="editing • content • visuals">монтаж • контент • визуал</span>
 <span class="hhand" data-ru="заставь свои видео" data-en="make your videos">заставь свои видео</span>
@@ -438,13 +457,13 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <span class="gw-text" data-ru="СИЯТЬ" data-en="SHINE">СИЯТЬ</span>
 </span>
 </h1>
-<p class="hsub" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам по всему миру</p>
+<p class="hsub" data-ru="Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам<br>по всему миру" data-en="I create outstanding visuals that are remembered and help brands worldwide reach a new level">Создаю выдающийся и уникальный визуал, который запоминается и помогает выйти на новый уровень брендам<br>по всему миру</p>
 <div class="hbtns">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri">
 <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg>
 <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
 </a>
-<a href="mailto:your@email.com" class="bsec">
+<a href="mailto:klageeheieru@gmail.com" class="bsec">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
 <span data-ru="Написать Email" data-en="Email me">Написать Email</span>
 </a>
@@ -455,29 +474,29 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </section>
 </div>
 
-<div class="tick-wrap fu">
+<div class="tick-wrap reveal">
 <div class="tick-inner"><div class="tick-track" id="tt"></div></div>
 </div>
 
 <div id="main-content">
 
-<section id="works" style="padding: 100px 0 50px; position:relative; z-index:10">
+<section id="projects" style="padding: 100px 0 50px; position:relative; z-index:10">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
 <h2 class="stitle" data-ru="Вертикальные работы" data-en="Vertical projects">Вертикальные работы</h2>
 </div>
-<div class="vgrid rs" id="vg"></div>
+<div class="vgrid" id="vg"></div>
 </div>
 </section>
 
 <section style="padding: 50px 0 100px; position:relative; z-index:10">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Портфолио" data-en="Portfolio">Портфолио</div>
 <h2 class="stitle" data-ru="Горизонтальные работы" data-en="Horizontal projects">Горизонтальные работы</h2>
 </div>
-<div class="hgrid rs" id="hg"></div>
+<div class="hgrid" id="hg"></div>
 </div>
 </section>
 
@@ -485,11 +504,11 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="results" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Кейсы" data-en="Results">Кейсы</div>
 <h2 class="stitle" data-ru="Результаты клиентов" data-en="Client results">Результаты клиентов</h2>
 </div>
-<div class="rgrid rs" id="rg"></div>
+<div class="rgrid" id="rg"></div>
 </div>
 </section>
 
@@ -498,13 +517,13 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <section id="about" class="sp">
 <div class="cnt">
 <div class="agrid">
-<div class="aphoto fu">
+<div class="aphoto reveal">
 <div class="aframe">
-<img src="assets/images/photo_desktop.webp" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960" loading="lazy">
-<img src="assets/images/photo_mobile.webp" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800" loading="lazy">
+<img src="assets/images/photo_desktop.avif" alt="Илья — KLAGE" class="photo-desktop" width="800" height="960" loading="lazy">
+<img src="assets/images/photo_mobile.avif" alt="Илья — KLAGE" class="photo-mobile" width="600" height="800" loading="lazy">
 </div>
 </div>
-<div class="atxt ft">
+<div class="atxt reveal">
 <div class="slbl" data-ru="Обо мне" data-en="About Me">Обо мне</div>
 <p data-ru="Привет, я Илья" data-en="Hi, I'm Ilya">Привет, я Илья</p>
 <p data-ru="Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали." data-en="I create unique, structured videos where every detail works towards the goal. I work with rhythm, clarity, and the meaning of the frame so that videos are not just watched, but felt and remembered.">Создаю уникальные, структурированные видео, где каждая деталь работает на цель. Работаю с ритмом, чистотой и смыслом кадра, чтобы видео не просто смотрели, а чувствовали и запоминали.</p>
@@ -518,7 +537,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 </div>
 <div class="ab-btns">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Обсудить проект" data-en="Discuss project">Обсудить проект</span></a>
-<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email me">Написать Email</span></a>
+<a href="mailto:klageeheieru@gmail.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email me">Написать Email</span></a>
 </div>
 </div>
 </div>
@@ -529,11 +548,11 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="reviews" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl" data-ru="Отзывы" data-en="Reviews">Отзывы</div>
 <h2 class="stitle" data-ru="Что говорят клиенты" data-en="What clients say">Что говорят клиенты</h2>
 </div>
-<div class="rbox fu">
+<div class="rbox reveal">
 <div class="rvid ru-only">
 <div class="rgst">Видеоотзывы</div>
 <div class="vid-slider-wrap">
@@ -544,7 +563,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev1.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -553,7 +572,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev2.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -562,7 +581,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev3.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -571,7 +590,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev4.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
@@ -580,20 +599,20 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 <div class="vidcirc" data-index="4">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev5.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
-  <div class="vc-name">Клиент</div>
+  <div class="vc-name">Валерий</div>
 </div>
 <div class="vidcirc" data-index="5">
   <div class="vc-ring">
     <div class="vc-in" onclick="toggleCircleVideo(this)">
-      <video src="assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
+      <video src="assets/rev/rev6.mp4#t=0.001" loop playsinline preload="metadata"></video>
       <button class="w-play-btn" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
     </div>
   </div>
-  <div class="vc-name">Клиент</div>
+  <div class="vc-name">Евгений</div>
 </div>
 </div>
 <button class="slider-btn" id="nextBtn" aria-label="Следующее видео">
@@ -608,7 +627,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
   <div class="voccard" onclick="toggleVoice(this, event)">
     <audio src="assets/audio/voice1.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
-    <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
+    <div class="vocwave-box" onclick="seekVoice(event, this)"></div>
     <div class="voc-dur">0:00</div>
   </div>
   <div class="voc-name">@keingnade</div>
@@ -617,7 +636,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
   <div class="voccard" onclick="toggleVoice(this, event)">
     <audio src="assets/audio/voice2.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
-    <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
+    <div class="vocwave-box" onclick="seekVoice(event, this)"></div>
     <div class="voc-dur">0:00</div>
   </div>
   <div class="voc-name">Max</div>
@@ -626,7 +645,7 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
   <div class="voccard" onclick="toggleVoice(this, event)">
     <audio src="assets/audio/voice3.mp3" preload="none" ontimeupdate="updateVoiceProgress(this)" onloadedmetadata="initVoice(this)" onended="resetVoice(this)"></audio>
     <button class="vocplay" aria-label="Воспроизвести отзыв"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
-    <div class="vocwave-box" onclick="seekVoice(event, this)"><div class="vocwave-bg"></div><div class="vocwave-fill"></div></div>
+    <div class="vocwave-box" onclick="seekVoice(event, this)"></div>
     <div class="voc-dur">0:00</div>
   </div>
   <div class="voc-name">@threehuna</div>
@@ -666,29 +685,28 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <section id="faq" class="sp">
 <div class="cnt">
-<div class="ft">
+<div class="reveal">
 <div class="slbl">FAQ</div>
 <h2 class="stitle" data-ru="Частые вопросы" data-en="Frequently Asked Questions">Частые вопросы</h2>
 </div>
-<div class="flist fu" id="fl"></div>
+<div class="flist reveal" id="fl"></div>
 </div>
 </section>
 
-<div class="div"></div>
-
 <section id="cta">
 <div class="cnt">
-<div class="ctabox fu">
+<div class="ctabox reveal">
 <div class="slbl" data-ru="Начнём?" data-en="Let's start?">Начнём?</div>
 <h2 class="ctatitle" data-ru="Готов вывести свой контент на новый уровень?" data-en="Ready to take your content to the next level?">Готов вывести свой контент на новый уровень?</h2>
 <div class="ctabtns">
 <a href="https://t.me/m/TSaL5l7OMGVi" target="_blank" class="bpri"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink:0"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" /></svg> <span data-ru="Получить консультацию" data-en="Get a consultation">Получить консультацию</span></a>
-<a href="mailto:your@email.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email me">Написать Email</span></a>
+<a href="mailto:klageeheieru@gmail.com" class="bsec"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span data-ru="Написать Email" data-en="Email me">Написать Email</span></a>
 </div>
 </div>
 </div>
 </section>
 
+<div class="div"></div>
 <footer>
 <div class="f-container">
     <div class="fcopy" data-ru="© 2026 KLAGE. Все права защищены" data-en="© 2026 KLAGE. All rights reserved.">© 2026 KLAGE. Все права защищены</div>
@@ -698,75 +716,39 @@ nav.sc { width: calc(100% - 24px); height: 52px; padding: 6px 6px 6px 20px; }
 
 <script>
 const LOGOS = [
-{ src: 'assets/logos/africa.png', alt: 'Африка', size: 90 },
-{ src: 'assets/logos/fullflat.png', alt: 'fullflat', size: 85 },
-{ src: 'assets/logos/Probazis.png', alt: 'Probazis', size: 200 },
-{ src: 'assets/logos/fscr.png', alt: 'FSCR', size: 80 },
-{ src: 'assets/logos/remsart.png', alt: 'Remstart', size: 120 },
-{ src: 'assets/logos/narnia.png', alt: 'Шкафы Нарния', size: 140 },
-{ src: 'assets/logos/region.png', alt: 'Region Online', size: 150 },
-{ src: 'assets/logos/nutreasy.png', alt: 'Nutreasy', size: 150 }
+{ src: 'assets/logos/africa.avif', alt: 'Африка', size: 90 },
+{ src: 'assets/logos/fullflat.avif', alt: 'fullflat', size: 85 },
+{ src: 'assets/logos/Probazis.avif', alt: 'Probazis', size: 200 },
+{ src: 'assets/logos/fscr.avif', alt: 'FSCR', size: 80 },
+{ src: 'assets/logos/remsart.avif', alt: 'Remstart', size: 120 },
+{ src: 'assets/logos/narnia.avif', alt: 'Шкафы Нарния', size: 140 },
+{ src: 'assets/logos/region.avif', alt: 'Region Online', size: 150 },
+{ src: 'assets/logos/nutreasy.avif', alt: 'Nutreasy', size: 150 }
 ];
 
 const VW = [
-{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/video_v/v1.mp4', p: 'assets/covers_h/cover1.webp' },
-{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/video_v/v2.mp4', p: 'assets/covers_h/cover4.webp' },
-{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/video_v/v3.mp4', p: 'assets/covers_h/cover3.webp' },
-{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/video_v/v4.mp4', p: 'assets/covers_h/cover2.webp' },
-{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/video_v/v5.mp4', p: 'assets/covers_h/cover6.webp' },
-{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/video_v/v6.mp4', p: 'assets/covers_h/cover5.webp' }
+{ l: 'Reels · SMM', t: 'Probazis', v: 'assets/video_v/v1.mp4', p: 'assets/covers_h/cover1.avif' },
+{ l: 'Shorts · Спорт', t: 'FSCR', v: 'assets/video_v/v2.mp4', p: 'assets/covers_h/cover4.avif' },
+{ l: 'Reels · Бизнес', t: 'Remstart', v: 'assets/video_v/v3.mp4', p: 'assets/covers_h/cover3.avif' },
+{ l: 'Reels · Недвижимость', t: 'fullflat', v: 'assets/video_v/v4.mp4', p: 'assets/covers_h/cover2.avif' },
+{ l: 'Shorts · Продукт', t: 'Nutreasy', v: 'assets/video_v/v5.mp4', p: 'assets/covers_h/cover6.avif' },
+{ l: 'Reels · Медиа', t: 'Region Online', v: 'assets/video_v/v6.mp4', p: 'assets/covers_h/cover5.avif' }
 ];
 
 const HW = [
-{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/video_h/h1.mp4', p: 'assets/covers_v/cover1.webp' },
-{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/video_h/h2.mp4', p: 'assets/covers_v/cover2.webp' },
-{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/video_h/h3.mp4', p: 'assets/covers_v/cover3.webp' },
-{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/video_h/h4.mp4', p: 'assets/covers_v/cover4.webp' }
+{ l: 'YouTube · Обзор', t: 'Probazis', v: 'assets/video_h/h1.mp4', p: 'assets/covers_v/cover1.avif' },
+{ l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: 'assets/video_h/h2.mp4', p: 'assets/covers_v/cover2.avif' },
+{ l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: 'assets/video_h/h3.mp4', p: 'assets/covers_v/cover3.avif' },
+{ l: 'Corporate · Корпоратив', t: 'Remstart', v: 'assets/video_h/h4.mp4', p: 'assets/covers_v/cover4.avif' }
 ];
 
 const RS = [
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda1.webp', 
-    main: '570K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Views for a<br>large creator' 
-  },
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda2.webp', 
-    main: '177K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Engagement growth<br>in 2 weeks' 
-  },
-  { 
-    type: 'blur', 
-    img: 'assets/images/nda3.webp', 
-    main: '276K', 
-    sub: 'Просмотров для<br>крупного автора',
-    subEn: 'Likes under one<br>client Reels' 
-  },
-  { 
-    type: 'open', 
-    img: 'assets/images/case1.webp', 
-    main: '278K', 
-    sub: 'Просмотров при 2400<br>подписчиках', 
-    subEn: 'Views with 2400<br>followers' 
-  },
-{ 
-    type: 'open', 
-    img: 'assets/images/case2.webp', 
-    main: '218K', 
-    sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', 
-    subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' 
-  },
-  { 
-    type: 'open', 
-    img: 'assets/images/case3.webp', 
-    main: '82K', 
-    sub: 'Просмотров при 850<br>подписчиках', 
-    subEn: 'Views with 850<br>followers' 
-  }
+  { type: 'blur', img: 'assets/images/nda1.avif', main: '570K', sub: 'Просмотров для<br>крупного автора', subEn: 'Views for a<br>large creator' },
+  { type: 'blur', img: 'assets/images/nda2.avif', main: '177K', sub: 'Просмотров для<br>крупного автора', subEn: 'Engagement growth<br>in 2 weeks' },
+  { type: 'blur', img: 'assets/images/nda3.avif', main: '276K', sub: 'Просмотров для<br>крупного автора', subEn: 'Likes under one<br>client Reels' },
+  { type: 'open', img: 'assets/images/case1.avif', main: '278K', sub: 'Просмотров при 2400<br>подписчиках', subEn: 'Views with 2400<br>followers' },
+  { type: 'open', img: 'assets/images/case2.avif', main: '218K', sub: 'Просмотров, видео принесло<br>автору <span style="color: var(--y);">+600</span> подписчиков', subEn: 'Views, the video brought<br>the author <span style="color: var(--y);">+600</span> followers' },
+  { type: 'open', img: 'assets/images/case3.avif', main: '82K', sub: 'Просмотров при 850<br>подписчиках', subEn: 'Views with 850<br>followers' }
 ];
 
 const FAQ = [
@@ -779,12 +761,15 @@ const FAQ = [
 let lang = 'ru';
 
 function buildTicker() {
-const track = [...LOGOS, ...LOGOS];
-const baseHeight = 28;
-document.getElementById('tt').innerHTML = track.map(logo => {
-const newHeight = (baseHeight * (logo.size || 100)) / 100;
-return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" loading="lazy" decoding="async" style="--base-h: ${newHeight}px; height: var(--base-h);"><span class="tdot"></span></div>`;
-}).join('');
+    let track = [...LOGOS, ...LOGOS, ...LOGOS];
+    const baseHeight = 28;
+    let html = track.map(logo => {
+        const newHeight = (baseHeight * (logo.size || 100)) / 100;
+        return `<div class="tick-item"><img src="${logo.src}" alt="${logo.alt}" class="tick-logo" width="150" height="${newHeight}" decoding="async" style="--base-h: ${newHeight}px; height: var(--base-h);"><span class="tdot"></span></div>`;
+    }).join('');
+    
+    const inner = document.querySelector('.tick-inner');
+    inner.innerHTML = `<div class="tick-track">${html}</div><div class="tick-track">${html}</div>`;
 }
 
 function resetIdleTimer(container) {
@@ -864,33 +849,42 @@ function togglePlayAction(container) {
 }
 
 function toggleFullScreen(btn, event) {
+    event.preventDefault();
     event.stopPropagation();
     const card = btn.closest('.wi');
+    const video = card.querySelector('.w-video');
+    
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile && video) {
+        if (video.webkitEnterFullscreen) {
+            if (!video.paused || video.readyState >= 2) {
+                video.webkitEnterFullscreen();
+            } else {
+                video.play().then(() => { video.webkitEnterFullscreen(); }).catch(() => {});
+            }
+            return;
+        }
+        if (video.requestFullscreen) { video.requestFullscreen(); return; }
+    }
+    
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (card.requestFullscreen) {
-            card.requestFullscreen();
-        } else if (card.webkitRequestFullscreen) {
-            card.webkitRequestFullscreen();
-        } else if (card.msRequestFullscreen) {
-            card.msRequestFullscreen();
-        }
+        if (card.requestFullscreen) { card.requestFullscreen(); } 
+        else if (card.webkitRequestFullscreen) { card.webkitRequestFullscreen(); } 
+        else if (card.msRequestFullscreen) { card.msRequestFullscreen(); }
+        else if (video && video.webkitEnterFullscreen) { video.webkitEnterFullscreen(); }
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
+        if (document.exitFullscreen) { document.exitFullscreen(); } 
+        else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); } 
+        else if (document.msExitFullscreen) { document.msExitFullscreen(); }
     }
 }
 
 function wCard(w, cls) {
 const timelineHTML = `<div class="w-timeline-wrap" onclick="seekVideo(event, this)"><div class="w-timeline-bg"><div class="w-timeline-fill"></div></div></div>`;
 return `
-<div class="${cls} wcard">
+<div class="${cls} wcard reveal" ontouchstart="">
 <div class="wi" onclick="togglePlayAction(this)" onmousemove="resetIdleTimer(this)" ontouchstart="resetIdleTimer(this)" onmouseleave="hideUIFast(this)">
-<video class="w-video" src="${w.v}" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
+<video class="w-video" src="${w.v}#t=0.001" poster="${w.p}" playsinline preload="none" onended="onVideoEnded(this)" ontimeupdate="updateTimeline(this)"></video>
 <button class="w-play-btn" aria-label="Смотреть/Пауза"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg></button>
 <button class="w-fs-btn" onclick="toggleFullScreen(this, event)" aria-label="На весь экран">
 <svg class="fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
@@ -904,16 +898,15 @@ ${timelineHTML}
 function buildWorks() {
 document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
 document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
+observeNewElements();
 }
 
 function buildResults() {
     const copyTxt = lang === 'ru' ? 'Проект под защитой<br>авторских прав' : 'Project protected<br>by copyright';
     document.getElementById('rg').innerHTML = RS.map(r => {
         const subtext = lang === 'ru' ? r.sub : (r.subEn || r.sub);
-        
         const isBlur = r.type === 'blur';
-        const cardClass = isBlur ? 'rcard nda-card' : 'rcard';
-        
+        const cardClass = isBlur ? 'rcard nda-card reveal' : 'rcard reveal';
         const imagePart = isBlur ? `
             <img src="${r.img}" class="rimg" loading="lazy" alt="Кейс NDA" draggable="false" width="671" height="1035">
             <div class="rblur">
@@ -921,27 +914,43 @@ function buildResults() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 </div>
                 <div class="rbtxt" style="line-height: 1.4; margin-top: 8px;">${copyTxt}</div>
-            </div>` : 
-            `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс" width="671" height="1035">`;
-        
+            </div>` : `<img src="${r.img}" class="rimg" loading="lazy" alt="Кейс" width="671" height="1035">`;
         const wrapAttrs = isBlur ? 'oncontextmenu="return false;" draggable="false"' : '';
 
         return `
-        <div class="${cardClass}">
-            <div class="rimg-wrap" ${wrapAttrs}>
-                ${imagePart}
-            </div>
+        <div class="${cardClass}" ontouchstart="">
+            <div class="rimg-wrap" ${wrapAttrs}>${imagePart}</div>
             <div class="rtxt-box">
                 <div class="rtxt-main">${r.main}</div>
                 <div class="rtxt-sub">${subtext}</div>
             </div>
         </div>`;
     }).join('');
+    observeNewElements();
 }
 
-function buildFAQ() { document.getElementById('fl').innerHTML = FAQ.map((f, i) => `<div class="fi" id="f${i}"><div class="fq" onclick="tf(${i})"><span>${f.q[lang]}</span><div class="fic">+</div></div><div class="fa">${f.a[lang]}</div></div>`).join('') }
+function buildFAQ() { 
+    document.getElementById('fl').innerHTML = FAQ.map((f, i) => `
+        <div class="fi" id="f${i}">
+            <div class="fq" onclick="tf(${i})">
+                <span>${f.q[lang]}</span>
+                <div class="fic">+</div>
+            </div>
+            <div class="fa-wrapper">
+                <div class="fa-inner">
+                    <div class="fa">${f.a[lang]}</div>
+                </div>
+            </div>
+        </div>
+    `).join(''); 
+}
 
-function tf(i) { const e = document.getElementById('f' + i); const was = e.classList.contains('open'); document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); if (!was) e.classList.add('open') }
+function tf(i) { 
+    const e = document.getElementById('f' + i); 
+    const was = e.classList.contains('open'); 
+    document.querySelectorAll('.fi').forEach(x => x.classList.remove('open')); 
+    if (!was) e.classList.add('open'); 
+}
 
 function tl() {
 lang = lang === 'ru' ? 'en' : 'ru';
@@ -1037,11 +1046,11 @@ function initVoice(audio) {
 }
 
 function updateVoiceProgress(audio) {
-    const fill = audio.parentElement.querySelector('.vocwave-fill');
+    const fill = audio.parentElement.querySelector('.vbar-fill');
     const durEl = audio.parentElement.querySelector('.voc-dur');
     if (audio.duration) {
         const percent = (audio.currentTime / audio.duration) * 100;
-        fill.style.width = percent + '%';
+        fill.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
         durEl.textContent = formatTime(audio.currentTime);
     }
 }
@@ -1049,11 +1058,10 @@ function updateVoiceProgress(audio) {
 function resetVoice(audio) {
     const card = audio.parentElement;
     const btn = card.querySelector('.vocplay');
-    const fill = card.querySelector('.vocwave-fill');
+    const fill = card.querySelector('.vbar-fill');
     const durEl = card.querySelector('.voc-dur');
-    
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 5.5v13l10.5-6.5z" /></svg>';
-    fill.style.width = '0%';
+    fill.style.clipPath = 'inset(0 100% 0 0)';
     durEl.textContent = formatTime(audio.duration);
 }
 
@@ -1086,47 +1094,72 @@ function seekVoice(event, box) {
     const card = box.parentElement;
     const audio = card.querySelector('audio');
     if (!audio.duration) return;
-    
     const rect = box.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-    
     audio.currentTime = percentage * audio.duration;
 }
 
 window.addEventListener('scroll', () => {
 const scrollY = window.scrollY;
 document.getElementById('nav').classList.toggle('sc', scrollY > 40);
-const ids = ['works', 'results', 'about']; let act = '';
+const ids = ['projects', 'results', 'about']; let act = '';
 ids.forEach(id => { const el = document.getElementById(id); if (!el) return; const r = el.getBoundingClientRect(); if (r.top <= 110 && r.bottom > 0) act = id });
 document.querySelectorAll('.nl').forEach(a => a.classList.toggle('active', a.dataset.s === act));
 }, { passive: true });
 
 const obs = new IntersectionObserver(entries => {
 entries.forEach(e => {
-if (e.isIntersecting) { e.target.classList.add('on'); } else if (e.boundingClientRect.top > window.innerHeight * 0.4) { e.target.classList.remove('on'); }
+if (e.isIntersecting) { e.target.classList.add('on'); } 
 });
-}, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+}, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
-setTimeout(() => { document.querySelectorAll('.rv,.fu,.ft,.rs').forEach(el => obs.observe(el)); }, 100);
-
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) });
-});
+function observeNewElements() {
+    document.querySelectorAll('.reveal:not(.observed)').forEach(el => {
+        el.classList.add('observed');
+        obs.observe(el);
+    });
+}
 
 (function () {
-const cv = document.getElementById('noise'); const ctx = cv.getContext('2d');
-const nw = 128, nh = 128; const oc = document.createElement('canvas'); oc.width = nw; oc.height = nh; const octx = oc.getContext('2d');
-let w, h;
-function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
-resize(); window.addEventListener('resize', resize, { passive: true });
-function tick() {
-    const id = octx.createImageData(nw, nh); const d = id.data;
-    for (let i = 0; i < d.length; i += 4) { const val = Math.random() > 0.5 ? 255 : 0; d[i] = val; d[i+1] = val; d[i+2] = val; d[i+3] = 255; }
-    octx.putImageData(id, 0, 0); ctx.clearRect(0, 0, w, h); ctx.fillStyle = ctx.createPattern(oc, 'repeat'); ctx.fillRect(0, 0, w, h);
+    const cv = document.getElementById('noise');
+    if(!cv) return;
+    const ctx = cv.getContext('2d', { alpha: true });
+    const nw = 128, nh = 128;
+    const oc = document.createElement('canvas');
+    oc.width = nw; oc.height = nh;
+    const octx = oc.getContext('2d', { alpha: false });
+    let w, h, resizeTimer;
+    function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); }, { passive: true });
+    
+    let lastTime = 0, running = true;
+    const fpsInterval = 1000 / 12;
+    
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { running = false; }
+        else { running = true; lastTime = 0; requestAnimationFrame(tick); }
+    });
+    
+    function tick(now) {
+        if (!running) return;
+        requestAnimationFrame(tick);
+        const elapsed = now - lastTime;
+        if (elapsed > fpsInterval) {
+            lastTime = now - (elapsed % fpsInterval);
+            const id = octx.createImageData(nw, nh);
+            const buf = new Uint32Array(id.data.buffer);
+            for (let i = 0, len = buf.length; i < len; i++) {
+                buf[i] = Math.random() > 0.5 ? 0xFFFFFFFF : 0xFF000000;
+            }
+            octx.putImageData(id, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = ctx.createPattern(oc, 'repeat');
+            ctx.fillRect(0, 0, w, h);
+        }
+    }
     requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1134,6 +1167,27 @@ document.addEventListener('DOMContentLoaded', () => {
     buildWorks(); 
     buildResults(); 
     buildFAQ();
+    
+    document.querySelectorAll('.vocwave-box').forEach((box, i) => {
+        let bars = '';
+        let seed = (i + 1) * 15; 
+        for(let j=0; j<40; j++) {
+            let x = Math.sin(seed++) * 10000;
+            let h = 20 + Math.floor((x - Math.floor(x)) * 80); 
+            bars += `<div class="vbar" style="height: ${h}%"></div>`;
+        }
+        box.innerHTML = `
+            <div class="vbar-track vbar-bg">${bars}</div>
+            <div class="vbar-track vbar-fill">${bars}</div>
+        `;
+    });
+    
+    document.querySelectorAll('.voccard audio').forEach((audio, i) => {
+        if(i === 0) audio.volume = 0.2;
+        else audio.volume = 0.6;
+    });
+
+    observeNewElements();
 });
 
 </script>
