@@ -148,11 +148,22 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
 .gw-blur, .gw-sharp, .gw-text { grid-area: 1 / 1; font-family: 'Involve', sans-serif; font-size: clamp(48px, 11vw, 130px); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; padding: 0 0.05em; }
 
 .gw-blur { 
-    color: #fff; filter: blur(6px); -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
-    /* Оставили только 1-ю (10px) и 3-ю (60px) тени */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 160, 0, 0.8); 
-    will-change: opacity; -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; animation: gp-opacity 4s ease-in-out infinite alternate; transform: translateZ(0);
+    color: #fff; 
+    filter: blur(6px); 
+    -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
+    
+    /* ФИНАЛЬНЫЙ ВАРИАНТ: 3 тени (10px, 60px и вернули 150px), как просил Илья */
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.4), 
+        0 0 60px rgba(255, 160, 0, 0.8), 
+        0 0 150px rgba(255, 110, 0, 0.5); 
+        
+    will-change: opacity; 
+    -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; 
+    animation: gp-opacity 4s ease-in-out infinite alternate; 
+    transform: translateZ(0);
 }
+
 @-webkit-keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 @keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
