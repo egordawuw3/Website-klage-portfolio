@@ -918,7 +918,7 @@ const RS = [
 const FAQ = [
 { q: { ru: 'Какая стоимость за видео?', en: 'What is the price per video?' }, a: { ru: 'Стоимость для каждого проекта индивидуальна и может зависеть от множества факторов. В первую очередь, от сложности и объема работы. Давайте обсудим ваш проект и я смогу подсказать точную стоимость.', en: "The cost for each project is individual and can depend on multiple factors. Primarily, on the complexity and volume of the work. Let's discuss your project and I'll be able to give you the exact price." } },
 { q: { ru: 'Какие сроки выполнения работы?', en: 'What are the timelines?' }, a: { ru: 'Сроки для каждого проекта могут варьироваться от 1 дня до нескольких недель. Также они зависят от сложности, объема работы и моей загруженности в этот период. На этапе обсуждения проекта мы всегда обговариваем точные сроки.', en: 'Timelines for each project can vary from 1 day to several weeks. They also depend on the complexity, volume of work, and my current workload. We always agree on exact deadlines during the project discussion stage.' } },
-{ q: { ru: 'Что нужно для начала?', en: 'What do you need to start?' }, a: { ru: 'Для начала работы потребуется ТЗ (техническое задание), материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам. При необходимости буду готов помочь с его составлением.', en: "To get started, I will need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules. If needed, I'm ready to help you put one together." } },
+{ q: { ru: 'Что нужно для начала?', en: 'Что нужно для начала?' }, a: { ru: 'Для начала работы потребуется ТЗ (техническое задание), материалы и референсы (при их наличии). ТЗ не обязательно должно быть максимально подробным и следовать каким-то определенным правилам. При необходимости буду готов помочь с его составлением.', en: "To get started, I will need a brief, materials, and references (if any). The brief doesn't have to be perfectly detailed or follow strict rules. If needed, I'm ready to help you put one together." } },
 { q: { ru: 'Сколько правок доступно?', en: 'How many revisions are included?' }, a: { ru: 'Все правки в рамках ТЗ (технического задания) абсолютно бесплатны. Внесение дополнительных изменений оплачивается отдельно.', en: 'All revisions within the scope of the original brief are absolutely free. Any additional changes are paid separately.' } }
 ];
 
@@ -1352,9 +1352,9 @@ const sectionObserver = new IntersectionObserver((entries) => {
             });
         }
     });
-}, { threshold: 0.3 });
+}, { threshold: 0.2 });
 
-['projects', 'results', 'about'].forEach(id => {
+['hero', 'projects', 'results', 'about', 'reviews', 'faq', 'cta'].forEach(id => {
     const el = document.getElementById(id);
     if (el) sectionObserver.observe(el);
 });
