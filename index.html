@@ -175,9 +175,9 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
         0 0 90px rgba(255, 184, 0, 0.95), 
         0 0 190px rgba(255, 130, 0, 0.9); 
         
-    will-change: opacity; 
-    -webkit-animation: gp-opacity 4s ease-in-out infinite alternate; 
-    animation: gp-opacity 4s ease-in-out infinite alternate; 
+    will-change: opacity;
+    -webkit-animation: gp-opacity 4s ease-in-out 1 alternate;
+    animation: gp-opacity 4s ease-in-out 1 alternate;
     transform: translateZ(0);
 }
 @-webkit-keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -1445,21 +1445,36 @@ function observeNewElements() {
     const octx = oc.getContext('2d', { alpha: false });
     let w, h, resizeTimer;
 
-    function draw() {
-        const id = octx.createImageData(nw, nh);
-        const buf = new Uint32Array(id.data.buffer);
-        for (let i = 0, len = buf.length; i < len; i++) {
-            buf[i] = Math.random() > 0.5 ? 0xFFFFFFFF : 0xFF000000;
-        }
-        octx.putImageData(id, 0, 0);
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = ctx.createPattern(oc, 'repeat');
-        ctx.fillRect(0, 0, w, h);
-    }
-
-    function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; draw(); }
+    function resize() { w = cv.width = window.innerWidth; h = cv.height = window.innerHeight; }
     resize();
     window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); }, { passive: true });
+
+    let lastTime = 0, running = true;
+    const fpsInterval = 1000 / 12;
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { running = false; }
+        else { running = true; lastTime = 0; requestAnimationFrame(tick); }
+    });
+
+    function tick(now) {
+        if (!running) return;
+        requestAnimationFrame(tick);
+        const elapsed = now - lastTime;
+        if (elapsed > fpsInterval) {
+            lastTime = now - (elapsed % fpsInterval);
+            const id = octx.createImageData(nw, nh);
+            const buf = new Uint32Array(id.data.buffer);
+            for (let i = 0, len = buf.length; i < len; i++) {
+                buf[i] = Math.random() > 0.5 ? 0xFFFFFFFF : 0xFF000000;
+            }
+            octx.putImageData(id, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.fillStyle = ctx.createPattern(oc, 'repeat');
+            ctx.fillRect(0, 0, w, h);
+        }
+    }
+    requestAnimationFrame(tick);
 })();
 
 function initCircPlyr(v) {
