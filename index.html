@@ -759,7 +759,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="0">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev1.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Семён</div>
@@ -767,7 +767,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="1">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev2.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Марк</div>
@@ -775,7 +775,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="2">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev3.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Айша</div>
@@ -783,7 +783,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="3">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev4.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Александр</div>
@@ -791,7 +791,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="4">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev5.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Валерий</div>
@@ -799,7 +799,7 @@ nav.sc { max-width: calc(100vw - 32px); height: 52px; padding: 6px 6px 6px 16px;
 <div class="vidcirc" data-index="5">
   <div class="vc-ring">
     <div class="vc-in">
-      <video class="plyr-circ" src="/assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
+      <video class="plyr-circ" data-src="/assets/rev/rev6.mp4" loop playsinline preload="metadata"></video>
     </div>
   </div>
   <div class="vc-name">Евгений</div>
@@ -997,7 +997,7 @@ function wCard(w, cls) {
     return `
     <div class="${cls} wcard reveal" ontouchstart="">
         <div class="wi">
-            <video class="plyr-video" src="${w.v}" poster="${w.p}" data-poster="${w.p}" playsinline preload="metadata"></video>
+            <video class="plyr-video" data-src="${w.v}" poster="${w.p}" data-poster="${w.p}" playsinline preload="metadata"></video>
             <button class="custom-fs-btn" type="button" aria-label="На весь экран">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
             </button>
@@ -1126,7 +1126,7 @@ function buildWorks() {
             worksObserver.unobserve(entry.target);
             initWorkPlyr(entry.target);
         });
-    }, { rootMargin: '600px 0px', threshold: 0 });
+    }, { rootMargin: '200px 0px', threshold: 0 });
 
     document.querySelectorAll('.plyr-video').forEach(v => worksObserver.observe(v));
 
@@ -1134,6 +1134,7 @@ function buildWorks() {
 }
 
 function initWorkPlyr(v) {
+        v.src = v.dataset.src;
         let player;
         try {
             if (typeof Plyr === 'undefined') throw new Error('Plyr not loaded');
@@ -1477,6 +1478,7 @@ function observeNewElements() {
 })();
 
 function initCircPlyr(v) {
+    v.src = v.dataset.src;
     v.addEventListener('loadeddata', () => { if (v.currentTime === 0) v.currentTime = 0.001; }, { once: true });
     if (v.readyState >= 2 && v.currentTime === 0) v.currentTime = 0.001;
     v.load();
@@ -1536,7 +1538,7 @@ document.addEventListener('DOMContentLoaded', () => {
             circObserver.unobserve(entry.target);
             initCircPlyr(entry.target);
         });
-    }, { rootMargin: '600px 0px', threshold: 0 });
+    }, { rootMargin: '200px 0px', threshold: 0 });
     document.querySelectorAll('.plyr-circ').forEach(v => circObserver.observe(v));
 
     document.querySelectorAll('.vocwave-box').forEach((box, i) => {
