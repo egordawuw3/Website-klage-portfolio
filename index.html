@@ -958,6 +958,12 @@ const FAQ = [
 let lang = 'ru';
 let plyrInstances = [];
 let circPlyrInstances = [];
+let worksObserver = null;
+let circObserver = null;
+let fsHandlers = [];
+
+document.addEventListener('fullscreenchange', () => fsHandlers.forEach(fn => fn()));
+document.addEventListener('webkitfullscreenchange', () => fsHandlers.forEach(fn => fn()));
 
 function pauseAllMedia(exceptPlyr = null, exceptAudio = null) {
     plyrInstances.forEach(p => {
@@ -1108,11 +1114,26 @@ function toggleCustomFS(btn, e) {
 function buildWorks() {
     plyrInstances.forEach(p => p.destroy());
     plyrInstances = [];
-    
+    fsHandlers = [];
+    if (worksObserver) worksObserver.disconnect();
+
     document.getElementById('vg').innerHTML = VW.map(w => wCard(w, 'vi')).join('');
     document.getElementById('hg').innerHTML = HW.map(w => wCard(w, 'hi')).join('');
-    
-    document.querySelectorAll('.plyr-video').forEach(v => {
+
+    worksObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            worksObserver.unobserve(entry.target);
+            initWorkPlyr(entry.target);
+        });
+    }, { rootMargin: '600px 0px', threshold: 0 });
+
+    document.querySelectorAll('.plyr-video').forEach(v => worksObserver.observe(v));
+
+    observeNewElements();
+}
+
+function initWorkPlyr(v) {
         let player;
         try {
             if (typeof Plyr === 'undefined') throw new Error('Plyr not loaded');
@@ -1204,8 +1225,7 @@ function buildWorks() {
                 fsBtn.addEventListener('touchend', onFsTrigger, { passive: false });
             }
 
-            document.addEventListener('fullscreenchange', handleFsChange);
-            document.addEventListener('webkitfullscreenchange', handleFsChange);
+            fsHandlers.push(handleFsChange);
             v.addEventListener('webkitbeginfullscreen', () => {
                 wi.classList.add('is-fullscreen-ui');
                 wi.classList.remove('controls-hidden');
@@ -1215,9 +1235,6 @@ function buildWorks() {
                 wi.classList.remove('is-fullscreen-ui');
             });
         }
-    });
-    
-    observeNewElements();
 }
 
 function buildResults() {
@@ -1459,60 +1476,69 @@ function observeNewElements() {
     requestAnimationFrame(tick);
 })();
 
+function initCircPlyr(v) {
+    v.addEventListener('loadeddata', () => { if (v.currentTime === 0) v.currentTime = 0.001; }, { once: true });
+    if (v.readyState >= 2 && v.currentTime === 0) v.currentTime = 0.001;
+    v.load();
+    let player;
+    try {
+        if (typeof Plyr === 'undefined') throw new Error('Plyr not loaded');
+        player = new Plyr(v, {
+            controls: ['play-large'],
+            clickToPlay: true,
+            fullscreen: { enabled: false }
+        });
+    } catch (err) {
+        v.controls = true;
+        return;
+    }
+    circPlyrInstances.push(player);
+    player.on('play', (event) => {
+        pauseAllMedia(event.detail.plyr);
+    });
+    player.on('pause', () => {});
+
+    const vcIn = v.closest('.vc-in');
+    if (vcIn) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        vcIn.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        vcIn.addEventListener('touchend', (e) => {
+            const circ = vcIn.closest('.vidcirc');
+            if (!circ || !circ.classList.contains('active')) return;
+            if (e.target.closest('.plyr__control--overlaid')) return;
+
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+
+            if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                e.preventDefault();
+                if (player.playing) player.pause();
+                else player.play();
+            }
+        }, { passive: false });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     if (lang !== 'ru') applyLang();
     buildTicker();
     buildWorks();
     buildResults();
     buildFAQ();
-    
-    document.querySelectorAll('.plyr-circ').forEach(v => {
-        v.addEventListener('loadeddata', () => { if (v.currentTime === 0) v.currentTime = 0.001; }, { once: true });
-        if (v.readyState >= 2 && v.currentTime === 0) v.currentTime = 0.001;
-        v.load();
-        let player;
-        try {
-            if (typeof Plyr === 'undefined') throw new Error('Plyr not loaded');
-            player = new Plyr(v, {
-                controls: ['play-large'],
-                clickToPlay: true,
-                fullscreen: { enabled: false }
-            });
-        } catch (err) {
-            v.controls = true;
-            return;
-        }
-        circPlyrInstances.push(player);
-        player.on('play', (event) => {
-            pauseAllMedia(event.detail.plyr);
+
+    circObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            circObserver.unobserve(entry.target);
+            initCircPlyr(entry.target);
         });
-        player.on('pause', () => {});
-        
-        const vcIn = v.closest('.vc-in');
-        if (vcIn) {
-            let touchStartX = 0;
-            let touchStartY = 0;
-            vcIn.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-            vcIn.addEventListener('touchend', (e) => {
-                const circ = vcIn.closest('.vidcirc');
-                if (!circ || !circ.classList.contains('active')) return;
-                if (e.target.closest('.plyr__control--overlaid')) return;
-                
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                
-                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
-                    e.preventDefault();
-                    if (player.playing) player.pause();
-                    else player.play();
-                }
-            }, { passive: false });
-        }
-    });
-    
+    }, { rootMargin: '600px 0px', threshold: 0 });
+    document.querySelectorAll('.plyr-circ').forEach(v => circObserver.observe(v));
+
     document.querySelectorAll('.vocwave-box').forEach((box, i) => {
         let bars = '';
         let seed = (i + 1) * 15; 
