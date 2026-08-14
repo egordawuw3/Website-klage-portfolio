@@ -173,8 +173,9 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
         0 0 90px rgba(255, 184, 0, 0.95), 
         0 0 190px rgba(255, 130, 0, 0.9); 
         
-    -webkit-animation: gp-opacity 4s ease-in-out 1 alternate;
-    animation: gp-opacity 4s ease-in-out 1 alternate;
+    will-change: opacity;
+    -webkit-animation: gp-opacity 4s ease-in-out infinite alternate;
+    animation: gp-opacity 4s ease-in-out infinite alternate;
     transform: translateZ(0);
 }
 @-webkit-keyframes gp-opacity { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
