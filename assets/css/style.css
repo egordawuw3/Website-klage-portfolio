@@ -112,7 +112,7 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
 .reveal.on { opacity: 1; }
 .tick-wrap { overflow: hidden; border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); position: relative; z-index: 10; background: rgba(0,0,0,0.1); }
 .tick-inner { width: 100%; padding: 30px 0; display: flex; flex-wrap: nowrap; mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); }
-.tick-track { display: flex; align-items: center; gap: 35px; padding-right: 35px; width: -webkit-max-content; width: -moz-max-content; width: max-content; flex-shrink: 0; -webkit-animation: tk 3s linear 1; animation: tk 3s linear 1; transform: translateZ(0); will-change: transform; }
+.tick-track { display: flex; align-items: center; gap: 35px; padding-right: 35px; width: -webkit-max-content; width: -moz-max-content; width: max-content; flex-shrink: 0; -webkit-animation: tk 60s linear infinite; animation: tk 60s linear infinite; transform: translateZ(0); will-change: transform; }
 @-webkit-keyframes tk { from { transform: translate3d(0,0,0) } to { transform: translate3d(-100%,0,0) } }
 @keyframes tk { from { transform: translate3d(0,0,0) } to { transform: translate3d(-100%,0,0) } }
 .tick-item { display: flex; align-items: center; gap: 35px; }
