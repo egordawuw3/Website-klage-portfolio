@@ -78,6 +78,10 @@ nav.sc { max-width: 680px; height: 56px; padding: 0 12px 0 24px; background: rgb
     filter: blur(6px); 
     -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; 
     
+    /* Фикс квадратной обрезки свечения в iOS Safari */
+    padding: 300px;
+    margin: -300px;
+    
     /* МАКСИМАЛЬНО СОЧНЫЙ ВАРИАНТ:
        1. Центр: яркий, плотный желтый
        2. Середина: фирменный золотой/желто-оранжевый (очень сочный)
