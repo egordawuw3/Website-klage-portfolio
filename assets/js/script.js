@@ -19,7 +19,7 @@ const VW = [
 ];
 
 const HW = [
-{ l: 'YouTube · Обзор', t: 'Probazis', v: '/assets/video_h/h1.mp4', p: '/assets/covers_v/cover1.avif' },
+{ l: 'YouTube · Обзор', t: 'Probazis', v: '/assets/video_h/h1.mp4?v=2', p: '/assets/covers_v/cover1.avif?v=2' }
 { l: 'YouTube · Travel', t: 'ПОЗДРАВЛЕНИЕ ИЗ АФРИКИ', v: '/assets/video_h/h2.mp4', p: '/assets/covers_v/cover2.avif' },
 { l: 'Highlight · Реклама', t: 'Шкафы Нарния', v: '/assets/video_h/h3.mp4', p: '/assets/covers_v/cover3.avif' },
 { l: 'Corporate · Корпоратив', t: 'Remstart', v: '/assets/video_h/h4.mp4', p: '/assets/covers_v/cover4.avif' }
