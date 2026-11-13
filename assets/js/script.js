@@ -6,7 +6,8 @@ const LOGOS = [
 { src: '/assets/logos/remsart.avif', alt: 'Remstart', size: 120 },
 { src: '/assets/logos/narnia.avif', alt: 'Шкафы Нарния', size: 140 },
 { src: '/assets/logos/region.avif', alt: 'Region Online', size: 150 },
-{ src: '/assets/logos/nutreasy.avif', alt: 'Nutreasy', size: 150 }
+{ src: '/assets/logos/nutreasy.avif', alt: 'Nutreasy', size: 150 },
+{ src: '/assets/logos/stropatex.avif', alt: 'Стропатэкс', size: 190 }
 ];
 
 const VW = [
